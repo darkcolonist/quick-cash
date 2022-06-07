@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->unsignedBigInteger('role_id')->index('role_id');
+            $table->unsignedBigInteger('role_id')->index('role_id')->nullable();
         });
     }
 
