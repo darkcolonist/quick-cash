@@ -7,6 +7,19 @@ use App\Models\Company;
 
 class CompanyController extends Controller
 {
+    public function getCompanyList()
+    {
+        try
+        {
+            $companies = Company::orderBy('id', 'ASC')->get();
+            return response()->json($companies);
+        }
+        catch(Exception $e)
+        {
+            Log::error($e);
+        }
+    }
+
     public function index(Request $request)
     {
 
