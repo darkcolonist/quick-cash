@@ -19,7 +19,7 @@ class CreateLoansTable extends Migration
             $table->unsignedBigInteger('loanee_id')->index('loanee_id');
             $table->unsignedBigInteger('company_id')->index('loans_ibfk_2');
             $table->decimal('amount', 10)->nullable();
-            $table->float('rate', 10, 0)->nullable();
+            $table->double('rate')->nullable();
             $table->bigInteger('term_in_months')->nullable();
             $table->unsignedBigInteger('approver_id')->nullable()->index('approver_id');
             $table->unsignedBigInteger('acknowledger_id')->nullable()->index('acknowledger_id');

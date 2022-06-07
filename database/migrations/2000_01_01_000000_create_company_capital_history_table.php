@@ -17,7 +17,7 @@ class CreateCompanyCapitalHistoryTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('company_id')->nullable()->index('company_id');
             $table->timestamp('date')->nullable();
-            $table->decimal('amount', 10, 0)->nullable();
+            $table->decimal('amount', 10)->nullable();
             $table->string('comment')->nullable();
             $table->unsignedBigInteger('user_id')->nullable()->index('user_id');
             $table->unsignedBigInteger('loan_history_id')->nullable()->index('loan_history_id');

@@ -23,8 +23,6 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->unsignedBigInteger('role_id')->index('role_id');
-
-            $table->primary(['id', 'role_id']);
         });
     }
 
