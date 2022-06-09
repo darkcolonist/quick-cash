@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { useState, useEffect } from "react";
 
 export default function UserAdd() {
+    const [companyIDToggle, setCompanyIDToggle] = useState(true);
     const [companies, setCompanies] = useState({});
     const [roles, setRoles] = useState({});
     const [isLoading, setLoading] = useState(true);
@@ -16,14 +17,18 @@ export default function UserAdd() {
             });
         }, []);
     }, []);
-
     
     if (isLoading) {
         return <div></div>;
     }
 
-    console.log(companies);
-    console.log(roles);
+    function toggleCompanyIDInput(selected) {
+        if (selected.target.value !== ' ') {
+            setCompanyIDToggle(false);
+        } else {
+            setCompanyIDToggle(true);
+        }
+    }
 
     return (
         <div>
@@ -63,14 +68,26 @@ export default function UserAdd() {
                 </div>
                 <div class="form-group col-md-4">
                     <label for="companyName">Company: </label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select
+                        class="form-select"
+                        aria-label="Default select example"
+                        onChange={toggleCompanyIDInput}
+                    >
                         <option value=" ">None</option>
                     {
                         companies.data.map(function (x,y) {
-                            return <option value="{x.id}">{x.name}</option>
+                            return <option value={x.id}>{x.name}</option>
                         })
                     }
                     </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="companyID">Company ID: </label>
+                    <input 
+                        type="text"
+                        class="form-control"
+                        id="companyID"
+                    disabled={companyIDToggle}/>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="companyName">Role: </label>
