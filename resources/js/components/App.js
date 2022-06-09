@@ -3,8 +3,14 @@ import Table from './company/Table';
 import CompanyAdd from './company/CompanyAdd';
 import UserAdd from './user/UserAdd';
 import UserTable from './user/UserTable';
+import UserEdit from './user/UserEdit';
 
-const path = window.location.pathname;
+let path = window.location.pathname;
+let pathwithparams = path.split('/');
+if (pathwithparams.length > 3) {
+    path = pathwithparams.pop();
+    path = pathwithparams.join('/');
+}
 function renderSwitch(param) {
     switch(param) {
         case '/company':
@@ -15,6 +21,8 @@ function renderSwitch(param) {
             return <CompanyAdd />;
         case '/user/add':
             return <UserAdd />;
+        case '/user/edit':
+            return <UserEdit />;
         default:
             return;
     }

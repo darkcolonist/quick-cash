@@ -10,7 +10,7 @@ export default function UserTableRow({data}) {
             return <tr>
                 <td>{x.name}</td>
                 <td>{x.email}</td>
-                <td></td>
+                <td><a className="btn btn-info" href={"/user/edit/" + x.id}>Edit User</a></td>
             </tr>
         })}
         </>
