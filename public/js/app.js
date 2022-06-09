@@ -6075,25 +6075,61 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function UserAdd() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+  // form
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
-      companyIDToggle = _useState2[0],
-      setCompanyIDToggle = _useState2[1];
+      userName = _useState2[0],
+      setUserName = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState4 = _slicedToArray(_useState3, 2),
-      companies = _useState4[0],
-      setCompanies = _useState4[1];
+      userMail = _useState4[0],
+      setUserMail = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState6 = _slicedToArray(_useState5, 2),
-      roles = _useState6[0],
-      setRoles = _useState6[1];
+      userPass = _useState6[0],
+      setUserPass = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState8 = _slicedToArray(_useState7, 2),
-      isLoading = _useState8[0],
-      setLoading = _useState8[1];
+      userRPass = _useState8[0],
+      setUserRPass = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState10 = _slicedToArray(_useState9, 2),
+      userCompany = _useState10[0],
+      setUserCompany = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState12 = _slicedToArray(_useState11, 2),
+      userCompanyID = _useState12[0],
+      setUserCompanyID = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState14 = _slicedToArray(_useState13, 2),
+      userRole = _useState14[0],
+      setUserRole = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+      _useState16 = _slicedToArray(_useState15, 2),
+      companyIDToggle = _useState16[0],
+      setCompanyIDToggle = _useState16[1];
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState18 = _slicedToArray(_useState17, 2),
+      companies = _useState18[0],
+      setCompanies = _useState18[1];
+
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState20 = _slicedToArray(_useState19, 2),
+      roles = _useState20[0],
+      setRoles = _useState20[1];
+
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+      _useState22 = _slicedToArray(_useState21, 2),
+      isLoading = _useState22[0],
+      setLoading = _useState22[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -6125,6 +6161,7 @@ function UserAdd() {
   function toggleCompanyIDInput(selected) {
     if (selected.target.value !== ' ') {
       setCompanyIDToggle(false);
+      setUserCompany(selected.target.value);
     } else {
       setCompanyIDToggle(true);
     }
@@ -6132,7 +6169,12 @@ function UserAdd() {
 
   function submitForm() {
     axios.post('/user/add/data', {
-      userName: 'user'
+      userName: userName,
+      userMail: userMail,
+      userPass: userPass,
+      userCompany: userCompany,
+      userCompanyID: userCompanyID,
+      userRole: userRole
     }).then(function (response) {
       console.log(response);
       /*setTimeout(() => {
@@ -6153,7 +6195,10 @@ function UserAdd() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "text",
           "class": "form-control",
-          id: "userName"
+          id: "userName",
+          onChange: function onChange(e) {
+            return setUserName(e.target.value);
+          }
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         "class": "form-group col-md-4",
@@ -6163,7 +6208,10 @@ function UserAdd() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "email",
           "class": "form-control",
-          id: "userMail"
+          id: "userMail",
+          onChange: function onChange(e) {
+            return setUserMail(e.target.value);
+          }
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         "class": "form-group col-md-4",
@@ -6173,7 +6221,10 @@ function UserAdd() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "password",
           "class": "form-control",
-          id: "userPass"
+          id: "userPass",
+          onChange: function onChange(e) {
+            return setUserPass(e.target.value);
+          }
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         "class": "form-group col-md-4",
@@ -6183,7 +6234,10 @@ function UserAdd() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "password",
           "class": "form-control",
-          id: "userRPass"
+          id: "userRPass",
+          onChange: function onChange(e) {
+            return setUserRPass(e.target.value);
+          }
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         "class": "form-group col-md-4",
@@ -6213,7 +6267,10 @@ function UserAdd() {
           type: "text",
           "class": "form-control",
           id: "userCompanyID",
-          disabled: companyIDToggle
+          disabled: companyIDToggle,
+          onChange: function onChange(e) {
+            return setUserCompanyID(e.target.value);
+          }
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         "class": "form-group col-md-4",
@@ -6223,11 +6280,26 @@ function UserAdd() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("select", {
           "class": "form-select",
           "aria-label": "Default select example",
+          onChange: function onChange(e) {
+            return setUserRole(e.target.value);
+          },
           children: roles.data.map(function (x, y) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
-              value: "{x.id}",
-              children: x.name
-            });
+            var init = true;
+
+            if (init) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
+                value: x.id,
+                selected: true,
+                children: x.name
+              });
+              init = false;
+              setUserRole(x.id);
+            } else {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
+                value: x.id,
+                children: x.name
+              });
+            }
           })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {

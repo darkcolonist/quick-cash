@@ -23,7 +23,19 @@ class UserController extends Controller
 
     public function addUser(Request $request)
     {
-        return 'works';
+        //return $request;
+        try
+        {
+            DB::table('users')->insert([
+                'name' =>,
+                'email' =>,
+                'password' =>,
+                'role_id' =>,
+            ]);
+        }
+        catch(Exception $e) {
+
+        }
     }
 
     public function index()

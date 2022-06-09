@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import { useState, useEffect } from "react";
 
 export default function UserAdd() {
+    // form
+    const [userName, setUserName] = useState("");
+    const [userMail, setUserMail] = useState("");
+    const [userPass, setUserPass] = useState("");
+    const [userRPass, setUserRPass] = useState("");
+    const [userCompany, setUserCompany] = useState("");
+    const [userCompanyID, setUserCompanyID] = useState("");
+    const [userRole, setUserRole] = useState("");
+
     const [companyIDToggle, setCompanyIDToggle] = useState(true);
     const [companies, setCompanies] = useState({});
     const [roles, setRoles] = useState({});
@@ -25,6 +34,7 @@ export default function UserAdd() {
     function toggleCompanyIDInput(selected) {
         if (selected.target.value !== ' ') {
             setCompanyIDToggle(false);
+            setUserCompany(selected.target.value);
         } else {
             setCompanyIDToggle(true);
         }
@@ -32,7 +42,12 @@ export default function UserAdd() {
 
     function submitForm() {
         axios.post('/user/add/data', {
-            userName: 'user'
+            userName: userName,
+            userMail: userMail,
+            userPass: userPass,
+            userCompany: userCompany,
+            userCompanyID: userCompanyID,
+            userRole: userRole
         }).then((response) => {
             console.log(response);
             /*setTimeout(() => {
@@ -51,6 +66,7 @@ export default function UserAdd() {
                         type="text"
                         class="form-control"
                         id="userName"
+                        onChange={e => setUserName(e.target.value)}
                     />
                 </div>
                 <div class="form-group col-md-4">
@@ -59,6 +75,7 @@ export default function UserAdd() {
                         type="email"
                         class="form-control"
                         id="userMail"
+                        onChange={e => setUserMail(e.target.value)}
                     />
                 </div>
                 <div class="form-group col-md-4">
@@ -67,6 +84,7 @@ export default function UserAdd() {
                         type="password"
                         class="form-control"
                         id="userPass"
+                        onChange={e => setUserPass(e.target.value)}
                     />
                 </div>
                 <div class="form-group col-md-4">
@@ -75,6 +93,7 @@ export default function UserAdd() {
                         type="password"
                         class="form-control"
                         id="userRPass"
+                        onChange={e => setUserRPass(e.target.value)}
                     />
                 </div>
                 <div class="form-group col-md-4">
@@ -98,14 +117,28 @@ export default function UserAdd() {
                         type="text"
                         class="form-control"
                         id="userCompanyID"
-                    disabled={companyIDToggle}/>
+                        disabled={companyIDToggle}
+                        onChange={e => setUserCompanyID(e.target.value)}
+                    />
                 </div>
                 <div class="form-group col-md-4">
                     <label for="userRole">Role: </label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select
+                        class="form-select"
+                        aria-label="Default select example"
+                        onChange={e => setUserRole(e.target.value)}
+                    >
                     {
                         roles.data.map(function (x,y) {
-                            return <option value="{x.id}">{x.name}</option>
+                            let init = true;
+                            if (init) {
+                                return <option value={x.id} selected>{x.name}</option>
+                                init = false;
+                                setUserRole(x.id);
+                            } else {
+                                return <option value={x.id}>{x.name}</option>
+                            }
+                            
                         })
                     }
                     </select>
