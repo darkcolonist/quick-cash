@@ -30,4 +30,9 @@ class UserController extends Controller
     {
         return view('home');
     }
+
+    public function editUserForm()
+    {
+        return view('home');
+    }
 }

@@ -43,3 +43,4 @@ Route::get('/user/add', [UserController::class, 'addUserForm']);
 
 Route::get('/get/role/list', 
         [RolesController::class, 'getRoleList'])->name('role.list');
+Route::get('/user/edit/{id}', [UserController::class, 'editUserForm']);
