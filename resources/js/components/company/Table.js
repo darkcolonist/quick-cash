@@ -29,7 +29,11 @@ class Table extends Component {
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
+                        <div className="col-md-4">
+                            <a className="btn btn-info" href="/company/add">Add Company</a>
+                        </div>
                         <div className="card">
+                            
                             <table className="table table-hover">
                                 <thead>
                                     <tr>

@@ -28,6 +28,13 @@ Route::post('/get/company/record',
         [CompanyController::class, 'getCompanyRecord']);
 Route::post('/update/company/data',
         [CompanyController::class, 'updateCompany']);
+Route::post('/company/add/data', [CompanyController::class, 'addCompany']);
+Route::get('/company/add', [CompanyController::class, 'addCompanyForm']);
+
+Route::get('/company',
+        [CompanyController::class, 'index'])->name('company.index');
 
 Route::get('/get/user/list', 
         [UserController::class, 'getUserList'])->name('user.list');
+Route::get('/user',
+        [UserController::class, 'index'])->name('user.index');

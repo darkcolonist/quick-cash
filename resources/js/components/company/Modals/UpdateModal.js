@@ -39,7 +39,9 @@ class UpdateModal extends Component {
             companyId: this.props.modalId,
             companyName: this.state.companyName
         }).then((response) => {
-            console.log(response);
+            setTimeout(() => {
+                location.reload();
+            }, 300)
         })
     }
 

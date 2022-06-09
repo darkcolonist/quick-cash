@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Models\Company;
 
@@ -18,6 +19,11 @@ class CompanyController extends Controller
         {
             Log::error($e);
         }
+    }
+
+    public function addCompanyForm()
+    {
+        return view('home');
     }
 
     public function getCompanyRecord(Request $request)
@@ -52,9 +58,21 @@ class CompanyController extends Controller
         }
     }
 
-    public function index(Request $request)
+    public function addCompany(Request $request)
     {
+        try
+        {
+            DB::table('companies')->insert([
+                'name' => $request->get('companyName')
+            ]);
+        } catch (Exception $e) {
+            Log::error($e);
+        }
+    }
 
+    public function index()
+    {
+        return view('home');
     }
 
     public function store(Request $request)
