@@ -6130,6 +6130,17 @@ function UserAdd() {
     }
   }
 
+  function submitForm() {
+    axios.post('/user/add/data', {
+      userName: 'user'
+    }).then(function (response) {
+      console.log(response);
+      /*setTimeout(() => {
+          window.location.href = "/company";
+      }, 500)*/
+    });
+  }
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
       children: "Add Users"
@@ -6137,47 +6148,47 @@ function UserAdd() {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         "class": "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          "for": "companyName",
+          "for": "userName",
           children: "Name: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "text",
           "class": "form-control",
-          id: "companyName"
+          id: "userName"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         "class": "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          "for": "companyName",
+          "for": "userMail",
           children: "Email: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-          type: "text",
+          type: "email",
           "class": "form-control",
-          id: "companyName"
+          id: "userMail"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         "class": "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          "for": "companyName",
+          "for": "userPass",
           children: "Password: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "password",
           "class": "form-control",
-          id: "companyName"
+          id: "userPass"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         "class": "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          "for": "companyName",
+          "for": "userRPass",
           children: "Retype Password: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "password",
           "class": "form-control",
-          id: "companyName"
+          id: "userRPass"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         "class": "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          "for": "companyName",
+          "for": "userCompany",
           children: "Company: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("select", {
           "class": "form-select",
@@ -6196,18 +6207,18 @@ function UserAdd() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         "class": "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          "for": "companyID",
+          "for": "userCompanyID",
           children: "Company ID: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "text",
           "class": "form-control",
-          id: "companyID",
+          id: "userCompanyID",
           disabled: companyIDToggle
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         "class": "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          "for": "companyName",
+          "for": "userRole",
           children: "Role: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("select", {
           "class": "form-select",
@@ -6222,6 +6233,7 @@ function UserAdd() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
         type: "button",
         "class": "btn btn-primary",
+        onClick: submitForm,
         children: "Submit"
       })]
     })]

@@ -30,44 +30,55 @@ export default function UserAdd() {
         }
     }
 
+    function submitForm() {
+        axios.post('/user/add/data', {
+            userName: 'user'
+        }).then((response) => {
+            console.log(response);
+            /*setTimeout(() => {
+                window.location.href = "/company";
+            }, 500)*/
+        })
+    }
+
     return (
         <div>
             <h3>Add Users</h3>
             <form>
                 <div class="form-group col-md-4">
-                    <label for="companyName">Name: </label>
+                    <label for="userName">Name: </label>
                     <input 
                         type="text"
                         class="form-control"
-                        id="companyName"
+                        id="userName"
                     />
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="companyName">Email: </label>
+                    <label for="userMail">Email: </label>
                     <input 
-                        type="text"
+                        type="email"
                         class="form-control"
-                        id="companyName"
+                        id="userMail"
                     />
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="companyName">Password: </label>
-                    <input 
-                        type="password"
-                        class="form-control"
-                        id="companyName"
-                    />
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="companyName">Retype Password: </label>
+                    <label for="userPass">Password: </label>
                     <input 
                         type="password"
                         class="form-control"
-                        id="companyName"
+                        id="userPass"
                     />
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="companyName">Company: </label>
+                    <label for="userRPass">Retype Password: </label>
+                    <input 
+                        type="password"
+                        class="form-control"
+                        id="userRPass"
+                    />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="userCompany">Company: </label>
                     <select
                         class="form-select"
                         aria-label="Default select example"
@@ -82,15 +93,15 @@ export default function UserAdd() {
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="companyID">Company ID: </label>
+                    <label for="userCompanyID">Company ID: </label>
                     <input 
                         type="text"
                         class="form-control"
-                        id="companyID"
+                        id="userCompanyID"
                     disabled={companyIDToggle}/>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="companyName">Role: </label>
+                    <label for="userRole">Role: </label>
                     <select class="form-select" aria-label="Default select example">
                     {
                         roles.data.map(function (x,y) {
@@ -102,6 +113,7 @@ export default function UserAdd() {
                 <button
                     type="button"
                     class="btn btn-primary"
+                    onClick={submitForm}
                 >Submit</button>
             </form>
         </div>

@@ -40,6 +40,7 @@ Route::get('/get/user/list',
 Route::get('/user',
         [UserController::class, 'index'])->name('user.index');
 Route::get('/user/add', [UserController::class, 'addUserForm']);
+Route::post('/user/add/data', [UserController::class, 'addUser']);
 
 Route::get('/get/role/list', 
         [RolesController::class, 'getRoleList'])->name('role.list');

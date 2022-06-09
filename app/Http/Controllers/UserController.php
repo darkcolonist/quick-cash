@@ -21,6 +21,11 @@ class UserController extends Controller
         }
     }
 
+    public function addUser(Request $request)
+    {
+        return 'works';
+    }
+
     public function index()
     {
         return view('home');
