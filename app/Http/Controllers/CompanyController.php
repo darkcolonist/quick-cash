@@ -20,6 +20,38 @@ class CompanyController extends Controller
         }
     }
 
+    public function getCompanyRecord(Request $request)
+    {
+        try
+        {
+            $companyRecord = Company::findOrFail($request->get('companyId'));
+            return response()->json($companyRecord);
+        }
+        catch(Exception $e)
+        {
+            Log::error($e);
+        }
+    }
+
+    public function updateCompany(Request $request)
+    {
+        try{
+            $company_id = $request->get('companyId');
+            $company_name = $request->get('companyName');
+            Company::where('id', $company_id)->update([
+                'name' => $company_name
+            ]);
+
+            return response()->json([
+                'name' => $company_name
+            ]);
+        }
+        catch(Exception $e)
+        {
+            Log::error($e);
+        }
+    }
+
     public function index(Request $request)
     {
 
@@ -27,7 +59,7 @@ class CompanyController extends Controller
 
     public function store(Request $request)
     {
-
+        
     }
 
     public function update(Request $request, Company $company)
