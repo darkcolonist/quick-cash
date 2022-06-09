@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/get/company/list', 
         [CompanyController::class, 'getCompanyList'])->name('company.list');
+Route::post('/get/company/record',
+        [CompanyController::class, 'getCompanyRecord']);
+Route::post('/update/company/data',
+        [CompanyController::class, 'updateCompany']);
+
+Route::get('/get/user/list', 
+        [UserController::class, 'getUserList'])->name('user.list');
