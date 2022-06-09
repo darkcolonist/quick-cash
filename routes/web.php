@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RolesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,7 @@ Route::get('/get/user/list',
         [UserController::class, 'getUserList'])->name('user.list');
 Route::get('/user',
         [UserController::class, 'index'])->name('user.index');
+Route::get('/user/add', [UserController::class, 'addUserForm']);
+
+Route::get('/get/role/list', 
+        [RolesController::class, 'getRoleList'])->name('role.list');
