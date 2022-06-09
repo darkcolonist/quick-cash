@@ -4,16 +4,21 @@ import { useState, useEffect } from "react";
 export default function CompanyAdd() {
     const [cname, setCname] = useState('');
 
-    const addCompany = e => {
+    function addCompany() {
         axios.post('/company/add/data', {
             companyName: cname
+        }).then((response) => {
+            console.log(response);
+            setTimeout(() => {
+                window.location.href = "/company";
+            }, 500)
         })
-    }
+      }
 
     return (
         <div>
             <h3>Add Company</h3>
-            <form>
+            <form action="/company" onSubmit={addCompany}>
                 <div class="form-group col-md-4">
                     <label for="companyName">New Company Name: </label>
                     <input 
