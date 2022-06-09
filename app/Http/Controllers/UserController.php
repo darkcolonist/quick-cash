@@ -20,4 +20,14 @@ class UserController extends Controller
             Log::error($e);
         }
     }
+
+    public function index()
+    {
+        return view('home');
+    }
+
+    public function addUserForm()
+    {
+        return view('home');
+    }
 }
