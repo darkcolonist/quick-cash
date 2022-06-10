@@ -26,11 +26,16 @@ class UserController extends Controller
     {
         try
         {
-            DB::table('users')->insert([
-                'name' => $request->get('userName'),
-                'email' => $request->get('userMail'),
-                'password' => $request->get('userPass'),
-                'role_id' => $request->get('userRole'),
+            $data = new User;
+            $data->name = $request->get('userName');
+            $data->email = $request->get('userMail');
+            $data->password = $request->get('userPass');
+            $data->role_id = $request->get('userRole');
+            $data->save();
+            $id = $data->id;
+            DB::table('loanees')->insert([
+                'user_id' => $id,
+                'company_id' => $request->get('userCompany'),
             ]);
         }
         catch(Exception $e) {

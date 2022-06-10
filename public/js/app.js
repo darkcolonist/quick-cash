@@ -6217,71 +6217,49 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function UserAdd() {
-  // form
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
-      _useState2 = _slicedToArray(_useState, 2),
-      userName = _useState2[0],
-      setUserName = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
-      _useState4 = _slicedToArray(_useState3, 2),
-      userMail = _useState4[0],
-      setUserMail = _useState4[1];
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
-      _useState6 = _slicedToArray(_useState5, 2),
-      userPass = _useState6[0],
-      setUserPass = _useState6[1];
-
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
-      _useState8 = _slicedToArray(_useState7, 2),
-      userRPass = _useState8[0],
-      setUserRPass = _useState8[1];
-
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
-      _useState10 = _slicedToArray(_useState9, 2),
-      userCompany = _useState10[0],
-      setUserCompany = _useState10[1];
-
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
-      _useState12 = _slicedToArray(_useState11, 2),
-      userCompanyID = _useState12[0],
-      setUserCompanyID = _useState12[1];
-
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
-      _useState14 = _slicedToArray(_useState13, 2),
-      userRole = _useState14[0],
-      setUserRole = _useState14[1];
-
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
-      _useState16 = _slicedToArray(_useState15, 2),
-      companyIDToggle = _useState16[0],
-      setCompanyIDToggle = _useState16[1];
-
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
-      _useState18 = _slicedToArray(_useState17, 2),
-      companies = _useState18[0],
-      setCompanies = _useState18[1];
-
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
-      _useState20 = _slicedToArray(_useState19, 2),
-      roles = _useState20[0],
-      setRoles = _useState20[1];
-
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
-      _useState22 = _slicedToArray(_useState21, 2),
-      isLoading = _useState22[0],
-      setLoading = _useState22[1];
-
   var formik = (0,formik__WEBPACK_IMPORTED_MODULE_1__.useFormik)({
     initialValues: {
       userName: '',
-      email: 't'
+      userMail: '',
+      userPass: '',
+      userRPass: '',
+      userCompany: '',
+      userRole: '4'
     },
+    validationSchema: yup__WEBPACK_IMPORTED_MODULE_2__.object({
+      userName: yup__WEBPACK_IMPORTED_MODULE_2__.string().required('Required'),
+      userMail: yup__WEBPACK_IMPORTED_MODULE_2__.string().email('Invalid email').required('Required'),
+      userPass: yup__WEBPACK_IMPORTED_MODULE_2__.string().required('Required'),
+      userRPass: yup__WEBPACK_IMPORTED_MODULE_2__.string().oneOf([yup__WEBPACK_IMPORTED_MODULE_2__.ref('userPass'), null], 'Passwords do not match'),
+      userCompany: yup__WEBPACK_IMPORTED_MODULE_2__.string(),
+      userRole: yup__WEBPACK_IMPORTED_MODULE_2__.string()
+    }),
     onSubmit: function onSubmit(values) {
       alert(JSON.stringify(values, null, 2));
+      axios.post('/user/add/data', values).then(function (response) {
+        console.log(response);
+        /*setTimeout(() => {
+            window.location.href = "/company";
+        }, 500)*/
+      });
     }
   });
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      companies = _useState2[0],
+      setCompanies = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState4 = _slicedToArray(_useState3, 2),
+      roles = _useState4[0],
+      setRoles = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isLoading = _useState6[0],
+      setLoading = _useState6[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
@@ -6309,30 +6287,7 @@ function UserAdd() {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {});
   }
 
-  function toggleCompanyIDInput(selected) {
-    if (selected.target.value !== ' ') {
-      setCompanyIDToggle(false);
-      setUserCompany(selected.target.value);
-    } else {
-      setCompanyIDToggle(true);
-    }
-  }
-
-  function submitForm() {
-    axios.post('/user/add/data', {
-      userName: userName,
-      userMail: userMail,
-      userPass: userPass,
-      userCompany: userCompany,
-      userCompanyID: userCompanyID,
-      userRole: userRole
-    }).then(function (response) {
-      console.log(response);
-      /*setTimeout(() => {
-          window.location.href = "/company";
-      }, 500)*/
-    });
-  }
+  function submitForm() {}
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
@@ -6349,8 +6304,12 @@ function UserAdd() {
           "class": "form-control",
           id: "userName" //onChange={e => setUserName(e.target.value)}
           ,
-          onChange: formik.handleChange
-        })]
+          onChange: formik.handleChange,
+          onBlur: formik.handleBlur,
+          value: formik.values.userName
+        }), formik.touched.userName && formik.errors.userName ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: formik.errors.userName
+        }) : null]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         "class": "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
@@ -6359,11 +6318,14 @@ function UserAdd() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
           type: "email",
           "class": "form-control",
-          id: "userMail" //onChange={formik.values.email}
+          id: "userMail" //onChange={e => setUserMail(e.target.value)}
           ,
           onChange: formik.handleChange,
-          defaultValue: formik.values.email
-        })]
+          onBlur: formik.handleBlur,
+          value: formik.values.userMail
+        }), formik.touched.userMail && formik.errors.userMail ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: formik.errors.userMail
+        }) : null]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         "class": "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
@@ -6372,11 +6334,14 @@ function UserAdd() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
           type: "password",
           "class": "form-control",
-          id: "userPass",
-          onChange: function onChange(e) {
-            return setUserPass(e.target.value);
-          }
-        })]
+          id: "userPass" //onChange={e => setUserPass(e.target.value)}
+          ,
+          onChange: formik.handleChange,
+          onBlur: formik.handleBlur,
+          value: formik.values.userPass
+        }), formik.touched.userPass && formik.errors.userPass ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: formik.errors.userPass
+        }) : null]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         "class": "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
@@ -6385,22 +6350,29 @@ function UserAdd() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
           type: "password",
           "class": "form-control",
-          id: "userRPass",
-          onChange: function onChange(e) {
-            return setUserRPass(e.target.value);
-          }
-        })]
+          id: "userRPass" //onChange={e => setUserRPass(e.target.value)}
+          ,
+          onChange: formik.handleChange,
+          onBlur: formik.handleBlur,
+          value: formik.values.userRPass
+        }), formik.touched.userRPass && formik.errors.userRPass ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: formik.errors.userRPass
+        }) : null]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         "class": "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
           "for": "userCompany",
           children: "Company: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
+          id: "userCompany",
           "class": "form-select",
-          "aria-label": "Default select example",
-          onChange: toggleCompanyIDInput,
+          "aria-label": "Default select example" //onChange={toggleCompanyIDInput}
+          ,
+          onChange: formik.handleChange,
+          onBlur: formik.handleBlur,
+          value: formik.values.userCompany,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
-            value: " ",
+            value: "",
             children: "None"
           }), companies.data.map(function (x, y) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
@@ -6408,32 +6380,22 @@ function UserAdd() {
               children: x.name
             });
           })]
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        "class": "form-group col-md-4",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-          "for": "userCompanyID",
-          children: "Company ID: "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-          type: "text",
-          "class": "form-control",
-          id: "userCompanyID",
-          disabled: companyIDToggle,
-          onChange: function onChange(e) {
-            return setUserCompanyID(e.target.value);
-          }
-        })]
+        }), formik.touched.userCompany && formik.errors.userCompany ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: formik.errors.userCompany
+        }) : null]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         "class": "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
           "for": "userRole",
           children: "Role: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("select", {
+          id: "userRole",
           "class": "form-select",
-          "aria-label": "Default select example",
-          onChange: function onChange(e) {
-            return setUserRole(e.target.value);
-          },
+          "aria-label": "Default select example" //onChange={e => setUserRole(e.target.value)}
+          ,
+          onChange: formik.handleChange,
+          onBlur: formik.handleBlur,
+          value: formik.values.userRole,
           children: roles.data.map(function (x, y) {
             var init = true;
 
@@ -6454,10 +6416,8 @@ function UserAdd() {
           })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-        type: "button",
-        "class": "btn btn-primary" //onClick={submitForm}
-        ,
-        onClick: formik.handleSubmit,
+        "class": "btn btn-primary",
+        type: "submit",
         children: "Submit"
       })]
     })]

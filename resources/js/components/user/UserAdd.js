@@ -1,17 +1,42 @@
 import React, { Component } from 'react';
 import { useState, useEffect } from "react";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 export default function UserAdd() {
-    // form
-    const [userName, setUserName] = useState("");
-    const [userMail, setUserMail] = useState("");
-    const [userPass, setUserPass] = useState("");
-    const [userRPass, setUserRPass] = useState("");
-    const [userCompany, setUserCompany] = useState("");
-    const [userCompanyID, setUserCompanyID] = useState("");
-    const [userRole, setUserRole] = useState("");
+    const formik = useFormik({
+        initialValues: {
+            userName: '',
+            userMail: '',
+            userPass: '',
+            userRPass: '',
+            userCompany: '',
+            userRole: '4',
+        },
+        validationSchema: Yup.object({
+            userName: Yup.string()
+                .required('Required'),
+            userMail: Yup.string()
+                .email('Invalid email')
+                .required('Required'),
+            userPass: Yup.string()
+                .required('Required'),
+            userRPass: Yup.string()
+                .oneOf([Yup.ref('userPass'), null], 'Passwords do not match'),
+            userCompany: Yup.string(),
+            userRole: Yup.string()
+        }),
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+            axios.post('/user/add/data', values).then((response) => {
+                console.log(response);
+                /*setTimeout(() => {
+                    window.location.href = "/company";
+                }, 500)*/
+            })
+        },
+    });
 
-    const [companyIDToggle, setCompanyIDToggle] = useState(true);
     const [companies, setCompanies] = useState({});
     const [roles, setRoles] = useState({});
     const [isLoading, setLoading] = useState(true);
@@ -31,43 +56,28 @@ export default function UserAdd() {
         return <div></div>;
     }
 
-    function toggleCompanyIDInput(selected) {
-        if (selected.target.value !== ' ') {
-            setCompanyIDToggle(false);
-            setUserCompany(selected.target.value);
-        } else {
-            setCompanyIDToggle(true);
-        }
-    }
-
     function submitForm() {
-        axios.post('/user/add/data', {
-            userName: userName,
-            userMail: userMail,
-            userPass: userPass,
-            userCompany: userCompany,
-            userCompanyID: userCompanyID,
-            userRole: userRole
-        }).then((response) => {
-            console.log(response);
-            /*setTimeout(() => {
-                window.location.href = "/company";
-            }, 500)*/
-        })
+        
     }
 
     return (
         <div>
             <h3>Add Users</h3>
-            <form>
+            <form onSubmit={formik.handleSubmit}>
                 <div class="form-group col-md-4">
                     <label for="userName">Name: </label>
                     <input 
                         type="text"
                         class="form-control"
                         id="userName"
-                        onChange={e => setUserName(e.target.value)}
+                        //onChange={e => setUserName(e.target.value)}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.userName}
                     />
+                    {formik.touched.userName && formik.errors.userName ? (
+                        <div>{formik.errors.userName}</div>
+                    ) : null}
                 </div>
                 <div class="form-group col-md-4">
                     <label for="userMail">Email: </label>
@@ -75,8 +85,14 @@ export default function UserAdd() {
                         type="email"
                         class="form-control"
                         id="userMail"
-                        onChange={e => setUserMail(e.target.value)}
+                        //onChange={e => setUserMail(e.target.value)}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.userMail}
                     />
+                    {formik.touched.userMail && formik.errors.userMail ? (
+                        <div>{formik.errors.userMail}</div>
+                    ) : null}
                 </div>
                 <div class="form-group col-md-4">
                     <label for="userPass">Password: </label>
@@ -84,8 +100,14 @@ export default function UserAdd() {
                         type="password"
                         class="form-control"
                         id="userPass"
-                        onChange={e => setUserPass(e.target.value)}
+                        //onChange={e => setUserPass(e.target.value)}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.userPass}
                     />
+                    {formik.touched.userPass && formik.errors.userPass ? (
+                        <div>{formik.errors.userPass}</div>
+                    ) : null}
                 </div>
                 <div class="form-group col-md-4">
                     <label for="userRPass">Retype Password: </label>
@@ -93,40 +115,47 @@ export default function UserAdd() {
                         type="password"
                         class="form-control"
                         id="userRPass"
-                        onChange={e => setUserRPass(e.target.value)}
+                        //onChange={e => setUserRPass(e.target.value)}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.userRPass}
                     />
+                    {formik.touched.userRPass && formik.errors.userRPass ? (
+                        <div>{formik.errors.userRPass}</div>
+                    ) : null}
                 </div>
                 <div class="form-group col-md-4">
                     <label for="userCompany">Company: </label>
                     <select
+                        id="userCompany"
                         class="form-select"
                         aria-label="Default select example"
-                        onChange={toggleCompanyIDInput}
+                        //onChange={toggleCompanyIDInput}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.userCompany}
                     >
-                        <option value=" ">None</option>
+                        <option value="">None</option>
                     {
                         companies.data.map(function (x,y) {
                             return <option value={x.id}>{x.name}</option>
                         })
                     }
                     </select>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="userCompanyID">Company ID: </label>
-                    <input 
-                        type="text"
-                        class="form-control"
-                        id="userCompanyID"
-                        disabled={companyIDToggle}
-                        onChange={e => setUserCompanyID(e.target.value)}
-                    />
+                    {formik.touched.userCompany && formik.errors.userCompany ? (
+                        <div>{formik.errors.userCompany}</div>
+                    ) : null}
                 </div>
                 <div class="form-group col-md-4">
                     <label for="userRole">Role: </label>
                     <select
+                        id="userRole"
                         class="form-select"
                         aria-label="Default select example"
-                        onChange={e => setUserRole(e.target.value)}
+                        //onChange={e => setUserRole(e.target.value)}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.userRole}
                     >
                     {
                         roles.data.map(function (x,y) {
@@ -138,16 +167,11 @@ export default function UserAdd() {
                             } else {
                                 return <option value={x.id}>{x.name}</option>
                             }
-                            
                         })
                     }
                     </select>
                 </div>
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    onClick={submitForm}
-                >Submit</button>
+                <button class="btn btn-primary" type="submit">Submit</button>
             </form>
         </div>
     )
