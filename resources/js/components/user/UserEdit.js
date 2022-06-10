@@ -6,42 +6,42 @@ export default function UserEdit() {
         <div>
             <h3>Edit User</h3>
             <form>
-                <div class="form-group col-md-4">
-                    <label for="companyName">Name: </label>
+                <div className="form-group col-md-4">
+                    <label htmlFor="companyName">Name: </label>
                     <input 
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="companyName"
                     />
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="companyName">Email: </label>
+                <div className="form-group col-md-4">
+                    <label htmlFor="companyName">Email: </label>
                     <input 
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="companyName"
                     />
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="companyName">Password: </label>
+                <div className="form-group col-md-4">
+                    <label htmlFor="companyName">Password: </label>
                     <input 
                         type="password"
-                        class="form-control"
+                        className="form-control"
                         id="companyName"
                     />
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="companyName">Retype Password: </label>
+                <div className="form-group col-md-4">
+                    <label htmlFor="companyName">Retype Password: </label>
                     <input 
                         type="password"
-                        class="form-control"
+                        className="form-control"
                         id="companyName"
                     />
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="companyName">Company: </label>
+                <div className="form-group col-md-4">
+                    <label htmlFor="companyName">Company: </label>
                     <select
-                        class="form-select"
+                        className="form-select"
                         aria-label="Default select example"
 
                     >
@@ -49,23 +49,23 @@ export default function UserEdit() {
                     
                     </select>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="companyID">Company ID: </label>
+                <div className="form-group col-md-4">
+                    <label htmlFor="companyID">Company ID: </label>
                     <input 
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="companyID" />
 
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="companyName">Role: </label>
-                    <select class="form-select" aria-label="Default select example">
+                <div className="form-group col-md-4">
+                    <label htmlFor="companyName">Role: </label>
+                    <select className="form-select" aria-label="Default select example">
                     
                     </select>
                 </div>
                 <button
                     type="button"
-                    class="btn btn-primary"
+                    className="btn btn-primary"
                 >Submit</button>
             </form>
         </div>

@@ -5435,6 +5435,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_UserEdit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./user/UserEdit */ "./resources/js/components/user/UserEdit.js");
 /* harmony import */ var _config_ConfigEdit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./config/ConfigEdit */ "./resources/js/components/config/ConfigEdit.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+ //import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
 
 
 
@@ -5477,6 +5479,9 @@ function renderSwitch(param) {
 }
 
 function App() {
+  axios.get('/get/uses').then(function (response) {
+    if (!response.data) {}
+  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
     className: "container",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -5487,6 +5492,55 @@ function App() {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+
+/***/ }),
+
+/***/ "./resources/js/components/Nav.js":
+/*!****************************************!*\
+  !*** ./resources/js/components/Nav.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+function Nav() {
+  var navlist = [{
+    'Users': '/user',
+    'access': [4, 3, 2]
+  }, {
+    'Companies': '/company',
+    'access': [4, 3]
+  }, {
+    'Company Loans': '/home',
+    'access': [4, 3]
+  }, {
+    'Employee Loans': '/home',
+    'access': [4, 3, 2]
+  }, {
+    'Capital': '/home',
+    'access': [4, 3]
+  }, {
+    'Create Loan': '/home',
+    'access': [1]
+  }];
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    className: "container",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "row justify-content-center",
+      children: "navigation"
+    })
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Nav);
 
 /***/ }),
 
@@ -6449,52 +6503,52 @@ function UserEdit() {
       children: "Edit User"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          "for": "companyName",
+          htmlFor: "companyName",
           children: "Name: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "text",
-          "class": "form-control",
+          className: "form-control",
           id: "companyName"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          "for": "companyName",
+          htmlFor: "companyName",
           children: "Email: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "text",
-          "class": "form-control",
+          className: "form-control",
           id: "companyName"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          "for": "companyName",
+          htmlFor: "companyName",
           children: "Password: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "password",
-          "class": "form-control",
+          className: "form-control",
           id: "companyName"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          "for": "companyName",
+          htmlFor: "companyName",
           children: "Retype Password: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "password",
-          "class": "form-control",
+          className: "form-control",
           id: "companyName"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          "for": "companyName",
+          htmlFor: "companyName",
           children: "Company: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("select", {
-          "class": "form-select",
+          className: "form-select",
           "aria-label": "Default select example",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
             value: " ",
@@ -6502,27 +6556,27 @@ function UserEdit() {
           })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          "for": "companyID",
+          htmlFor: "companyID",
           children: "Company ID: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "text",
-          "class": "form-control",
+          className: "form-control",
           id: "companyID"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          "for": "companyName",
+          htmlFor: "companyName",
           children: "Role: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("select", {
-          "class": "form-select",
+          className: "form-select",
           "aria-label": "Default select example"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
         type: "button",
-        "class": "btn btn-primary",
+        className: "btn btn-primary",
         children: "Submit"
       })]
     })]
@@ -6714,14 +6768,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/App */ "./resources/js/components/App.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_Nav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Nav */ "./resources/js/components/Nav.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
 
 
 if (document.getElementById('qc-main')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_App__WEBPACK_IMPORTED_MODULE_2__["default"], {}), document.getElementById('qc-main'));
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_App__WEBPACK_IMPORTED_MODULE_2__["default"], {}), document.getElementById('qc-main'));
+}
+
+if (document.getElementById('qc-main')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Nav__WEBPACK_IMPORTED_MODULE_3__["default"], {}), document.getElementById('side-nav'));
 }
 
 /***/ }),

@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Configuration;
+use Illuminate\Support\Facades\Auth;
 
 class ConfigurationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getConfigurationList()
     {
         try

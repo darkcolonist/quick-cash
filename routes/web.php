@@ -39,9 +39,13 @@ Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/add', [UserController::class, 'addUserForm']);
 Route::post('/user/add/data', [UserController::class, 'addUser']);
 Route::get('/user/edit/{id}', [UserController::class, 'editUserForm']);
+Route::get('/get/uses', [UserController::class, 'getUsersSession']);
 
 //role
 Route::get('/get/role/list', [RolesController::class, 'getRoleList']);
+
+//config
 Route::get('/config/edit', [ConfigurationController::class, 'editConfigForm']);
 Route::get('/get/config', [ConfigurationController::class, 'getConfigurationList']);
 Route::post('/config/edit', [ConfigurationController::class, 'updateConfiguration']);
+

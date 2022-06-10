@@ -1,14 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use DB;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Loanee;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getUserList()
     {
         try
@@ -22,6 +29,11 @@ class UserController extends Controller
         }
     }
 
+    public function getUsersSession()
+    {
+        return Auth::id();
+    }
+
     public function addUser(Request $request)
     {
         try
@@ -29,7 +41,7 @@ class UserController extends Controller
             $data = new User;
             $data->name = $request->get('userName');
             $data->email = $request->get('userMail');
-            $data->password = $request->get('userPass');
+            $data->password = Hash::make($request->get('userPass'));
             $data->role_id = $request->get('userRole');
             $data->save();
             $id = $data->id;

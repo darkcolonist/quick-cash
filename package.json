@@ -30,6 +30,8 @@
         "@mui/icons-material": "^5.8.2",
         "@mui/material": "^5.8.2",
         "formik": "^2.2.9",
+        "react-router": "^6.3.0",
+        "react-router-dom": "^6.3.0",
         "yup": "^0.32.11"
     }
 }

@@ -1,4 +1,7 @@
 import React from 'react';
+//import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Route, Redirect } from 'react-router'
+
 import Table from './company/Table';
 import CompanyAdd from './company/CompanyAdd';
 import UserAdd from './user/UserAdd';
@@ -32,6 +35,12 @@ function renderSwitch(param) {
 }
 
 function App() {
+
+    axios.get('/get/uses').then(function (response) {
+        if (!response.data){
+           
+        }
+    });
     return (
         <div className="container">
             <div className="row justify-content-center">
