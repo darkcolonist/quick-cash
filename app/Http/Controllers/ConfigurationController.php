@@ -38,4 +38,9 @@ class ConfigurationController extends Controller
             Log::error($e);
         }
     }
+
+    public function editConfigForm(Request $request)
+    {
+        return view('home');
+    }
 }

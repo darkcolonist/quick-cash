@@ -5433,7 +5433,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_UserAdd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user/UserAdd */ "./resources/js/components/user/UserAdd.js");
 /* harmony import */ var _user_UserTable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user/UserTable */ "./resources/js/components/user/UserTable.js");
 /* harmony import */ var _user_UserEdit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./user/UserEdit */ "./resources/js/components/user/UserEdit.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _config_ConfigEdit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./config/ConfigEdit */ "./resources/js/components/config/ConfigEdit.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -5452,19 +5454,22 @@ if (pathwithparams.length > 3) {
 function renderSwitch(param) {
   switch (param) {
     case '/company':
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_company_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {});
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_company_Table__WEBPACK_IMPORTED_MODULE_1__["default"], {});
 
     case '/user':
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_user_UserTable__WEBPACK_IMPORTED_MODULE_4__["default"], {});
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_user_UserTable__WEBPACK_IMPORTED_MODULE_4__["default"], {});
 
     case '/company/add':
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_company_CompanyAdd__WEBPACK_IMPORTED_MODULE_2__["default"], {});
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_company_CompanyAdd__WEBPACK_IMPORTED_MODULE_2__["default"], {});
 
     case '/user/add':
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_user_UserAdd__WEBPACK_IMPORTED_MODULE_3__["default"], {});
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_user_UserAdd__WEBPACK_IMPORTED_MODULE_3__["default"], {});
 
     case '/user/edit':
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_user_UserEdit__WEBPACK_IMPORTED_MODULE_5__["default"], {});
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_user_UserEdit__WEBPACK_IMPORTED_MODULE_5__["default"], {});
+
+    case '/config/edit':
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_config_ConfigEdit__WEBPACK_IMPORTED_MODULE_6__["default"], {});
 
     default:
       return;
@@ -5472,9 +5477,9 @@ function renderSwitch(param) {
 }
 
 function App() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
     className: "container",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "row justify-content-center",
       children: renderSwitch(path)
     })
@@ -6034,6 +6039,30 @@ var TableRow = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TableRow);
+
+/***/ }),
+
+/***/ "./resources/js/components/config/ConfigEdit.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/config/ConfigEdit.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ConfigEdit)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+function ConfigEdit() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+    children: "Works"
+  });
+}
 
 /***/ }),
 

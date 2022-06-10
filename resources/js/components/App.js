@@ -4,6 +4,7 @@ import CompanyAdd from './company/CompanyAdd';
 import UserAdd from './user/UserAdd';
 import UserTable from './user/UserTable';
 import UserEdit from './user/UserEdit';
+import ConfigEdit from './config/ConfigEdit';
 
 let path = window.location.pathname;
 let pathwithparams = path.split('/');
@@ -23,6 +24,8 @@ function renderSwitch(param) {
             return <UserAdd />;
         case '/user/edit':
             return <UserEdit />;
+        case '/config/edit':
+            return <ConfigEdit />
         default:
             return;
     }

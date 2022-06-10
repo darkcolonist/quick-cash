@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\ConfigurationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,7 @@ Route::post('/user/add/data', [UserController::class, 'addUser']);
 Route::get('/get/role/list', 
         [RolesController::class, 'getRoleList'])->name('role.list');
 Route::get('/user/edit/{id}', [UserController::class, 'editUserForm']);
+
+Route::get('/config/edit', [ConfigurationController::class, 'editConfigForm']);
+Route::get('/get/config', 
+        [ConfigurationController::class, 'getConfigurationList']);

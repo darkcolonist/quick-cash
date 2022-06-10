@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Configurations extends Model
+class Configuration extends Model
 {
     public $timestamps = false;
     
@@ -14,5 +14,5 @@ class Configurations extends Model
     protected $fillable = [
         'setting',
         'value',
-    ];
+    ]; 
 }
