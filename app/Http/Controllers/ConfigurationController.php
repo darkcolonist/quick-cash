@@ -23,8 +23,8 @@ class ConfigurationController extends Controller
     public function updateConfiguration(Request $request)
     {
         try{
-            foreach($request->get('configs') as $config){
-                $configvalue = $config['val'];
+            foreach($request->get('config') as $config){
+                $configvalue = $config['value'];
                 Configuration::where('id', $config['id'])->update([
                     'value' => $configvalue
                 ]);

@@ -24,29 +24,24 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/get/company/list', 
-        [CompanyController::class, 'getCompanyList'])->name('company.list');
-Route::post('/get/company/record',
-        [CompanyController::class, 'getCompanyRecord']);
-Route::post('/update/company/data',
-        [CompanyController::class, 'updateCompany']);
+
+//company
+Route::get('/get/company/list',  [CompanyController::class, 'getCompanyList']);
+Route::post('/get/company/record', [CompanyController::class, 'getCompanyRecord']);
+Route::post('/update/company/data', [CompanyController::class, 'updateCompany']);
 Route::post('/company/add/data', [CompanyController::class, 'addCompany']);
 Route::get('/company/add', [CompanyController::class, 'addCompanyForm']);
+Route::get('/company', [CompanyController::class, 'index']);
 
-Route::get('/company',
-        [CompanyController::class, 'index'])->name('company.index');
-
-Route::get('/get/user/list', 
-        [UserController::class, 'getUserList'])->name('user.list');
-Route::get('/user',
-        [UserController::class, 'index'])->name('user.index');
+//user
+Route::get('/get/user/list', [UserController::class, 'getUserList']);
+Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/add', [UserController::class, 'addUserForm']);
 Route::post('/user/add/data', [UserController::class, 'addUser']);
-
-Route::get('/get/role/list', 
-        [RolesController::class, 'getRoleList'])->name('role.list');
 Route::get('/user/edit/{id}', [UserController::class, 'editUserForm']);
 
+//role
+Route::get('/get/role/list', [RolesController::class, 'getRoleList']);
 Route::get('/config/edit', [ConfigurationController::class, 'editConfigForm']);
-Route::get('/get/config', 
-        [ConfigurationController::class, 'getConfigurationList']);
+Route::get('/get/config', [ConfigurationController::class, 'getConfigurationList']);
+Route::post('/config/edit', [ConfigurationController::class, 'updateConfiguration']);
