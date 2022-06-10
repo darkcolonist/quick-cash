@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Loanee;
@@ -23,14 +24,13 @@ class UserController extends Controller
 
     public function addUser(Request $request)
     {
-        //return $request;
         try
         {
             DB::table('users')->insert([
-                'name' =>,
-                'email' =>,
-                'password' =>,
-                'role_id' =>,
+                'name' => $request->get('userName'),
+                'email' => $request->get('userMail'),
+                'password' => $request->get('userPass'),
+                'role_id' => $request->get('userRole'),
             ]);
         }
         catch(Exception $e) {
