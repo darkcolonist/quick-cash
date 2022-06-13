@@ -14,8 +14,8 @@ export default function LoanTableRow({data}) {
             
             let $loaneeRecord = getLoaneeRecord(x.loanee_id)
             return <tr>
-                <td>{x.loanee_id}</td>
-                <td>{$loaneeRecord}</td>
+                <td>{x.user.name}</td>
+                <td>{x.company.name}</td>
                 <td>{x.amount}</td>
                 <td>
 

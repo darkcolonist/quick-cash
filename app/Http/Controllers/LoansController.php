@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Loan;
 use App\Models\LoanHistory;
+use App\Models\User;
+use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 
 class LoansController extends Controller
@@ -67,6 +69,12 @@ class LoansController extends Controller
                 ->with('loanee')
                 ->orderBy('id', 'ASC')
                 ->get();
+            foreach($loans as $loan) {
+                $user = User::whereId($loan->loanee->user_id)->first();
+                $company = Company::whereId($loan->loanee->company_id)->first();
+                $loan->user = $user;
+                $loan->company = $company;
+            }
             return response()->json($loans);
         }
         catch (Exception $e)
