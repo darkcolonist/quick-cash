@@ -36,20 +36,19 @@ export default function LoanRequest() {
     const [isLoading, setLoading] = useState(true);
     const [ident, setIdent] = useState({});
     const [existingLoan, setExistingLoan] = useState({});
+
     useEffect(async () => {
         //
         await axios.get('/get/uses').then(function (response) {
-            if (response.data){
-                setIdent(response.data)
-                //user id
-            }
+            setIdent(response.data);
+            //user id
+            axios.get('/users/loan/' + response.data.id).then(function (r){
+                setExistingLoan(r.data);
+                console.log(r.data);
+                setLoading(false);
+            })
         });
-        await axios.get('/users/loan/' + ident.id).then(function (r){
-            setExistingLoan(r.data);
-            setLoading(false);
-            console.log('f');
-        })
-        await axios.get('/get/config').then(function (response) {
+        axios.get('/get/config').then( function (response) {
             response.data.map(function(x,y) {
                 if (x.id === 1) {
                     setLoanInterest(x.value);
@@ -71,9 +70,15 @@ export default function LoanRequest() {
         <div className="row justify-content-center">
             <div className="col-md-8">
             <h3>Request Loan</h3>
-            { existingLoan.id
-            }
-            <form onSubmit={formik.handleSubmit}>
+            { existingLoan.id ? (
+                <div>
+                    <div>You have an existing loan.</div>
+                    <div>Amount: {existingLoan.amount}</div>
+                    <div>Rate (percent): {existingLoan.rate}</div>
+                    <div>Term (months): {existingLoan.term_in_months}</div>
+                </div>
+            ) : (
+                <form onSubmit={formik.handleSubmit}>
                 <div className="form-group col-md-4">
                     <label htmlFor="amount">Amount: </label>
                     <input 
@@ -142,6 +147,8 @@ export default function LoanRequest() {
                 </div>
                 <button className="btn btn-primary" type="submit">Submit</button>
             </form>
+            )}
+            
             </div>
         </div>
     </div>

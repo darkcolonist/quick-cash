@@ -6,10 +6,16 @@ import LoanTableRow from './LoanTableRow';
 export default function LoanTable() {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState({});
+    const [ident, setIdent] = useState({});
     useEffect(async () => {
-        await axios.get('/get/loan/employees').then(response => {
-            setData(response.data);
-            setLoading(false);
+        await axios.get('/get/uses').then(function (response) {
+            setIdent(response.data)
+            axios.get('/get/loan/employees/' + response.data.id).then(r => {
+                setData(r.data);
+                console.log('FFF');
+                console.log(r.data);
+                setLoading(false);
+            });
         });
     }, []);
   

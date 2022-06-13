@@ -22,12 +22,14 @@ if (pathwithparams.length > 3) {
 
 function App() {
     const [ident, setIdent] = useState({});
-    axios.get('/get/uses').then(function (response) {
-        if (response.data){
-            setIdent(response.data)
-            //user id
-        }
-    });
+    useEffect(async () => {
+        await axios.get('/get/uses').then(function (response) {
+            if (response.data){
+                setIdent(response.data)
+                //user id
+            }
+        });
+    }, []);
 
     function renderSwitch(param) {
         switch(param) {

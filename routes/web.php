@@ -56,5 +56,5 @@ Route::post('/config/edit', [ConfigurationController::class, 'updateConfiguratio
 Route::get('/loan/request', [LoansController::class, 'requestLoan']);
 Route::post('/loan/add/data', [LoansController::class, 'addLoan']);
 Route::get('/users/loan/{id}', [LoansController::class, 'getPendingLoanRecord']);
-Route::get('/get/loan/employees', [LoansController::class, 'getLoanEmployees']);
+Route::get('/get/loan/employees/{id}', [LoansController::class, 'getLoanEmployees']);
 Route::get('/loan/employees', [LoansController::class, 'showLoanEmployees']);

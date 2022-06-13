@@ -120,14 +120,6 @@ export default function UserEdit({pathParam}) {
                     </select>
                 </div>
                 <div className="form-group col-md-4">
-                    <label htmlFor="companyID">Company ID: </label>
-                    <input 
-                        type="text"
-                        className="form-control"
-                        id="companyID" />
-
-                </div>
-                <div className="form-group col-md-4">
                     <label htmlFor="companyName">Role: </label>
                     <select className="form-select" aria-label="Default select example">
                     
