@@ -27,18 +27,13 @@ class LoansController extends Controller
         try
         {
             $data = new Loan;
-            $data->loanee_id = $request->get('dummy');
-            $data->company_id = $request->get('dummy');
-            $data->amount = $request->get('dummy');
-            $data->rate = $request->get('dummy');
-            $data->term_in_months = $request->get('dummy');
-            $data->bank_account_loanee = $request->get('dummy');
+            $data->loanee_id = $request->get('loanee_id');
+            $data->company_id = $request->get('company_id');
+            $data->amount = $request->get('amount');
+            $data->rate = $request->get('rate');
+            $data->term_in_months = $request->get('amortDuration');
+            $data->bank_account_loanee = $request->get('bank_account_loanee');
             $data->save();
-            $id = $data->id;
-            DB::table('loanees')->insert([
-                'user_id' => $id,
-                'company_id' => $request->get('userCompany'),
-            ]);
         }
         catch(Exception $e) {
             Log::error($e);

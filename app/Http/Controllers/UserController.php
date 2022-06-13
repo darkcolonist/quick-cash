@@ -7,6 +7,7 @@ use DB;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Loanee;
+use App\Models\Company;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -32,6 +33,14 @@ class UserController extends Controller
     public function getUsersSession()
     {
         $user = User::whereId(Auth::id())->first();
+        $loanee = Loanee::where('user_id', $user->id)->first();
+        if ($loanee != null) {
+            $company = Company::whereId($loanee->company_id)->first();
+            $user->loanee = $loanee;
+            if ($company != null) {
+                $user->company = $company;
+            }
+        }
         return $user;
     }
 

@@ -5633,7 +5633,7 @@ function Nav() {
     'access': [1, 2]
   }, {
     'label': 'Employee Loans',
-    'path': '/get/loan/list',
+    'path': '/loan/employees',
     'access': [1, 2, 3]
   }, {
     'label': 'Capital',
@@ -6405,8 +6405,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function LoanRequest(_ref) {
-  var ident = _ref.ident;
+function LoanRequest() {
   var formik = (0,formik__WEBPACK_IMPORTED_MODULE_2__.useFormik)({
     initialValues: {
       amount: '',
@@ -6422,8 +6421,11 @@ function LoanRequest(_ref) {
       bank_account_loanee: yup__WEBPACK_IMPORTED_MODULE_3__.string().required('Required')
     }),
     onSubmit: function onSubmit(values) {
+      values.rate = loanInterest;
+      values.loanee_id = ident.loanee.id;
+      values.company_id = ident.loanee.company_id;
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/loan/add/data', values).then(function (response) {
-        values.rate = loanInterest;
+        //values.rate = loanInterest;
         console.log(values);
       });
     }
@@ -6444,6 +6446,11 @@ function LoanRequest(_ref) {
       isLoading = _useState6[0],
       setLoading = _useState6[1];
 
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+      _useState8 = _slicedToArray(_useState7, 2),
+      ident = _useState8[0],
+      setIdent = _useState8[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
@@ -6458,6 +6465,11 @@ function LoanRequest(_ref) {
 
                 if (x.id === 2) {
                   setAmortizationMonths(x.value);
+                }
+              });
+              axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/uses').then(function (response) {
+                if (response.data) {
+                  setIdent(response.data); //user id
                 }
               });
               setLoading(false);
@@ -6752,6 +6764,10 @@ function LoanTableRow(_ref) {
             className: "btn btn-info",
             href: "/user/edit/" + x.id,
             children: "Acknowledge"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+            className: "btn btn-info",
+            href: "/user/edit/" + x.id,
+            children: "Details"
           })]
         })]
       });
