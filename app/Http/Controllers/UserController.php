@@ -52,7 +52,7 @@ class UserController extends Controller
             ]);
         }
         catch(Exception $e) {
-
+            Log::error($e);
         }
     }
 
@@ -69,5 +69,18 @@ class UserController extends Controller
     public function editUserForm()
     {
         return view('home');
+    }
+
+    public function getUserRecord($id)
+    {
+        try
+        {
+            $user = User::whereId($id)->first();
+            return $user;
+        }
+        catch (Exception $e)
+        {
+            Log::error($e);
+        }
     }
 }

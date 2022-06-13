@@ -13,6 +13,7 @@ import LoanRequest from './loan/LoanRequest';
 
 let path = window.location.pathname;
 let pathwithparams = path.split('/');
+let pathParam = pathwithparams[3];
 if (pathwithparams.length > 3) {
     path = pathwithparams.pop();
     path = pathwithparams.join('/');
@@ -30,19 +31,19 @@ function App() {
     function renderSwitch(param) {
         switch(param) {
             case '/company':
-                return <Table ident={ident}/>;
+                return <Table ident={ident} pathParam={pathParam}/>;
             case '/user':
-                return <UserTable ident={ident}/>;
+                return <UserTable ident={ident} pathParam={pathParam}/>;
             case '/company/add':
-                return <CompanyAdd ident={ident}/>;
+                return <CompanyAdd ident={ident} pathParam={pathParam}/>;
             case '/user/add':
-                return <UserAdd ident={ident}/>;
+                return <UserAdd ident={ident} pathParam={pathParam}/>;
             case '/user/edit':
-                return <UserEdit ident={ident}/>;
+                return <UserEdit ident={ident} pathParam={pathParam}/>;
             case '/config/edit':
-                return <ConfigEdit ident={ident}/>
+                return <ConfigEdit ident={ident} pathParam={pathParam}/>
             case '/loan/request':
-                return <LoanRequest ident={ident}/>
+                return <LoanRequest ident={ident} pathParam={pathParam}/>
             default:
                 return;
         }

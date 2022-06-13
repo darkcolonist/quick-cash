@@ -3,49 +3,34 @@ import { useState, useEffect } from "react";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-
-export default function LoanRequest({ident}) {
+export default function UserAddID() {
     const formik = useFormik({
         initialValues: {
-            amount: '',
+            loanAmt: '',
             amortDuration: '1',
-            loanee_id: '',
-            company_id: '',
-            rate: loanInterest,
-            bank_account_loanee: '',
         },
         validationSchema: Yup.object({
-            amount: Yup.number()
+            loanAmt: Yup.number()
                 .required('Required'),
             amortDuration: Yup.string()
-                .required('Required'),
-            bank_account_loanee: Yup.string()
-                .required('Required')
+            .required('Required')
         }),
         onSubmit: values => {
-            axios.post('/loan/add/data', values).then((response) => {
-                values.rate = loanInterest;
-                console.log(values);
-            })
+            alert(JSON.stringify(values, null, 2));
         },
     });
 
     const [amortizationMonths, setAmortizationMonths] = useState(0);
-    const [loanInterest, setLoanInterest] = useState(0);
     const [isLoading, setLoading] = useState(true);
     useEffect(async () => {
-        await axios.get('/get/config').then(function (response) {
+        axios.get('/get/config').then(function (response) {
             response.data.map(function(x,y) {
-                if (x.id === 1) {
-                    setLoanInterest(x.value);
-                }
                 if (x.id === 2) {
                     setAmortizationMonths(x.value);
                 }
             })
             setLoading(false);
         });
-        
     }, []);
 
     if (isLoading) {
@@ -59,29 +44,14 @@ export default function LoanRequest({ident}) {
             <h3>Request Loan</h3>
             <form onSubmit={formik.handleSubmit}>
                 <div className="form-group col-md-4">
-                    <label htmlFor="amount">Amount: </label>
+                    <label htmlFor="loanAmt">Amount: </label>
                     <input 
                         type="text"
                         className="form-control"
-                        id="amount"
+                        id="loanAmt"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.amount}
-                    />
-                    {formik.touched.amount && formik.errors.amount ? (
-                        <div>{formik.errors.amount}</div>
-                    ) : null}
-                </div>
-                <div className="form-group col-md-4">
-                    <label htmlFor="interest">Interest: </label>
-                    <input 
-                        type="text"
-                        className="form-control"
-                        id="interest"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={loanInterest}
-                        disabled
+                        value={formik.values.loanAmt}
                     />
                     {formik.touched.loanAmt && formik.errors.loanAmt ? (
                         <div>{formik.errors.loanAmt}</div>
@@ -108,20 +78,6 @@ export default function LoanRequest({ident}) {
                         })()
                         }
                     </select>
-                </div>
-                <div className="form-group col-md-4">
-                    <label htmlFor="bank_account_loanee">Bank Account: </label>
-                    <input 
-                        type="text"
-                        className="form-control"
-                        id="bank_account_loanee"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.bank_account_loanee}
-                    />
-                    {formik.touched.bank_account_loanee && formik.errors.bank_account_loanee ? (
-                        <div>{formik.errors.bank_account_loanee}</div>
-                    ) : null}
                 </div>
                 <button className="btn btn-primary" type="submit">Submit</button>
             </form>

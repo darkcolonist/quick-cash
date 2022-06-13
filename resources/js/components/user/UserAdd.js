@@ -27,12 +27,11 @@ export default function UserAdd() {
             userRole: Yup.string()
         }),
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
             axios.post('/user/add/data', values).then((response) => {
                 console.log(response);
-                /*setTimeout(() => {
-                    window.location.href = "/company";
-                }, 500)*/
+                setTimeout(() => {
+                    window.location.href = "/user";
+                }, 1000)
             })
         },
     });
@@ -56,10 +55,6 @@ export default function UserAdd() {
         return <div></div>;
     }
 
-    function submitForm() {
-        
-    }
-
     return (
         <div>
             <h3>Add Users</h3>
@@ -70,7 +65,6 @@ export default function UserAdd() {
                         type="text"
                         class="form-control"
                         id="userName"
-                        //onChange={e => setUserName(e.target.value)}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.userName}
