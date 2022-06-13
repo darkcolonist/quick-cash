@@ -27,6 +27,7 @@ class CreateLoansTable extends Migration
             $table->timestamp('date_acknowledged')->nullable();
             $table->string('bank_account_loanee')->nullable();
             $table->string('bank_account_lender')->nullable();
+            $table->boolean('is_companyPayingLoan')->nullable();
         });
     }
 

@@ -58,4 +58,25 @@ class LoansController extends Controller
             Log::error($e);
         }
     }
+
+    public function getLoanEmployees()
+    {
+        try
+        {
+            $loans = Loan::where('is_companyPayingLoan', 0)
+                ->with('loanee')
+                ->orderBy('id', 'ASC')
+                ->get();
+            return response()->json($loans);
+        }
+        catch (Exception $e)
+        {
+            Log::error($e);
+        }
+    }
+
+    public function showLoanEmployees()
+    {
+        return view('home');
+    }
 }

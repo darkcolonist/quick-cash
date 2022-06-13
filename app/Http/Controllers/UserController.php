@@ -83,4 +83,17 @@ class UserController extends Controller
             Log::error($e);
         }
     }
+
+    public function getLoaneeRecord($id)
+    {
+        try
+        {
+            $loanee = Loanee::where('user_id', $id)->first();
+            return $loanee;
+        }
+        catch (Exception $e)
+        {
+            Log::error($e);
+        }
+    }
 }

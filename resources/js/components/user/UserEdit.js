@@ -5,19 +5,29 @@ import * as Yup from 'yup';
 
 export default function UserEdit({pathParam}) {
     const [userRecord, setUserRecord] = useState({});
+    const [loaneeRecord, setLoaneeRecord] = useState({});
     const [isLoading, setLoading] = useState(true);
+    const [companies, setCompanies] = useState({});
+    const [roles, setRoles] = useState({});
 
     useEffect(async () => {
         await axios.get('/get/user/' + pathParam).then(function (response) {
             setUserRecord(response.data);
             console.log(response.data);
-            setLoading(false);
         });
+        await axios.get('/get/role/list').then(function (response) {
+            setRoles(response);
+        }).then(function (response) {
+            axios.get('/get/company/list').then(function (response) {
+                setCompanies(response);
+                setLoading(false);
+            });
+        }, []);
     }, []);
 
     const formik = useFormik({
         initialValues: {
-            userName: userRecord.name,
+            userName: '',
             userMail: '',
             userPass: '',
             userRPass: '',
@@ -46,6 +56,10 @@ export default function UserEdit({pathParam}) {
             })
         },
     });
+    
+    if (isLoading) {
+        return <div></div>;
+    }
 
     return (
         <div>
@@ -59,34 +73,35 @@ export default function UserEdit({pathParam}) {
                         id="userName"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.userName}
+                        defaultValue={userRecord.name}
                     />
                 {formik.touched.userName && formik.errors.userName ? (
                     <div>{formik.errors.userName}</div>
                 ) : null}
                 </div>
                 <div className="form-group col-md-4">
-                    <label htmlFor="companyName">Email: </label>
+                    <label htmlFor="userMail">Email: </label>
                     <input 
                         type="text"
                         className="form-control"
-                        id="companyName"
+                        id="userMail"
+                        defaultValue={userRecord.email}
                     />
                 </div>
                 <div className="form-group col-md-4">
-                    <label htmlFor="companyName">Password: </label>
+                    <label htmlFor="userPass">New Password: </label>
                     <input 
                         type="password"
                         className="form-control"
-                        id="companyName"
+                        id="userPass"
                     />
                 </div>
                 <div className="form-group col-md-4">
-                    <label htmlFor="companyName">Retype Password: </label>
+                    <label htmlFor="userRPass">Retype Password: </label>
                     <input 
                         type="password"
                         className="form-control"
-                        id="companyName"
+                        id="userRPass"
                     />
                 </div>
                 <div className="form-group col-md-4">
@@ -96,8 +111,12 @@ export default function UserEdit({pathParam}) {
                         aria-label="Default select example"
 
                     >
-                        <option value=" ">None</option>
-                    
+                    <option value=" ">None</option>
+                    {
+                        companies.data.map(function (x,y) {
+                            return <option value={x.id}>{x.name}</option>
+                        })
+                    }
                     </select>
                 </div>
                 <div className="form-group col-md-4">

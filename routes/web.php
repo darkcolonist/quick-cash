@@ -42,6 +42,7 @@ Route::post('/user/add/data', [UserController::class, 'addUser']);
 Route::get('/user/edit/{id}', [UserController::class, 'editUserForm']);
 Route::get('/get/uses', [UserController::class, 'getUsersSession']);
 Route::get('/get/user/{id}', [UserController::class, 'getUserRecord']);
+Route::get('/get/loanee/{id}', [UserController::class, 'getLoaneeRecord']);
 
 //role
 Route::get('/get/role/list', [RolesController::class, 'getRoleList']);
@@ -55,4 +56,5 @@ Route::post('/config/edit', [ConfigurationController::class, 'updateConfiguratio
 Route::get('/loan/request', [LoansController::class, 'requestLoan']);
 Route::post('/loan/add/data', [LoansController::class, 'addLoan']);
 Route::get('/users/loan/{id}', [LoansController::class, 'getPendingLoanRecord']);
-Route::get('/get/loan/list', [LoansController::class, 'getLoanList']);
+Route::get('/get/loan/employees', [LoansController::class, 'getLoanEmployees']);
+Route::get('/loan/employees', [LoansController::class, 'showLoanEmployees']);

@@ -10,6 +10,7 @@ import UserTable from './user/UserTable';
 import UserEdit from './user/UserEdit';
 import ConfigEdit from './config/ConfigEdit';
 import LoanRequest from './loan/LoanRequest';
+import LoanTable from './loan/LoanTable';
 
 let path = window.location.pathname;
 let pathwithparams = path.split('/');
@@ -44,6 +45,8 @@ function App() {
                 return <ConfigEdit ident={ident} pathParam={pathParam}/>
             case '/loan/request':
                 return <LoanRequest ident={ident} pathParam={pathParam}/>
+            case '/loan/employees':
+                return <LoanTable ident={ident} pathParam={pathParam}/>
             default:
                 return;
         }
