@@ -6424,10 +6424,7 @@ function LoanRequest() {
       values.rate = loanInterest;
       values.loanee_id = ident.loanee.id;
       values.company_id = ident.loanee.company_id;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/loan/add/data', values).then(function (response) {
-        //values.rate = loanInterest;
-        console.log(values);
-      });
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/loan/add/data', values).then(function (response) {});
     }
   });
 
@@ -6451,12 +6448,33 @@ function LoanRequest() {
       ident = _useState8[0],
       setIdent = _useState8[1];
 
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+      _useState10 = _slicedToArray(_useState9, 2),
+      existingLoan = _useState10[0],
+      setExistingLoan = _useState10[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/uses').then(function (response) {
+              if (response.data) {
+                setIdent(response.data); //user id
+              }
+            });
+
+          case 2:
+            _context.next = 4;
+            return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/users/loan/' + ident.id).then(function (r) {
+              setExistingLoan(r.data);
+              setLoading(false);
+              console.log('f');
+            });
+
+          case 4:
+            _context.next = 6;
             return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/config').then(function (response) {
               response.data.map(function (x, y) {
                 if (x.id === 1) {
@@ -6467,15 +6485,9 @@ function LoanRequest() {
                   setAmortizationMonths(x.value);
                 }
               });
-              axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/uses').then(function (response) {
-                if (response.data) {
-                  setIdent(response.data); //user id
-                }
-              });
-              setLoading(false);
             });
 
-          case 2:
+          case 6:
           case "end":
             return _context.stop();
         }
@@ -6495,7 +6507,7 @@ function LoanRequest() {
         className: "col-md-8",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
           children: "Request Loan"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
+        }), existingLoan.id, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
           onSubmit: formik.handleSubmit,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "form-group col-md-4",

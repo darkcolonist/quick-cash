@@ -7,6 +7,7 @@ use App\Models\Loan;
 use App\Models\LoanHistory;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\Loanee;
 use Illuminate\Support\Facades\Auth;
 
 class LoansController extends Controller
@@ -23,7 +24,6 @@ class LoansController extends Controller
 
     public function addLoan(Request $request)
     {
-        return $request;
         try
         {
             $data = new Loan;
@@ -44,7 +44,11 @@ class LoansController extends Controller
     {
         try
         {
-            $loan = Loan::where('loanee_id', $id)
+            $loanee = Loanee::where('user_id', $id)->first();
+            if ($loanee == null) {
+                return null;
+            }
+            $loan = Loan::where('loanee_id', $loanee->id)
                 ->where('approver_id', null)
                 ->where('acknowledger_id', null)
                 ->first();

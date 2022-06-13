@@ -27,8 +27,6 @@ export default function LoanRequest() {
             values.loanee_id = ident.loanee.id;
             values.company_id = ident.loanee.company_id;
             axios.post('/loan/add/data', values).then((response) => {
-                //values.rate = loanInterest;
-                console.log(values);
             })
         },
     });
@@ -37,7 +35,20 @@ export default function LoanRequest() {
     const [loanInterest, setLoanInterest] = useState(0);
     const [isLoading, setLoading] = useState(true);
     const [ident, setIdent] = useState({});
+    const [existingLoan, setExistingLoan] = useState({});
     useEffect(async () => {
+        //
+        await axios.get('/get/uses').then(function (response) {
+            if (response.data){
+                setIdent(response.data)
+                //user id
+            }
+        });
+        await axios.get('/users/loan/' + ident.id).then(function (r){
+            setExistingLoan(r.data);
+            setLoading(false);
+            console.log('f');
+        })
         await axios.get('/get/config').then(function (response) {
             response.data.map(function(x,y) {
                 if (x.id === 1) {
@@ -47,14 +58,8 @@ export default function LoanRequest() {
                     setAmortizationMonths(x.value);
                 }
             })
-            axios.get('/get/uses').then(function (response) {
-                if (response.data){
-                    setIdent(response.data)
-                    //user id
-                }
-            });
-            setLoading(false);
         });
+        
     }, []);
 
     if (isLoading) {
@@ -66,6 +71,8 @@ export default function LoanRequest() {
         <div className="row justify-content-center">
             <div className="col-md-8">
             <h3>Request Loan</h3>
+            { existingLoan.id
+            }
             <form onSubmit={formik.handleSubmit}>
                 <div className="form-group col-md-4">
                     <label htmlFor="amount">Amount: </label>
@@ -118,6 +125,7 @@ export default function LoanRequest() {
                         }
                     </select>
                 </div>
+
                 <div className="form-group col-md-4">
                     <label htmlFor="bank_account_loanee">Bank Account: </label>
                     <input 
