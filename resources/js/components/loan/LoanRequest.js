@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 
-export default function LoanRequest({ident}) {
+export default function LoanRequest() {
     const formik = useFormik({
         initialValues: {
             amount: '',
@@ -23,8 +23,11 @@ export default function LoanRequest({ident}) {
                 .required('Required')
         }),
         onSubmit: values => {
+            values.rate = loanInterest;
+            values.loanee_id = ident.loanee.id;
+            values.company_id = ident.loanee.company_id;
             axios.post('/loan/add/data', values).then((response) => {
-                values.rate = loanInterest;
+                //values.rate = loanInterest;
                 console.log(values);
             })
         },
@@ -33,6 +36,7 @@ export default function LoanRequest({ident}) {
     const [amortizationMonths, setAmortizationMonths] = useState(0);
     const [loanInterest, setLoanInterest] = useState(0);
     const [isLoading, setLoading] = useState(true);
+    const [ident, setIdent] = useState({});
     useEffect(async () => {
         await axios.get('/get/config').then(function (response) {
             response.data.map(function(x,y) {
@@ -43,9 +47,14 @@ export default function LoanRequest({ident}) {
                     setAmortizationMonths(x.value);
                 }
             })
+            axios.get('/get/uses').then(function (response) {
+                if (response.data){
+                    setIdent(response.data)
+                    //user id
+                }
+            });
             setLoading(false);
         });
-        
     }, []);
 
     if (isLoading) {
