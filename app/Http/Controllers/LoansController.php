@@ -13,4 +13,9 @@ class LoansController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function requestLoan()
+    {
+        return view('home');
+    }
 }

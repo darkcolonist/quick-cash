@@ -31,7 +31,8 @@ class UserController extends Controller
 
     public function getUsersSession()
     {
-        return Auth::id();
+        $user = User::whereId(Auth::id())->first();
+        return $user;
     }
 
     public function addUser(Request $request)

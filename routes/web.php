@@ -5,6 +5,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ConfigurationController;
+use App\Http\Controllers\LoansController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,4 +49,7 @@ Route::get('/get/role/list', [RolesController::class, 'getRoleList']);
 Route::get('/config/edit', [ConfigurationController::class, 'editConfigForm']);
 Route::get('/get/config', [ConfigurationController::class, 'getConfigurationList']);
 Route::post('/config/edit', [ConfigurationController::class, 'updateConfiguration']);
+
+//loan
+Route::get('/loan/request', [LoansController::class, 'requestLoan']);
 
