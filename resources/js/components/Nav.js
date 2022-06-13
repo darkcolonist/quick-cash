@@ -1,19 +1,42 @@
 import React from 'react';
+import { useState, useEffect } from "react";
 
 function Nav() {
+    const [ident, setIdent] = useState({});
+    const [isLoading, setLoading] = useState(true);
+
+    axios.get('/get/uses').then(function (response) {
+        if (response.data){
+            setIdent(response.data)
+            setLoading(false);
+            //user id
+        }
+    });
+
     const navlist = [
-        { 'Users': '/user', 'access': [4,3,2] },
-        { 'Companies': '/company', 'access': [4,3] },
-        { 'Company Loans': '/home', 'access': [4,3] },
-        { 'Employee Loans': '/home', 'access': [4,3,2] },
-        { 'Capital': '/home', 'access': [4,3] },
-        { 'Create Loan': '/home', 'access': [1] },
+        { 'label': 'Users', 'path': '/user', 'access': [1,2,3] },
+        { 'label': 'Companies', 'path': '/company', 'access': [1,2] },
+        { 'label': 'Company Loans', 'path':  '/home', 'access': [1,2] },
+        { 'label': 'Employee Loans', 'path': '/home', 'access': [1,2,3] },
+        { 'label': 'Capital', 'path': '/home', 'access': [1,2] },
+        { 'label': 'Request Loan', 'path': '/loan/request', 'access': [4] },
     ];
+
+    if (isLoading) {
+        return <div></div>;
+    }
 
     return (
         <div className="container">
             <div className="row justify-content-center">
-                navigation
+                {navlist.map(function(x,y) {
+                    
+                    {if (x.access.includes(ident.role_id)){
+                        
+                        return <div><a href={x.path}>{x.label}</a></div>
+                    }
+                }
+                })}
             </div>
         </div>
     );
