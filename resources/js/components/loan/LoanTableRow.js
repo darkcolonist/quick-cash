@@ -42,9 +42,7 @@ export default function LoanTableRow({data}) {
                 <td>
                     {
                         ident.role_id < 3 ? (
-                            <form onSubmit={acknowledgeloan}>
                                 <a className="btn btn-info" href={"/acknowledge/loan/" + x.id}>Acknowledge</a>
-                            </form>
                         ) : (
                             <a className="btn btn-info" href={"/approve/loan/" + x.id}>Approve</a>
                         )

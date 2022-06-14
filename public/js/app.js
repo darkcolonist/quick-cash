@@ -6855,13 +6855,10 @@ function LoanTableRow(_ref) {
             children: "Pending Acknowledgement"
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-          children: [ident.role_id < 3 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("form", {
-            onSubmit: acknowledgeloan,
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
-              className: "btn btn-info",
-              href: "/acknowledge/loan/" + x.id,
-              children: "Acknowledge"
-            })
+          children: [ident.role_id < 3 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+            className: "btn btn-info",
+            href: "/acknowledge/loan/" + x.id,
+            children: "Acknowledge"
           }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
             className: "btn btn-info",
             href: "/approve/loan/" + x.id,

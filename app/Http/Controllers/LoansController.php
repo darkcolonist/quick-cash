@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Company;
 use App\Models\Loanee;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class LoansController extends Controller
 {
@@ -122,12 +123,31 @@ class LoansController extends Controller
 
     public function acknowledgeLoan($id)
     {
+        // approves loan
         $user = User::whereId(Auth::id())->first();
         $loan = Loan::whereId($id)
             ->update([
                 'acknowledger_id'=>$user->id,
                 'date_acknowledged'=>now()
             ]);
+
+        // creates loan history
+        $loan = Loan::whereId($id)->first();
+        //$debt = $loan->amount + $loan->amount * ($loan->rate/100);
+        //$debtpermonth = $debt / $loan->term_in_months;
+        $refMonth = Carbon::now()->startOfMonth();
+
+        $loanHistory = LoanHistory::where('loan_id', $loan->id)->first();
+        if (!$loanHistory){
+            for ($x=0; $x<$loan->term_in_months; $x++) {
+                $amortDate = $refMonth->addMonth();
+                $data = new LoanHistory;
+                $data->loan_id = $loan->id;
+                $data->amortization_date = $amortDate;
+                $data->save();
+            }
+        }
+        
         return redirect('/loan/employees');
     }
 
