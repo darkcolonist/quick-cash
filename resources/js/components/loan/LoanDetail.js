@@ -27,6 +27,9 @@ export default function LoanDetail({ident, pathParam}) {
                 <b>Amount:</b> {loan.amount}
             </div>
             <div>
+                <b>Date of Application:</b> {loan.dateofapplication}
+            </div>
+            <div>
                 <b>Approved by:</b> {approver ? approver : 'Loan is not yet approved'}
             </div>
             <div>
@@ -44,8 +47,9 @@ export default function LoanDetail({ident, pathParam}) {
                 <table className="table table-hover">
                     <thead>
                     <tr>
-                        <th>Amount</th>
+                        <th>Amount to pay</th>
                         <th>Due Date</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -56,7 +60,20 @@ export default function LoanDetail({ident, pathParam}) {
                                     return <tr>
                                         <td>{debtpermonth}</td>
                                         <td>{loan.amort_dates[y]}</td>
-                                        <td></td>
+                                        <td>
+                                        {
+                                            x.is_paid === 1 ? (
+                                                <p>Paid</p>
+                                            ) : (
+                                                <p>Not yet paid</p>
+                                            )
+                                        }
+                                        </td>
+                                        <td>
+                                            <a className="btn btn-info" href={"/pay/loan/" + x.id}>
+                                                Pay Loan
+                                            </a>
+                                        </td>
                                     </tr>
                                 })
                                 

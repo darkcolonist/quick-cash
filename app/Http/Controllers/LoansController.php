@@ -169,6 +169,8 @@ class LoansController extends Controller
         $loan->debt = $loan->amount + $loan->amount * ($loan->rate/100);
         $loan->debtpermonth = $loan->debt / $loan->term_in_months;
 
+        $dateofapplication = Carbon::parse($loan->created_at);
+        $dateofapplication = $dateofapplication->toFormattedDateString();
         $amort_dates = [];
         if (count($history) > 0) {
             for ($x=0; $x<$loan->term_in_months; $x++) {
@@ -178,10 +180,36 @@ class LoansController extends Controller
             $loan->amort_dates = $amort_dates;
         }
 
+        $loan->dateofapplication = $dateofapplication;
         $loan->history = $history;
         $loan->historylength = count($loan->history);
         $loan->approver = $approver;
         $loan->acknowledger = $acknowledger;
         return $loan;
+    }
+
+    public function showLoanPayForm($id) 
+    {
+        return view('home');
+    }
+
+    public function getHistorysLoan($id)
+    {
+        $hist = LoanHistory::whereId($id)->first();
+        return $hist->loan_id;
+    }
+
+    public function payLoan(Request $request)
+    {
+        $id = $request->get('id');
+        $bank_account_lender = $request->get('bank_account_lender');
+        $bank_account_loanee = $request->get('bank_account_loanee');
+        $loan = LoanHistory::whereId($id)
+            ->update([
+                'is_paid' => 1,
+                'bank_account_lender' => $bank_account_lender,
+                'bank_account_loanee' => $bank_account_loanee
+            ]);
+        return;
     }
 }

@@ -62,3 +62,6 @@ Route::get('/approve/loan/{id}', [LoansController::class, 'approveLoan']);
 Route::get('/acknowledge/loan/{id}', [LoansController::class, 'acknowledgeLoan']);
 Route::get('/loan/detail/{id}', [LoansController::class, 'showLoanDetails']);
 Route::get('/get/loan/detail/{id}', [LoansController::class, 'getLoanDetails']);
+Route::get('/pay/loan/{id}', [LoansController::class, 'showLoanPayForm']);
+Route::post('/pay/loan', [LoansController::class, 'payLoan']);
+Route::get('/get/historys/loan/{id}', [LoansController::class, 'getHistorysLoan']);
