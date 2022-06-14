@@ -27,8 +27,8 @@ export default function UserEdit({pathParam}) {
 
     const formik = useFormik({
         initialValues: {
-            userName: '',
-            userMail: '',
+            userName: userRecord.name,
+            userMail: userRecord.email,
             userPass: '',
             userRPass: '',
             userCompany: '',
@@ -48,12 +48,13 @@ export default function UserEdit({pathParam}) {
             userRole: Yup.string()
         }),
         onSubmit: values => {
-            axios.post('/user/add/data', values).then((response) => {
+            console.log(values);
+            /*axios.post('/user/add/data', values).then((response) => {
                 console.log(response);
                 setTimeout(() => {
                     window.location.href = "/user";
                 }, 1000)
-            })
+            })*/
         },
     });
     
@@ -64,7 +65,7 @@ export default function UserEdit({pathParam}) {
     return (
         <div>
             <h3>Edit User</h3>
-            <form>
+            <form onSubmit={formik.handleSubmit}>
                 <div className="form-group col-md-4">
                     <label htmlFor="userName">Name: </label>
                     <input 
@@ -114,21 +115,32 @@ export default function UserEdit({pathParam}) {
                     <option value=" ">None</option>
                     {
                         companies.data.map(function (x,y) {
-                            return <option value={x.id}>{x.name}</option>
+                            if (userRecord.loanee !== null){
+                            if (userRecord.loanee.company_id === x.id){
+                                return <option value={x.id} selected>{x.name}</option>
+                            } else {
+                                return <option value={x.id}>{x.name}</option>
+                            }
+                            }
                         })
                     }
                     </select>
                 </div>
                 <div className="form-group col-md-4">
-                    <label htmlFor="companyName">Role: </label>
+                    <label htmlFor="companyName">Role:</label>
                     <select className="form-select" aria-label="Default select example">
-                    
+                    {
+                        roles.data.map(function (x,y) {
+                            if (userRecord.role_id === x.id) {
+                                return <option value={x.id} selected>{x.name}</option>
+                            } else {
+                                return <option value={x.id}>{x.name}</option>
+                            }
+                        })
+                    }
                     </select>
                 </div>
-                <button
-                    type="button"
-                    className="btn btn-primary"
-                >Submit</button>
+                <button class="btn btn-primary" type="submit">Submit</button>
             </form>
         </div>
     )

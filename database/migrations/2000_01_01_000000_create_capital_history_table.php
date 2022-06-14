@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyCapitalHistoryTable extends Migration
+class CreateCapitalHistoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateCompanyCapitalHistoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('company_capital_history', function (Blueprint $table) {
+        Schema::create('capital_history', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('company_id')->nullable()->index('company_id');
+            $table->unsignedBigInteger('user_id')->nullable()->index('user_id');
             $table->timestamp('date')->nullable();
             $table->decimal('amount', 10)->nullable();
             $table->string('comment')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable()->index('user_id');
             $table->unsignedBigInteger('loan_history_id')->nullable()->index('loan_history_id');
+            $table->decimal('total_amt', 10)->nullable();
         });
     }
 
@@ -31,6 +32,6 @@ class CreateCompanyCapitalHistoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_capital_history');
+        Schema::dropIfExists('capital_history');
     }
 }

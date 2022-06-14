@@ -101,6 +101,8 @@ class UserController extends Controller
         try
         {
             $user = User::whereId($id)->first();
+            $loanee = Loanee::where('user_id', $user->id)->first();
+            $user->loanee = $loanee;
             return $user;
         }
         catch (Exception $e)

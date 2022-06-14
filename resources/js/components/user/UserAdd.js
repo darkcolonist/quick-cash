@@ -59,11 +59,11 @@ export default function UserAdd() {
         <div>
             <h3>Add Users</h3>
             <form onSubmit={formik.handleSubmit}>
-                <div class="form-group col-md-4">
-                    <label for="userName">Name: </label>
+                <div className="form-group col-md-4">
+                    <label htmlFor="userName">Name: </label>
                     <input 
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="userName"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -73,11 +73,11 @@ export default function UserAdd() {
                         <div>{formik.errors.userName}</div>
                     ) : null}
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="userMail">Email: </label>
+                <div className="form-group col-md-4">
+                    <label htmlFor="userMail">Email: </label>
                     <input 
                         type="email"
-                        class="form-control"
+                        className="form-control"
                         id="userMail"
                         //onChange={e => setUserMail(e.target.value)}
                         onChange={formik.handleChange}
@@ -88,11 +88,11 @@ export default function UserAdd() {
                         <div>{formik.errors.userMail}</div>
                     ) : null}
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="userPass">Password: </label>
+                <div className="form-group col-md-4">
+                    <label htmlFor="userPass">Password: </label>
                     <input 
                         type="password"
-                        class="form-control"
+                        className="form-control"
                         id="userPass"
                         //onChange={e => setUserPass(e.target.value)}
                         onChange={formik.handleChange}
@@ -103,11 +103,11 @@ export default function UserAdd() {
                         <div>{formik.errors.userPass}</div>
                     ) : null}
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="userRPass">Retype Password: </label>
+                <div className="form-group col-md-4">
+                    <label htmlFor="userRPass">Retype Password: </label>
                     <input 
                         type="password"
-                        class="form-control"
+                        className="form-control"
                         id="userRPass"
                         //onChange={e => setUserRPass(e.target.value)}
                         onChange={formik.handleChange}
@@ -118,11 +118,11 @@ export default function UserAdd() {
                         <div>{formik.errors.userRPass}</div>
                     ) : null}
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="userCompany">Company: </label>
+                <div className="form-group col-md-4">
+                    <label htmlFor="userCompany">Company: </label>
                     <select
                         id="userCompany"
-                        class="form-select"
+                        className="form-select"
                         aria-label="Default select example"
                         //onChange={toggleCompanyIDInput}
                         onChange={formik.handleChange}
@@ -140,11 +140,11 @@ export default function UserAdd() {
                         <div>{formik.errors.userCompany}</div>
                     ) : null}
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="userRole">Role: </label>
+                <div className="form-group col-md-4">
+                    <label htmlFor="userRole">Role: </label>
                     <select
                         id="userRole"
-                        class="form-select"
+                        className="form-select"
                         aria-label="Default select example"
                         //onChange={e => setUserRole(e.target.value)}
                         onChange={formik.handleChange}
@@ -165,7 +165,7 @@ export default function UserAdd() {
                     }
                     </select>
                 </div>
-                <button class="btn btn-primary" type="submit">Submit</button>
+                <button className="btn btn-primary" type="submit">Submit</button>
             </form>
         </div>
     )

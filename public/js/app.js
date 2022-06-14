@@ -5768,13 +5768,13 @@ function CompanyAdd() {
       action: "/company",
       onSubmit: addCompany,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
           "for": "companyName",
           children: "New Company Name: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "text",
-          "class": "form-control",
+          className: "form-control",
           id: "companyName",
           placeholder: "Enter Company name",
           onChange: function onChange(e) {
@@ -5783,7 +5783,7 @@ function CompanyAdd() {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
         type: "button",
-        "class": "btn btn-primary",
+        className: "btn btn-primary",
         onClick: addCompany,
         children: "Submit"
       })]
@@ -6380,7 +6380,7 @@ function ConfigEdit() {
             children: config.setting
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
             type: "text",
-            "class": "form-control",
+            className: "form-control",
             id: config.id,
             defaultValue: config.value,
             onChange: function onChange(e) {
@@ -6390,7 +6390,7 @@ function ConfigEdit() {
         });
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
         type: "button",
-        "class": "btn btn-primary",
+        className: "btn btn-primary",
         onClick: saveConfig,
         children: "Submit"
       })]
@@ -6555,7 +6555,7 @@ function LoanDetail(_ref) {
                 children: "Not yet paid"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+              children: x.is_paid === 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
                 className: "btn btn-info",
                 href: "/pay/loan/" + x.id,
                 children: "Pay Loan"
@@ -7207,13 +7207,13 @@ function PayLoan(_ref) {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
       onSubmit: formik.handleSubmit,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
-          "for": "bank_account_loanee",
+          htmlFor: "bank_account_loanee",
           children: "Lender Bank acct: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
           type: "text",
-          "class": "form-control",
+          className: "form-control",
           id: "bank_account_loanee",
           onChange: formik.handleChange,
           onBlur: formik.handleBlur,
@@ -7222,13 +7222,13 @@ function PayLoan(_ref) {
           children: formik.errors.bank_account_loanee
         }) : null]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
-          "for": "bank_account_lender",
+          htmlFor: "bank_account_lender",
           children: "Loanee Bank acct: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
           type: "text",
-          "class": "form-control",
+          className: "form-control",
           id: "bank_account_lender",
           onChange: formik.handleChange,
           onBlur: formik.handleBlur,
@@ -7237,7 +7237,7 @@ function PayLoan(_ref) {
           children: formik.errors.bank_account_lender
         }) : null]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-        "class": "btn btn-primary",
+        className: "btn btn-primary",
         type: "submit",
         children: "Submit"
       })]
@@ -7364,13 +7364,13 @@ function UserAdd() {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
       onSubmit: formik.handleSubmit,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-          "for": "userName",
+          htmlFor: "userName",
           children: "Name: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
           type: "text",
-          "class": "form-control",
+          className: "form-control",
           id: "userName",
           onChange: formik.handleChange,
           onBlur: formik.handleBlur,
@@ -7379,13 +7379,13 @@ function UserAdd() {
           children: formik.errors.userName
         }) : null]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-          "for": "userMail",
+          htmlFor: "userMail",
           children: "Email: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
           type: "email",
-          "class": "form-control",
+          className: "form-control",
           id: "userMail" //onChange={e => setUserMail(e.target.value)}
           ,
           onChange: formik.handleChange,
@@ -7395,13 +7395,13 @@ function UserAdd() {
           children: formik.errors.userMail
         }) : null]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-          "for": "userPass",
+          htmlFor: "userPass",
           children: "Password: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
           type: "password",
-          "class": "form-control",
+          className: "form-control",
           id: "userPass" //onChange={e => setUserPass(e.target.value)}
           ,
           onChange: formik.handleChange,
@@ -7411,13 +7411,13 @@ function UserAdd() {
           children: formik.errors.userPass
         }) : null]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-          "for": "userRPass",
+          htmlFor: "userRPass",
           children: "Retype Password: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
           type: "password",
-          "class": "form-control",
+          className: "form-control",
           id: "userRPass" //onChange={e => setUserRPass(e.target.value)}
           ,
           onChange: formik.handleChange,
@@ -7427,13 +7427,13 @@ function UserAdd() {
           children: formik.errors.userRPass
         }) : null]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-          "for": "userCompany",
+          htmlFor: "userCompany",
           children: "Company: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
           id: "userCompany",
-          "class": "form-select",
+          className: "form-select",
           "aria-label": "Default select example" //onChange={toggleCompanyIDInput}
           ,
           onChange: formik.handleChange,
@@ -7452,13 +7452,13 @@ function UserAdd() {
           children: formik.errors.userCompany
         }) : null]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        "class": "form-group col-md-4",
+        className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-          "for": "userRole",
+          htmlFor: "userRole",
           children: "Role: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("select", {
           id: "userRole",
-          "class": "form-select",
+          className: "form-select",
           "aria-label": "Default select example" //onChange={e => setUserRole(e.target.value)}
           ,
           onChange: formik.handleChange,
@@ -7484,7 +7484,7 @@ function UserAdd() {
           })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-        "class": "btn btn-primary",
+        className: "btn btn-primary",
         type: "submit",
         children: "Submit"
       })]
@@ -7594,8 +7594,8 @@ function UserEdit(_ref) {
   })), []);
   var formik = (0,formik__WEBPACK_IMPORTED_MODULE_1__.useFormik)({
     initialValues: {
-      userName: '',
-      userMail: '',
+      userName: userRecord.name,
+      userMail: userRecord.email,
       userPass: '',
       userRPass: '',
       userCompany: '',
@@ -7610,12 +7610,13 @@ function UserEdit(_ref) {
       userRole: yup__WEBPACK_IMPORTED_MODULE_2__.string()
     }),
     onSubmit: function onSubmit(values) {
-      axios.post('/user/add/data', values).then(function (response) {
-        console.log(response);
-        setTimeout(function () {
-          window.location.href = "/user";
-        }, 1000);
-      });
+      console.log(values);
+      /*axios.post('/user/add/data', values).then((response) => {
+          console.log(response);
+          setTimeout(() => {
+              window.location.href = "/user";
+          }, 1000)
+      })*/
     }
   });
 
@@ -7627,6 +7628,7 @@ function UserEdit(_ref) {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
       children: "Edit User"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+      onSubmit: formik.handleSubmit,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
@@ -7685,24 +7687,48 @@ function UserEdit(_ref) {
             value: " ",
             children: "None"
           }), companies.data.map(function (x, y) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
-              value: x.id,
-              children: x.name
-            });
+            if (userRecord.loanee !== null) {
+              if (userRecord.loanee.company_id === x.id) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                  value: x.id,
+                  selected: true,
+                  children: x.name
+                });
+              } else {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                  value: x.id,
+                  children: x.name
+                });
+              }
+            }
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
           htmlFor: "companyName",
-          children: "Role: "
+          children: "Role:"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("select", {
           className: "form-select",
-          "aria-label": "Default select example"
+          "aria-label": "Default select example",
+          children: roles.data.map(function (x, y) {
+            if (userRecord.role_id === x.id) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                value: x.id,
+                selected: true,
+                children: x.name
+              });
+            } else {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                value: x.id,
+                children: x.name
+              });
+            }
+          })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-        type: "button",
-        className: "btn btn-primary",
+        "class": "btn btn-primary",
+        type: "submit",
         children: "Submit"
       })]
     })]

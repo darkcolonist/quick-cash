@@ -33,10 +33,11 @@ function Nav() {
         <div className="container">
             <div className="row justify-content-center">
                 {navlist.map(function(x,y) {
-                    {if (x.access.includes(ident.role_id)){
-                        return <div><a href={x.path}>{x.label}</a></div>
+                    {
+                        if (x.access.includes(ident.role_id)){
+                            return <div><a href={x.path}>{x.label}</a></div>
+                        }
                     }
-                }
                 })}
             </div>
         </div>

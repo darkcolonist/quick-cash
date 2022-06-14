@@ -58,7 +58,7 @@ export default function ConfigEdit() {
                                 <label>{config.setting}</label>
                                 <input
                                     type="text"
-                                    class="form-control"
+                                    className="form-control"
                                     id={config.id}
                                     defaultValue={config.value}
                                     onChange={e=> updateVal(e)}
@@ -69,7 +69,7 @@ export default function ConfigEdit() {
                 }
                 <button
                     type="button"
-                    class="btn btn-primary"
+                    className="btn btn-primary"
                     onClick={saveConfig}
                 >Submit</button>
             </form>

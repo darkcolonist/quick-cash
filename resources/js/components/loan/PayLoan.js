@@ -37,11 +37,11 @@ export default function PayLoan({pathParam}) {
     return (
         <div>
             <form onSubmit={formik.handleSubmit}>
-                <div class="form-group col-md-4">
-                    <label for="bank_account_loanee">Lender Bank acct: </label>
+                <div className="form-group col-md-4">
+                    <label htmlFor="bank_account_loanee">Lender Bank acct: </label>
                     <input 
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="bank_account_loanee"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -51,11 +51,11 @@ export default function PayLoan({pathParam}) {
                         <div>{formik.errors.bank_account_loanee}</div>
                     ) : null}
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="bank_account_lender">Loanee Bank acct: </label>
+                <div className="form-group col-md-4">
+                    <label htmlFor="bank_account_lender">Loanee Bank acct: </label>
                     <input 
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="bank_account_lender"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -65,7 +65,7 @@ export default function PayLoan({pathParam}) {
                         <div>{formik.errors.bank_account_lender}</div>
                     ) : null}
                 </div>
-                <button class="btn btn-primary" type="submit">Submit</button>
+                <button className="btn btn-primary" type="submit">Submit</button>
             </form>
         </div>
     );

@@ -70,9 +70,16 @@ export default function LoanDetail({ident, pathParam}) {
                                         }
                                         </td>
                                         <td>
-                                            <a className="btn btn-info" href={"/pay/loan/" + x.id}>
-                                                Pay Loan
-                                            </a>
+                                            {
+                                                x.is_paid === 1 ? (
+                                                    <p></p>
+                                                ) : (
+                                                    <a className="btn btn-info" href={"/pay/loan/" + x.id}>
+                                                        Pay Loan
+                                                    </a>
+                                                )
+                                            }
+                                            
                                         </td>
                                     </tr>
                                 })

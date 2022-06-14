@@ -19,11 +19,11 @@ export default function CompanyAdd() {
         <div>
             <h3>Add Company</h3>
             <form action="/company" onSubmit={addCompany}>
-                <div class="form-group col-md-4">
+                <div className="form-group col-md-4">
                     <label for="companyName">New Company Name: </label>
                     <input 
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="companyName"
                         placeholder="Enter Company name"
                         onChange={e => setCname(e.target.value)}
@@ -31,7 +31,7 @@ export default function CompanyAdd() {
                 </div>
                 <button
                     type="button"
-                    class="btn btn-primary"
+                    className="btn btn-primary"
                     onClick={ addCompany }
                 >Submit</button>
             </form>
