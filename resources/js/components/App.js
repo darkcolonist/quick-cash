@@ -12,7 +12,8 @@ import ConfigEdit from './config/ConfigEdit';
 import LoanRequest from './loan/LoanRequest';
 import LoanTable from './loan/LoanTable';
 import LoanDetail from './loan/LoanDetail';
-import PayLoan from './loan/PayLoan'
+import PayLoan from './loan/PayLoan';
+import NewUser from './user/NewUser';
 
 let path = window.location.pathname;
 let pathwithparams = path.split('/');
@@ -55,6 +56,8 @@ function App() {
                 return <LoanDetail ident={ident} pathParam={pathParam}/>;
             case '/pay/loan':
                 return <PayLoan ident={ident} pathParam={pathParam}/>;
+            case '/new/user':
+                return <NewUser ident={ident} pathParam={pathParam}/>;
             default:
                 return;
         }

@@ -9,6 +9,7 @@ function Nav() {
         await axios.get('/get/uses').then(function (response) {
             if (response.data){
                 setIdent(response.data)
+                console.log(response.data);
                 setLoading(false);
                 //user id
             }
@@ -30,15 +31,20 @@ function Nav() {
     }
 
     return (
+        
         <div className="container">
             <div className="row justify-content-center">
-                {navlist.map(function(x,y) {
-                    {
-                        if (x.access.includes(ident.role_id)){
-                            return <div><a href={x.path}>{x.label}</a></div>
+                {
+                    navlist.map(function(x,y) {
+                        if (ident.role_id === 4 && !ident.loanee) {
+                        } else {
+                            if (x.access.includes(ident.role_id)){
+                                return <div><a href={x.path}>{x.label}</a></div>
+                            }
                         }
-                    }
-                })}
+                    })   
+                }
+               
             </div>
         </div>
     );

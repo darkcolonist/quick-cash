@@ -43,6 +43,7 @@ Route::get('/user/edit/{id}', [UserController::class, 'editUserForm']);
 Route::get('/get/uses', [UserController::class, 'getUsersSession']);
 Route::get('/get/user/{id}', [UserController::class, 'getUserRecord']);
 Route::get('/get/loanee/{id}', [UserController::class, 'getLoaneeRecord']);
+Route::get('/new/user/login', [UserController::class, 'newUserForm']);
 
 //role
 Route::get('/get/role/list', [RolesController::class, 'getRoleList']);

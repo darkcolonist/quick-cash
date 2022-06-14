@@ -80,9 +80,9 @@ class DatabaseSeeder extends Seeder
             'role_id' => 3,
         ]);
         Loanee::create([
-            'user_id' => 4, //emp1
+            'user_id' => 4, //pay
             'company_id' => 1, //Company1
-            'company_identification' => '1abc-65k1-0048-ab01',
+            'company_identification' => '1234-2345-3456-4567',
         ]);
 
         
@@ -92,10 +92,18 @@ class DatabaseSeeder extends Seeder
             'password' => '$2y$10$Rknx6gU0b92OMIKLogrJwuLdl.dPfgt9NuOk/Z6kR21kNoqAvJ7hO',
             'role_id' => 4,
         ]);
+
+        User::create([
+            'name' => 'emp3',//6
+            'email' => 'emp3@mail.com',
+            'password' => '$2y$10$Rknx6gU0b92OMIKLogrJwuLdl.dPfgt9NuOk/Z6kR21kNoqAvJ7hO',
+            'role_id' => 4,
+        ]);
+
         Loanee::create([
-            'user_id' => 5, //emp1
-            'company_id' => 2, //Company1
-            'company_identification' => '1abc-65k1-0048-ab01',
+            'user_id' => 5, //emp2
+            'company_id' => 2, //Big Corp
+            'company_identification' => 'abc-abc-111-222',
         ]);
     }
 }

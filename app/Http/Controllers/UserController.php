@@ -17,6 +17,11 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+    public function newUserForm()
+    {
+        return view('home');
+    }
+
     public function getUserList($id)
     {
         try
