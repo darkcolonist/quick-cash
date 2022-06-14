@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ConfigurationController;
 use App\Http\Controllers\LoansController;
+use App\Http\Controllers\CapitalHistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,3 +67,6 @@ Route::get('/get/loan/detail/{id}', [LoansController::class, 'getLoanDetails']);
 Route::get('/pay/loan/{id}', [LoansController::class, 'showLoanPayForm']);
 Route::post('/pay/loan', [LoansController::class, 'payLoan']);
 Route::get('/get/historys/loan/{id}', [LoansController::class, 'getHistorysLoan']);
+
+//capital
+Route::get('/capital/list',  [CapitalHistoryController::class, 'getCapitalHistoryList']);

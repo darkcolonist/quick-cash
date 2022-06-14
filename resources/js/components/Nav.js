@@ -21,7 +21,7 @@ function Nav() {
         { 'label': 'Companies', 'path': '/company', 'access': [1,2] },
         { 'label': 'Company Loans', 'path':  '/home', 'access': [1,2] },
         { 'label': 'Employee Loans', 'path': '/loan/employees', 'access': [1,2,3] },
-        { 'label': 'Capital', 'path': '/home', 'access': [1,2] },
+        { 'label': 'Capital', 'path': '/capital/list', 'access': [1,2] },
         { 'label': 'Request Loan', 'path': '/loan/request', 'access': [1,4] },
         { 'label': 'Edit Configuration', 'path': '/config/edit', 'access': [1] }
     ];
