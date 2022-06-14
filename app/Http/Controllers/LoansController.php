@@ -155,4 +155,22 @@ class LoansController extends Controller
     {
         return view('home');
     }
+
+    public function showLoanDetails($id)
+    {
+        return view('home');
+    }
+
+    public function getLoanDetails($id)
+    {
+        $loan = Loan::whereId($id)->first();
+        $history = LoanHistory::where('loan_id', $id)->get();
+        $approver = User::whereId($loan->approver_id)->first();
+        $acknowledger = User::whereId($loan->acknowledger_id)->first();
+        $loan->history = $history;
+        $loan->historylength = count($loan->history);
+        $loan->approver = $approver;
+        $loan->acknowledger = $acknowledger;
+        return $loan;
+    }
 }

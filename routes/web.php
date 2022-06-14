@@ -60,3 +60,5 @@ Route::get('/get/loan/employees/{id}', [LoansController::class, 'getLoanEmployee
 Route::get('/loan/employees', [LoansController::class, 'showLoanEmployees']);
 Route::get('/approve/loan/{id}', [LoansController::class, 'approveLoan']);
 Route::get('/acknowledge/loan/{id}', [LoansController::class, 'acknowledgeLoan']);
+Route::get('/loan/detail/{id}', [LoansController::class, 'showLoanDetails']);
+Route::get('/get/loan/detail/{id}', [LoansController::class, 'getLoanDetails']);

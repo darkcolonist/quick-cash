@@ -47,7 +47,7 @@ export default function LoanTableRow({data}) {
                             <a className="btn btn-info" href={"/approve/loan/" + x.id}>Approve</a>
                         )
                     }
-                    <a className="btn btn-info" href={"/user/edit/" + x.id}>Details</a>
+                    <a className="btn btn-info" href={"/loan/detail/" + x.id}>Details</a>
                 </td>
             </tr>
         })}
