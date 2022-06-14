@@ -3,6 +3,18 @@ import { forEach } from "lodash";
 import { useState, useEffect } from "react";
 
 export default function LoanTableRow({data}) {
+    const [isLoading, setLoading] = useState(true);
+    const [ident, setIdent] = useState({});
+    useEffect(async () => {
+        await axios.get('/get/uses').then(function (response) {
+            setIdent(response.data)
+            setLoading(false);
+        });
+    }, []);
+
+    if (isLoading) {
+        return <div></div>;
+    }
     return (
         <>
         { data.map(function (x,y) {
@@ -28,8 +40,15 @@ export default function LoanTableRow({data}) {
                 }
                 </td>
                 <td>
-                    <a className="btn btn-info" href={"/user/edit/" + x.id}>Approve</a>
-                    <a className="btn btn-info" href={"/user/edit/" + x.id}>Acknowledge</a>
+                    {
+                        ident.role_id < 3 ? (
+                            <form onSubmit={acknowledgeloan}>
+                                <a className="btn btn-info" href={"/acknowledge/loan/" + x.id}>Acknowledge</a>
+                            </form>
+                        ) : (
+                            <a className="btn btn-info" href={"/approve/loan/" + x.id}>Approve</a>
+                        )
+                    }
                     <a className="btn btn-info" href={"/user/edit/" + x.id}>Details</a>
                 </td>
             </tr>

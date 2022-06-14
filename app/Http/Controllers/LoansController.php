@@ -109,6 +109,28 @@ class LoansController extends Controller
         }
     }
 
+    public function approveLoan($id)
+    {
+        $user = User::whereId(Auth::id())->first();
+        $loan = Loan::whereId($id)
+            ->update([
+                'approver_id'=>$user->id,
+                'date_approved'=>now()
+            ]);
+        return redirect('/loan/employees');
+    }
+
+    public function acknowledgeLoan($id)
+    {
+        $user = User::whereId(Auth::id())->first();
+        $loan = Loan::whereId($id)
+            ->update([
+                'acknowledger_id'=>$user->id,
+                'date_acknowledged'=>now()
+            ]);
+        return redirect('/loan/employees');
+    }
+
     public function showLoanEmployees()
     {
         return view('home');

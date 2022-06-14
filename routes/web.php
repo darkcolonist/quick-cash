@@ -58,3 +58,5 @@ Route::post('/loan/add/data', [LoansController::class, 'addLoan']);
 Route::get('/users/loan/{id}', [LoansController::class, 'getPendingLoanRecord']);
 Route::get('/get/loan/employees/{id}', [LoansController::class, 'getLoanEmployees']);
 Route::get('/loan/employees', [LoansController::class, 'showLoanEmployees']);
+Route::get('/approve/loan/{id}', [LoansController::class, 'approveLoan']);
+Route::get('/acknowledge/loan/{id}', [LoansController::class, 'acknowledgeLoan']);
