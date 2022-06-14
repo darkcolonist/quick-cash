@@ -7,7 +7,8 @@ export default function LoanDetail({ident, pathParam}) {
     const [approver, setApprover] = useState("");
     const [acknowledger, setAcknowledger] = useState("");
     const [loanHistory, setLoanHistory] = useState([]);
-    const [historylength, setHistoryLength] = useState([]);
+    const [historylength, setHistoryLength] = useState(0);
+    const [debtpermonth, setDebtpermonth] = useState(0);
     useEffect(async () => {
         await axios.get('/get/loan/detail/' + pathParam).then(function (response) {
             setLoan(response.data);
@@ -15,6 +16,7 @@ export default function LoanDetail({ident, pathParam}) {
             setAcknowledger(response.data.acknowledger.name);
             setLoanHistory(response.data.history);
             setHistoryLength(response.data.historylength);
+            setDebtpermonth(response.data.debtpermonth)
         });
     }, []);
 
@@ -36,23 +38,28 @@ export default function LoanDetail({ident, pathParam}) {
             <div>
                 <b>Interest rate:</b> {loan.rate}%
             </div>
+            <div>
+                <b>Total debt:</b> {loan.debt}
+            </div>
                 <table className="table table-hover">
                     <thead>
                     <tr>
                         <th>Amount</th>
                         <th>Due Date</th>
-                        <th>Amount</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                         {
                             historylength > 0 ? (
+                                loanHistory.map(function(x,y) {
+                                    return <tr>
+                                        <td>{debtpermonth}</td>
+                                        <td>{loan.amort_dates[y]}</td>
+                                        <td></td>
+                                    </tr>
+                                })
                                 
-                                <tr>
-                                    <td>data</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
                             ) : (
                                 <tr>
                                     <td>No data</td>

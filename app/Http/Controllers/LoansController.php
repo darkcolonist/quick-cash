@@ -133,8 +133,6 @@ class LoansController extends Controller
 
         // creates loan history
         $loan = Loan::whereId($id)->first();
-        //$debt = $loan->amount + $loan->amount * ($loan->rate/100);
-        //$debtpermonth = $debt / $loan->term_in_months;
         $refMonth = Carbon::now()->startOfMonth();
 
         $loanHistory = LoanHistory::where('loan_id', $loan->id)->first();
@@ -167,6 +165,19 @@ class LoansController extends Controller
         $history = LoanHistory::where('loan_id', $id)->get();
         $approver = User::whereId($loan->approver_id)->first();
         $acknowledger = User::whereId($loan->acknowledger_id)->first();
+
+        $loan->debt = $loan->amount + $loan->amount * ($loan->rate/100);
+        $loan->debtpermonth = $loan->debt / $loan->term_in_months;
+
+        $amort_dates = [];
+        if (count($history) > 0) {
+            for ($x=0; $x<$loan->term_in_months; $x++) {
+                $date = Carbon::parse($history[$x]->amortization_date);
+                array_push($amort_dates, $date->toFormattedDateString());
+            }
+            $loan->amort_dates = $amort_dates;
+        }
+
         $loan->history = $history;
         $loan->historylength = count($loan->history);
         $loan->approver = $approver;

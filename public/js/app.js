@@ -6458,10 +6458,15 @@ function LoanDetail(_ref) {
       loanHistory = _useState8[0],
       setLoanHistory = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0),
       _useState10 = _slicedToArray(_useState9, 2),
       historylength = _useState10[0],
       setHistoryLength = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0),
+      _useState12 = _slicedToArray(_useState11, 2),
+      debtpermonth = _useState12[0],
+      setDebtpermonth = _useState12[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -6475,6 +6480,7 @@ function LoanDetail(_ref) {
               setAcknowledger(response.data.acknowledger.name);
               setLoanHistory(response.data.history);
               setHistoryLength(response.data.historylength);
+              setDebtpermonth(response.data.debtpermonth);
             });
 
           case 2:
@@ -6505,6 +6511,10 @@ function LoanDetail(_ref) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("b", {
         children: "Interest rate:"
       }), " ", loan.rate, "%"]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("b", {
+        children: "Total debt:"
+      }), " ", loan.debt]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("table", {
       className: "table table-hover",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("thead", {
@@ -6514,14 +6524,18 @@ function LoanDetail(_ref) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
             children: "Due Date"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-            children: "Amount"
+            children: "Action"
           })]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {
-        children: historylength > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-            children: "data"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {})]
+        children: historylength > 0 ? loanHistory.map(function (x, y) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+              children: debtpermonth
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+              children: loan.amort_dates[y]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {})]
+          });
         }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
             children: "No data"
