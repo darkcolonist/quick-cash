@@ -6691,8 +6691,6 @@ function LoanTable() {
               setIdent(response.data);
               axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/loan/employees/' + response.data.id).then(function (r) {
                 setData(r.data);
-                console.log('FFF');
-                console.log(r.data);
                 setLoading(false);
               });
             });
@@ -6790,13 +6788,8 @@ __webpack_require__.r(__webpack_exports__);
 
 function LoanTableRow(_ref) {
   var data = _ref.data;
-
-  function getLoaneeRecord(id) {} //console.log(data);
-
-
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: data.map(function (x, y) {
-      var $loaneeRecord = getLoaneeRecord(x.loanee_id);
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
           children: x.user.name
@@ -6804,7 +6797,17 @@ function LoanTableRow(_ref) {
           children: x.company.name
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
           children: x.amount
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
+          children: [x.approver_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            children: "Approved"
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            children: "Pending Approval"
+          }), x.acknowledger_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            children: "Acknowledged"
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            children: "Pending Acknowledgement"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
             className: "btn btn-info",
             href: "/user/edit/" + x.id,
@@ -7345,15 +7348,24 @@ function UserTable() {
       data = _useState4[0],
       setData = _useState4[1];
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
+      _useState6 = _slicedToArray(_useState5, 2),
+      ident = _useState6[0],
+      setIdent = _useState6[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/user/list').then(function (response) {
-              setData(response.data);
-              setLoading(false);
+            return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/uses').then(function (response) {
+              setIdent(response.data);
+              axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/user/list/' + response.data.id).then(function (r) {
+                setData(r.data);
+                console.log(r.data);
+                setLoading(false);
+              });
             });
 
           case 2:

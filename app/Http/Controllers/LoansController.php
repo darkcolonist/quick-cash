@@ -79,7 +79,7 @@ class LoansController extends Controller
     {
         try
         {
-            $loans = 'asdf';
+            $loans = '';
             $requestor = User::whereId($id)->first();
             if ($requestor->role_id == 3) {
                 $company = Loanee::where('user_id', $id)->first();

@@ -17,11 +17,27 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function getUserList()
+    public function getUserList($id)
     {
         try
         {
-            $users = User::orderBy('id', 'ASC')->get();
+            $users = '';
+            $userids = [];
+            $requestor = User::whereId($id)->first();
+            if ($requestor->role_id == 3) {
+                $company = Loanee::where('user_id', $id)->first();
+                $loanees = Loanee::where('company_id', $company->company_id)
+                    ->orderBy('id', 'ASC')
+                    ->get();
+                foreach ($loanees as $loanee) {
+                    array_push($userids, $loanee->user_id);
+                }
+                $users = User::whereIn('id', $userids)
+                    ->orderBy('id', 'ASC')->get();
+            } else {
+                $users = User::orderBy('id', 'ASC')->get();
+            }
+            
             return response()->json($users);
         }
         catch(Exception $e)

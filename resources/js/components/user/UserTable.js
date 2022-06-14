@@ -6,10 +6,15 @@ import UserTableRow from './UserTableRow';
 export default function UserTable() {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState({});
+    const [ident, setIdent] = useState({});
     useEffect(async () => {
-        await axios.get('/get/user/list').then(response => {
-            setData(response.data);
-            setLoading(false);
+        await axios.get('/get/uses').then(function (response) {
+            setIdent(response.data)
+            axios.get('/get/user/list/' + response.data.id).then(r => {
+                setData(r.data);
+                console.log(r.data);
+                setLoading(false);
+            });
         });
     }, []);
   

@@ -35,7 +35,7 @@ Route::get('/company/add', [CompanyController::class, 'addCompanyForm']);
 Route::get('/company', [CompanyController::class, 'index']);
 
 //user
-Route::get('/get/user/list', [UserController::class, 'getUserList']);
+Route::get('/get/user/list/{id}', [UserController::class, 'getUserList']);
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/add', [UserController::class, 'addUserForm']);
 Route::post('/user/add/data', [UserController::class, 'addUser']);
