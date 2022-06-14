@@ -36,6 +36,8 @@ export default function LoanRequest() {
     const [isLoading, setLoading] = useState(true);
     const [ident, setIdent] = useState({});
     const [existingLoan, setExistingLoan] = useState({});
+    const [history, setHistory] = useState([]);
+    const [historyCount, setHistoryCount] = useState(0);
 
     useEffect(async () => {
         //
@@ -44,6 +46,8 @@ export default function LoanRequest() {
             //user id
             axios.get('/users/loan/' + response.data.id).then(function (r){
                 setExistingLoan(r.data);
+                setHistory(r.data.history);
+                setHistoryCount(r.data.historycount);
                 console.log(r.data);
                 setLoading(false);
             })
@@ -76,7 +80,46 @@ export default function LoanRequest() {
                     <div>Amount: {existingLoan.amount}</div>
                     <div>Rate (percent): {existingLoan.rate}</div>
                     <div>Term (months): {existingLoan.term_in_months}</div>
+                    <div>
+                        <table className="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Amount to pay</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                        <tbody>
+                            {
+                                historyCount > 0 ? (
+                                    history.map( function(x,y){
+                                        return <tr>
+                                            <td>{existingLoan.debtpermonth}</td>
+                                            <td>{existingLoan.amort_dates[y]}</td>
+                                            <td>
+                                            {
+                                                x.is_paid === 1 ? (
+                                                    <p>Paid</p>
+                                                ) : (
+                                                    <p>Not paid</p>
+                                                )
+                                            }
+                                            </td>
+                                        </tr>
+                                    })
+                                ) : (
+                                    <tr>
+                                        <td>No data</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
+                        </table>
+                    </div>
                 </div>
+                
             ) : (
                 <form onSubmit={formik.handleSubmit}>
                 <div className="form-group col-md-4">

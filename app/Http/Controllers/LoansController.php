@@ -52,20 +52,42 @@ class LoansController extends Controller
             }
             $loan = Loan::where('loanee_id', $loanee->id)
                 ->where('approver_id', null)
+                ->first();
+            if ($loan != null) {
+                return response()->json($loan);
+            }
+            $loan = Loan::where('loanee_id', $loanee->id)
                 ->where('acknowledger_id', null)
                 ->first();
             if ($loan != null) {
                 return response()->json($loan);
             }
+
             $loan = Loan::where('loanee_id', $loanee->id)
                 ->first();
             if ($loan == null) {
                 return null;
             }
             $loanhistories = LoanHistory::where('loan_id', $loan->id)
-                ->where('is_paid', 0)
-                ->first();
-            if ($loanhistories) {
+                ->where('is_paid', null)
+                ->get();
+            if (count($loanhistories) > 0) {
+                $loanhistories = LoanHistory::where('loan_id', $loan->id)->get();
+                $loan->historycount = count($loanhistories);
+                $loan->history = $loanhistories;
+                
+                $loan->debt = $loan->amount + $loan->amount * ($loan->rate/100);
+                $loan->debtpermonth = $loan->debt / $loan->term_in_months;
+                $amort_dates = [];
+                if (count($loanhistories) > 0) {
+                    for ($x=0; $x<$loan->term_in_months; $x++) {
+                        $date = Carbon::parse($loan->history[$x]->amortization_date);
+                        array_push($amort_dates, $date->toFormattedDateString());
+                    }
+                    $loan->amort_dates = $amort_dates;
+                }
+                
+                
                 return response()->json($loan);
             }
             
