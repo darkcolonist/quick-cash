@@ -110,37 +110,32 @@ export default function UserEdit({pathParam}) {
                     <select
                         className="form-select"
                         aria-label="Default select example"
+                        defaultValue={userRecord.loanee.company_id}
 
                     >
                     <option value=" ">None</option>
                     {
                         companies.data.map(function (x,y) {
-                            if (userRecord.loanee !== null){
-                            if (userRecord.loanee.company_id === x.id){
-                                return <option value={x.id} selected>{x.name}</option>
-                            } else {
-                                return <option value={x.id}>{x.name}</option>
-                            }
-                            }
+                            return <option value={x.id}>{x.name}</option>
                         })
                     }
                     </select>
                 </div>
                 <div className="form-group col-md-4">
                     <label htmlFor="companyName">Role:</label>
-                    <select className="form-select" aria-label="Default select example">
+                    <select
+                        className="form-select"
+                        aria-label="Default select example"
+                        defaultValue={userRecord.role_id}
+                    >
                     {
                         roles.data.map(function (x,y) {
-                            if (userRecord.role_id === x.id) {
-                                return <option value={x.id} selected>{x.name}</option>
-                            } else {
-                                return <option value={x.id}>{x.name}</option>
-                            }
+                            return <option value={x.id}>{x.name}</option>
                         })
                     }
                     </select>
                 </div>
-                <button class="btn btn-primary" type="submit">Submit</button>
+                <button className="btn btn-primary" type="submit">Submit</button>
             </form>
         </div>
     )

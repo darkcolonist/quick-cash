@@ -20,7 +20,7 @@ export default function CompanyAdd() {
             <h3>Add Company</h3>
             <form action="/company" onSubmit={addCompany}>
                 <div className="form-group col-md-4">
-                    <label for="companyName">New Company Name: </label>
+                    <label htmlFor="companyName">New Company Name: </label>
                     <input 
                         type="text"
                         className="form-control"

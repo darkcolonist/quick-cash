@@ -54,7 +54,7 @@ export default function ConfigEdit() {
                 {
                     config.map(function (config, index) {
                         return (
-                            <div class="form-group col-md-4">
+                            <div className="form-group col-md-4">
                                 <label>{config.setting}</label>
                                 <input
                                     type="text"

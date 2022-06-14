@@ -5770,7 +5770,7 @@ function CompanyAdd() {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-          "for": "companyName",
+          htmlFor: "companyName",
           children: "New Company Name: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
           type: "text",
@@ -6375,7 +6375,7 @@ function ConfigEdit() {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
       children: [config.map(function (config, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-          "class": "form-group col-md-4",
+          className: "form-group col-md-4",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
             children: config.setting
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
@@ -7683,24 +7683,15 @@ function UserEdit(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
           className: "form-select",
           "aria-label": "Default select example",
+          defaultValue: userRecord.loanee.company_id,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
             value: " ",
             children: "None"
           }), companies.data.map(function (x, y) {
-            if (userRecord.loanee !== null) {
-              if (userRecord.loanee.company_id === x.id) {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
-                  value: x.id,
-                  selected: true,
-                  children: x.name
-                });
-              } else {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
-                  value: x.id,
-                  children: x.name
-                });
-              }
-            }
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              value: x.id,
+              children: x.name
+            });
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -7711,23 +7702,16 @@ function UserEdit(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("select", {
           className: "form-select",
           "aria-label": "Default select example",
+          defaultValue: userRecord.role_id,
           children: roles.data.map(function (x, y) {
-            if (userRecord.role_id === x.id) {
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
-                value: x.id,
-                selected: true,
-                children: x.name
-              });
-            } else {
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
-                value: x.id,
-                children: x.name
-              });
-            }
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+              value: x.id,
+              children: x.name
+            });
           })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-        "class": "btn btn-primary",
+        className: "btn btn-primary",
         type: "submit",
         children: "Submit"
       })]
