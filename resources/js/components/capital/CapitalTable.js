@@ -1,7 +1,7 @@
 import axios from "axios";
 import { forEach } from "lodash";
 import { useState, useEffect } from "react";
-//import UserTableRow from './UserTableRow';
+import CapitalTableRow from './CapitalTableRow';
 
 export default function Capital() {
     const [isLoading, setLoading] = useState(true);
@@ -22,21 +22,19 @@ export default function Capital() {
         <div className="row justify-content-center">
             <div className="col-md-8">
                 <div className="col-md-4">
-                    <a className="btn btn-info" href="/user/add">Add User</a>
+                    <a className="btn btn-info" href="/capital/add">Add Capital</a>
                 </div>
                 <div className="card">
                     <table className="table table-hover">
                         <thead>
                             <tr>
-                            <th scope="col" width="100px">Name</th>
-                            <th scope="col" width="100px">E-mail</th>
-                            <th scope="col" width="100px">Actions</th>
+                            <th scope="col" width="100px">Amount</th>
+                            <th scope="col" width="100px">Note</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <UserTableRow
-                                data={data}
-                                setData={setData}
+                            <CapitalTableRow
+                                capital={capital}
                             />
                         </tbody>
                     </table>

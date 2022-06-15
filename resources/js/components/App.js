@@ -15,6 +15,7 @@ import LoanDetail from './loan/LoanDetail';
 import PayLoan from './loan/PayLoan';
 import NewUser from './user/NewUser';
 import CapitalTable from './capital/CapitalTable';
+import CapitalAdd from './capital/CapitalAdd';
 
 let path = window.location.pathname;
 let pathwithparams = path.split('/');
@@ -61,6 +62,8 @@ function App() {
                 return <NewUser ident={ident} pathParam={pathParam}/>;
             case '/capital/list':
                 return <CapitalTable ident={ident} pathParam={pathParam}/>;
+            case '/capital/add':
+                return <CapitalAdd ident={ident} pathParam={pathParam}/>;
             default:
                 return;
         }
