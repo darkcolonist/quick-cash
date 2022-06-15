@@ -70,4 +70,5 @@ Route::post('/pay/loan', [LoansController::class, 'payLoan']);
 Route::get('/get/historys/loan/{id}', [LoansController::class, 'getHistorysLoan']);
 
 //capital
-Route::get('/capital/list',  [CapitalHistoryController::class, 'getCapitalHistoryList']);
+Route::get('/capital/list',  [CapitalHistoryController::class, 'showCapitalHistoryList']);
+Route::get('/get/capital/list',  [CapitalHistoryController::class, 'getCapitalHistoryList']);

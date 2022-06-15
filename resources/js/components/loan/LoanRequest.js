@@ -27,6 +27,7 @@ export default function LoanRequest() {
             values.loanee_id = ident.loanee.id;
             values.company_id = ident.loanee.company_id;
             axios.post('/loan/add/data', values).then((response) => {
+                window.location.replace("/loan/request");
             })
         },
     });
