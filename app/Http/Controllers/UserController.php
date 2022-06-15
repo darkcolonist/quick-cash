@@ -77,13 +77,17 @@ class UserController extends Controller
             $data->role_id = $request->get('userRole');
             $data->save();
             $id = $data->id;
-            DB::table('loanees')->insert([
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-                'user_id' => $id,
-                'company_id' => $request->get('userCompany'),
-                'company_identification' => $request->get('userCompanyID'),
-            ]);
+            if (!$request->get('userCompany')) {
+                return $data->id;
+            } else {
+                DB::table('loanees')->insert([
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                    'user_id' => $id,
+                    'company_id' => $request->get('userCompany'),
+                    'company_identification' => $request->get('userCompanyID'),
+                ]);
+            }
         }
         catch(Exception $e) {
             Log::error($e);
@@ -121,6 +125,42 @@ class UserController extends Controller
     public function editUserForm()
     {
         return view('home');
+    }
+
+    public function editUser(Request $request)
+    {
+        $user = User::whereId($request->get('id'))
+            ->update([
+                'name' => $request->get('userName'),
+                'email' => $request->get('userMail'),
+                'role_id' => $request->get('userRole'),
+            ]);
+        if ($request->get('userPass') != '') {
+            $user = User::whereId($request->get('id'))
+            ->update([
+                'password' => Hash::make($request->get('userPass'))
+            ]);
+        }
+
+        $loanee = Loanee::where('user_id', $request->get('id'))->first();
+        if ($loanee != null) {
+            $loanee = Loanee::whereId($loanee->id)
+                ->update([
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                    'company_id' => $request->get('userCompany'),
+                    'company_identification' => $request->get('userCompanyID'),
+                ]);
+        } else {
+            $loanee = new Loanee;
+            $loanee->created_at = Carbon::now();
+            $loanee->updated_at = Carbon::now();
+            $loanee->user_id = $request->get('id');
+            $loanee->company_id = $request->get('userCompany');
+            $loanee->company_identification = $request->get('userCompanyID');
+            $loanee->save();
+        }
+        return $request;
     }
 
     public function getUserRecord($id)

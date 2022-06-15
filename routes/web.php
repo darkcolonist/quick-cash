@@ -41,6 +41,7 @@ Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/add', [UserController::class, 'addUserForm']);
 Route::post('/user/add/data', [UserController::class, 'addUser']);
 Route::get('/user/edit/{id}', [UserController::class, 'editUserForm']);
+Route::post('/edit/user', [UserController::class, 'editUser']);
 Route::get('/get/uses', [UserController::class, 'getUsersSession']);
 Route::get('/get/user/{id}', [UserController::class, 'getUserRecord']);
 Route::get('/get/loanee/{id}', [UserController::class, 'getLoaneeRecord']);

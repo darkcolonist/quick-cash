@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { useState, useEffect } from "react";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 export default function UserEdit({pathParam}) {
     const [userRecord, setUserRecord] = useState({});
@@ -41,12 +42,12 @@ export default function UserEdit({pathParam}) {
         }),
         onSubmit: values => {
             console.log(values);
-            /*axios.post('/user/add/data', values).then((response) => {
+            axios.post('/edit/user', values).then((response) => {
                 console.log(response);
-                setTimeout(() => {
+                /*setTimeout(() => {
                     window.location.href = "/user";
-                }, 1000)
-            })*/
+                }, 1000)*/
+            });
         },
     });
     
@@ -55,11 +56,20 @@ export default function UserEdit({pathParam}) {
     }
 
     ( () => {
+        formik.initialValues.id = userRecord.id;
         formik.initialValues.userName = userRecord.name;
         formik.initialValues.userMail = userRecord.email;
         formik.initialValues.userRole = userRecord.role_id;
         formik.initialValues.userPass = '';
         formik.initialValues.userRPass = '';
+        if (userRecord.loanee !== null) {
+            formik.initialValues.userCompanyID = userRecord.loanee.company_identification;
+            formik.initialValues.userCompany = userRecord.loanee.company_id;
+        } else {
+            formik.initialValues.userCompanyID = '';
+            formik.initialValues.userCompany = '';
+        }
+        
     })()
 
     return (
@@ -106,12 +116,14 @@ export default function UserEdit({pathParam}) {
                     />
                 </div>
                 <div className="form-group col-md-4">
-                    <label htmlFor="companyName">Company: </label>
+                    <label htmlFor="userCompany">Company: </label>
                     <select
                         className="form-select"
+                        id="userCompany"
                         aria-label="Default select example"
                         defaultValue={userCompany}
-
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     >
                     <option value=" ">None</option>
                     {
@@ -122,10 +134,24 @@ export default function UserEdit({pathParam}) {
                     </select>
                 </div>
                 <div className="form-group col-md-4">
-                    <label htmlFor="companyName">Role:</label>
+                    <label htmlFor="userCompanyID">Company ID: </label>
+                    <input 
+                        type="text"
+                        className="form-control"
+                        id="userCompanyID"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        defaultValue={formik.values.userCompanyID}
+                    />
+                </div>
+                <div className="form-group col-md-4">
+                    <label htmlFor="userRole">Role:</label>
                     <select
+                        id="userRole"
                         className="form-select"
                         aria-label="Default select example"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                         defaultValue={userRecord.role_id}
                     >
                     {
