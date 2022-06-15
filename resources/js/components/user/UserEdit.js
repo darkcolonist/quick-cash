@@ -26,7 +26,7 @@ export default function UserEdit({pathParam}) {
             }
         });
         await axios.get('/get/role/list').then(function (response) {
-            setRoles(response);
+            setRoles(response.data);
         }).then(function (response) {
             axios.get('/get/company/list').then(function (response) {
                 setCompanies(response);
@@ -166,8 +166,10 @@ export default function UserEdit({pathParam}) {
                         defaultValue={userRecord.role_id}
                     >
                     {
-                        roles.data.map(function (x,y) {
-                            return <option value={x.id}>{x.name}</option>
+                        roles.map(function (x,y) {
+                            if (ident.role_id <= x.id) {
+                                return <option value={x.id}>{x.name}</option>
+                            }
                         })
                     }
                     </select>

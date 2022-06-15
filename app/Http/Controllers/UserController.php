@@ -178,6 +178,19 @@ class UserController extends Controller
         }
     }
 
+    public function getEmployees()
+    {
+        try
+        {
+            $employees = User::where('role_id', 4)->get();
+            return $employees;
+        }
+        catch (Exception $e)
+        {
+            Log::error($e);
+        }
+    }
+
     public function getLoaneeRecord($id)
     {
         try

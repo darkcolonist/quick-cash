@@ -133,6 +133,11 @@ class LoansController extends Controller
         }
     }
 
+    public function addLoanForm()
+    {
+        return view('home');
+    }
+
     public function approveLoan($id)
     {
         $user = User::whereId(Auth::id())->first();

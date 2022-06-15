@@ -49,7 +49,7 @@ export default function UserAdd() {
             setIdent(response.data)
         });
         await axios.get('/get/role/list').then(function (response) {
-            setRoles(response);
+            setRoles(response.data);
         }).then(function (response) {
             axios.get('/get/company/list').then(function (response) {
                 setCompanies(response);
@@ -186,13 +186,8 @@ export default function UserAdd() {
                         value={formik.values.userRole}
                     >
                     {
-                        roles.data.map(function (x,y) {
-                            let init = true;
-                            if (init) {
-                                return <option value={x.id} selected>{x.name}</option>
-                                init = false;
-                                setUserRole(x.id);
-                            } else {
+                        roles.map(function (x,y) {
+                            if (ident.role_id <= x.id) {
                                 return <option value={x.id}>{x.name}</option>
                             }
                         })

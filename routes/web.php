@@ -47,6 +47,7 @@ Route::get('/get/user/{id}', [UserController::class, 'getUserRecord']);
 Route::get('/get/loanee/{id}', [UserController::class, 'getLoaneeRecord']);
 Route::get('/new/user/login', [UserController::class, 'newUserForm']);
 Route::post('/add/loanee', [UserController::class, 'addLoanee']);
+Route::get('/get/employees', [UserController::class, 'getEmployees']);
 
 //role
 Route::get('/get/role/list', [RolesController::class, 'getRoleList']);
@@ -69,6 +70,7 @@ Route::get('/get/loan/detail/{id}', [LoansController::class, 'getLoanDetails']);
 Route::get('/pay/loan/{id}', [LoansController::class, 'showLoanPayForm']);
 Route::post('/pay/loan', [LoansController::class, 'payLoan']);
 Route::get('/get/historys/loan/{id}', [LoansController::class, 'getHistorysLoan']);
+Route::get('/loan/add', [LoansController::class, 'addLoanForm']);
 
 //capital
 Route::get('/capital/list',  [CapitalHistoryController::class, 'showCapitalHistoryList']);
