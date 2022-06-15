@@ -8,7 +8,6 @@ export default function CompanyAdd() {
         axios.post('/company/add/data', {
             companyName: cname
         }).then((response) => {
-            console.log(response);
             setTimeout(() => {
                 window.location.href = "/company";
             }, 500)

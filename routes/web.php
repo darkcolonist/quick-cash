@@ -45,6 +45,7 @@ Route::get('/get/uses', [UserController::class, 'getUsersSession']);
 Route::get('/get/user/{id}', [UserController::class, 'getUserRecord']);
 Route::get('/get/loanee/{id}', [UserController::class, 'getLoaneeRecord']);
 Route::get('/new/user/login', [UserController::class, 'newUserForm']);
+Route::post('/add/loanee', [UserController::class, 'addLoanee']);
 
 //role
 Route::get('/get/role/list', [RolesController::class, 'getRoleList']);

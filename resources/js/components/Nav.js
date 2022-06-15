@@ -9,7 +9,6 @@ function Nav() {
         await axios.get('/get/uses').then(function (response) {
             if (response.data){
                 setIdent(response.data)
-                console.log(response.data);
                 setLoading(false);
                 //user id
             }
@@ -23,7 +22,7 @@ function Nav() {
         { 'label': 'Employee Loans', 'path': '/loan/employees', 'access': [1,2,3] },
         { 'label': 'Capital', 'path': '/capital/list', 'access': [1,2] },
         { 'label': 'Request Loan', 'path': '/loan/request', 'access': [1,4] },
-        { 'label': 'Edit Configuration', 'path': '/config/edit', 'access': [1] }
+        { 'label': 'Edit Configuration', 'path': '/config/edit', 'access': [1,2] }
     ];
 
     if (isLoading) {

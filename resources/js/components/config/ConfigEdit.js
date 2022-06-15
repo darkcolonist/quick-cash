@@ -36,10 +36,9 @@ export default function ConfigEdit() {
         axios.post('/config/edit', {
             config
         }).then((response) => {
-            console.log(response);
-            /*setTimeout(() => {
+            setTimeout(() => {
                 location.reload();
-            }, 300)*/
+            }, 300)
         })
     }
 

@@ -86,6 +86,24 @@ class UserController extends Controller
         }
     }
 
+    public function addLoanee(Request $request)
+    {
+        try
+        {
+            $user = User::whereId(Auth::id())->first();
+            $loanee = new Loanee;
+            $loanee->user_id = $user->id;
+            $loanee->company_id = $request->get('userCompany');
+            $loanee->company_identification = $request->get('userCompanyID');
+            $loanee->save();
+        }
+        catch(Exception $e)
+        {
+            return redirect('/home');
+        }
+        
+    }
+
     public function index()
     {
         return view('home');

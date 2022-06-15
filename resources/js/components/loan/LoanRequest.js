@@ -48,7 +48,6 @@ export default function LoanRequest() {
                 setExistingLoan(r.data);
                 setHistory(r.data.history);
                 setHistoryCount(r.data.historycount);
-                console.log(r.data);
                 setLoading(false);
             })
         });

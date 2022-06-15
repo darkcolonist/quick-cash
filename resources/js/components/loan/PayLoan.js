@@ -20,7 +20,6 @@ export default function PayLoan({pathParam}) {
         }),
         onSubmit: values => {
             axios.post('/pay/loan', values).then((response) => {
-                console.log(response);
                 setTimeout(() => {
                     window.location.href = "/loan/detail/" + loanID;
                 }, 1000)
