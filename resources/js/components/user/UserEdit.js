@@ -11,8 +11,12 @@ export default function UserEdit({pathParam}) {
     const [companies, setCompanies] = useState({});
     const [roles, setRoles] = useState({});
     const [userCompany, setUserCompany] = useState(0);
+    const [ident, setIdent] = useState({});
 
     useEffect(async () => {
+        await axios.get('/get/uses').then(function (response) {
+            setIdent(response.data)
+        });
         await axios.get('/get/user/' + pathParam).then(function (response) {
             setUserRecord(response.data);
             if (response.data.loanee === null){
@@ -44,9 +48,9 @@ export default function UserEdit({pathParam}) {
             console.log(values);
             axios.post('/edit/user', values).then((response) => {
                 console.log(response);
-                /*setTimeout(() => {
+                setTimeout(() => {
                     window.location.href = "/user";
-                }, 1000)*/
+                }, 1000)
             });
         },
     });
@@ -115,24 +119,31 @@ export default function UserEdit({pathParam}) {
                         id="userRPass"
                     />
                 </div>
-                <div className="form-group col-md-4">
-                    <label htmlFor="userCompany">Company: </label>
-                    <select
-                        className="form-select"
-                        id="userCompany"
-                        aria-label="Default select example"
-                        defaultValue={userCompany}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    >
-                    <option value=" ">None</option>
-                    {
-                        companies.data.map(function (x,y) {
-                            return <option value={x.id}>{x.name}</option>
-                        })
-                    }
-                    </select>
-                </div>
+                {
+                    ident.role_id === 3 ? (
+                        <div></div>
+                    ) : (
+                        <div className="form-group col-md-4">
+                            <label htmlFor="userCompany">Company: </label>
+                            <select
+                                className="form-select"
+                                id="userCompany"
+                                aria-label="Default select example"
+                                defaultValue={userCompany}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                            >
+                            <option value=" ">None</option>
+                            {
+                                companies.data.map(function (x,y) {
+                                    return <option value={x.id}>{x.name}</option>
+                                })
+                            }
+                            </select>
+                        </div>
+                    )
+                }
+                
                 <div className="form-group col-md-4">
                     <label htmlFor="userCompanyID">Company ID: </label>
                     <input 

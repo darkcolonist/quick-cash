@@ -7764,6 +7764,7 @@ function UserAdd() {
       userRole: yup__WEBPACK_IMPORTED_MODULE_2__.string()
     }),
     onSubmit: function onSubmit(values) {
+      console.log(values);
       axios.post('/user/add/data', values).then(function (response) {
         console.log(response);
         setTimeout(function () {
@@ -7788,12 +7789,23 @@ function UserAdd() {
       isLoading = _useState6[0],
       setLoading = _useState6[1];
 
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState8 = _slicedToArray(_useState7, 2),
+      ident = _useState8[0],
+      setIdent = _useState8[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
+            return axios.get('/get/uses').then(function (response) {
+              setIdent(response.data);
+            });
+
+          case 2:
+            _context.next = 4;
             return axios.get('/get/role/list').then(function (response) {
               setRoles(response);
             }).then(function (response) {
@@ -7801,9 +7813,9 @@ function UserAdd() {
                 setCompanies(response);
                 setLoading(false);
               });
-            }, []);
+            });
 
-          case 2:
+          case 4:
           case "end":
             return _context.stop();
         }
@@ -7814,6 +7826,12 @@ function UserAdd() {
   if (isLoading) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {});
   }
+
+  (function () {
+    if (ident.role_id === 3) {
+      formik.initialValues.userCompany = ident.loanee.company_id;
+    }
+  })();
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
@@ -7883,7 +7901,7 @@ function UserAdd() {
         }), formik.touched.userRPass && formik.errors.userRPass ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           children: formik.errors.userRPass
         }) : null]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      }), ident.role_id === 3 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
           htmlFor: "userCompany",
@@ -8043,12 +8061,23 @@ function UserEdit(_ref) {
       userCompany = _useState12[0],
       setUserCompany = _useState12[1];
 
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState14 = _slicedToArray(_useState13, 2),
+      ident = _useState14[0],
+      setIdent = _useState14[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_3___default().get('/get/uses').then(function (response) {
+              setIdent(response.data);
+            });
+
+          case 2:
+            _context.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_3___default().get('/get/user/' + pathParam).then(function (response) {
               setUserRecord(response.data);
 
@@ -8059,8 +8088,8 @@ function UserEdit(_ref) {
               }
             });
 
-          case 2:
-            _context.next = 4;
+          case 4:
+            _context.next = 6;
             return axios__WEBPACK_IMPORTED_MODULE_3___default().get('/get/role/list').then(function (response) {
               setRoles(response);
             }).then(function (response) {
@@ -8070,7 +8099,7 @@ function UserEdit(_ref) {
               });
             });
 
-          case 4:
+          case 6:
           case "end":
             return _context.stop();
         }
@@ -8088,9 +8117,9 @@ function UserEdit(_ref) {
       console.log(values);
       axios__WEBPACK_IMPORTED_MODULE_3___default().post('/edit/user', values).then(function (response) {
         console.log(response);
-        /*setTimeout(() => {
-            window.location.href = "/user";
-        }, 1000)*/
+        setTimeout(function () {
+          window.location.href = "/user";
+        }, 1000);
       });
     }
   });
@@ -8167,7 +8196,7 @@ function UserEdit(_ref) {
           className: "form-control",
           id: "userRPass"
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), ident.role_id === 3 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
           htmlFor: "userCompany",

@@ -29,6 +29,7 @@ export default function UserAdd() {
             userRole: Yup.string()
         }),
         onSubmit: values => {
+            console.log(values);
             axios.post('/user/add/data', values).then((response) => {
                 console.log(response);
                 setTimeout(() => {
@@ -41,8 +42,12 @@ export default function UserAdd() {
     const [companies, setCompanies] = useState({});
     const [roles, setRoles] = useState({});
     const [isLoading, setLoading] = useState(true);
+    const [ident, setIdent] = useState({});
 
     useEffect(async () => {
+        await axios.get('/get/uses').then(function (response) {
+            setIdent(response.data)
+        });
         await axios.get('/get/role/list').then(function (response) {
             setRoles(response);
         }).then(function (response) {
@@ -50,12 +55,18 @@ export default function UserAdd() {
                 setCompanies(response);
                 setLoading(false);
             });
-        }, []);
+        });
     }, []);
     
     if (isLoading) {
         return <div></div>;
     }
+
+    ( () => {
+        if (ident.role_id === 3) {
+            formik.initialValues.userCompany = ident.loanee.company_id;
+        }
+    })()
 
     return (
         <div>
@@ -120,28 +131,35 @@ export default function UserAdd() {
                         <div>{formik.errors.userRPass}</div>
                     ) : null}
                 </div>
-                <div className="form-group col-md-4">
-                    <label htmlFor="userCompany">Company: </label>
-                    <select
-                        id="userCompany"
-                        className="form-select"
-                        aria-label="Default select example"
-                        //onChange={toggleCompanyIDInput}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.userCompany}
-                    >
-                        <option value="">None</option>
-                    {
-                        companies.data.map(function (x,y) {
-                            return <option value={x.id}>{x.name}</option>
-                        })
-                    }
-                    </select>
-                    {formik.touched.userCompany && formik.errors.userCompany ? (
-                        <div>{formik.errors.userCompany}</div>
-                    ) : null}
-                </div>
+                {
+                    ident.role_id === 3 ? (
+                        <div></div>
+                    ) : (
+                        <div className="form-group col-md-4">
+                            <label htmlFor="userCompany">Company: </label>
+                            <select
+                                id="userCompany"
+                                className="form-select"
+                                aria-label="Default select example"
+                                //onChange={toggleCompanyIDInput}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.userCompany}
+                            >
+                                <option value="">None</option>
+                            {
+                                companies.data.map(function (x,y) {
+                                    return <option value={x.id}>{x.name}</option>
+                                })
+                            }
+                            </select>
+                            {formik.touched.userCompany && formik.errors.userCompany ? (
+                                <div>{formik.errors.userCompany}</div>
+                            ) : null}
+                        </div>
+                    )
+                }
+                
                 <div className="form-group col-md-4">
                     <label htmlFor="userCompanyID">Company ID: </label>
                     <input 
