@@ -7751,6 +7751,7 @@ function UserAdd() {
       userPass: '',
       userRPass: '',
       userCompany: '',
+      userCompanyID: '',
       userRole: '4'
     },
     validationSchema: yup__WEBPACK_IMPORTED_MODULE_2__.object({
@@ -7759,6 +7760,7 @@ function UserAdd() {
       userPass: yup__WEBPACK_IMPORTED_MODULE_2__.string().required('Required'),
       userRPass: yup__WEBPACK_IMPORTED_MODULE_2__.string().oneOf([yup__WEBPACK_IMPORTED_MODULE_2__.ref('userPass'), null], 'Passwords do not match'),
       userCompany: yup__WEBPACK_IMPORTED_MODULE_2__.string(),
+      userCompanyID: yup__WEBPACK_IMPORTED_MODULE_2__.string(),
       userRole: yup__WEBPACK_IMPORTED_MODULE_2__.string()
     }),
     onSubmit: function onSubmit(values) {
@@ -7909,6 +7911,21 @@ function UserAdd() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "form-group col-md-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          htmlFor: "userCompanyID",
+          children: "Company ID: "
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          type: "text",
+          className: "form-control",
+          id: "userCompanyID",
+          onChange: formik.handleChange,
+          onBlur: formik.handleBlur,
+          value: formik.values.userCompanyID
+        }), formik.touched.userCompanyID && formik.errors.userCompanyID ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: formik.errors.userCompanyID
+        }) : null]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "form-group col-md-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
           htmlFor: "userRole",
           children: "Role: "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("select", {
@@ -8018,6 +8035,11 @@ function UserEdit(_ref) {
       roles = _useState10[0],
       setRoles = _useState10[1];
 
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState12 = _slicedToArray(_useState11, 2),
+      userCompany = _useState12[0],
+      setUserCompany = _useState12[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
@@ -8026,7 +8048,12 @@ function UserEdit(_ref) {
             _context.next = 2;
             return axios.get('/get/user/' + pathParam).then(function (response) {
               setUserRecord(response.data);
-              console.log(response.data);
+
+              if (response.data.loanee === null) {
+                setUserCompany(0);
+              } else {
+                setUserCompany(response.data.loanee.company_id);
+              }
             });
 
           case 2:
@@ -8038,7 +8065,7 @@ function UserEdit(_ref) {
                 setCompanies(response);
                 setLoading(false);
               });
-            }, []);
+            });
 
           case 4:
           case "end":
@@ -8048,19 +8075,9 @@ function UserEdit(_ref) {
     }, _callee);
   })), []);
   var formik = (0,formik__WEBPACK_IMPORTED_MODULE_1__.useFormik)({
-    initialValues: {
-      userName: userRecord.name,
-      userMail: userRecord.email,
-      userPass: '',
-      userRPass: '',
-      userCompany: '',
-      userRole: '4'
-    },
+    initialValues: {},
     validationSchema: yup__WEBPACK_IMPORTED_MODULE_2__.object({
       userName: yup__WEBPACK_IMPORTED_MODULE_2__.string().required('Required'),
-      userMail: yup__WEBPACK_IMPORTED_MODULE_2__.string().email('Invalid email').required('Required'),
-      userPass: yup__WEBPACK_IMPORTED_MODULE_2__.string().required('Required'),
-      userRPass: yup__WEBPACK_IMPORTED_MODULE_2__.string().oneOf([yup__WEBPACK_IMPORTED_MODULE_2__.ref('userPass'), null], 'Passwords do not match'),
       userCompany: yup__WEBPACK_IMPORTED_MODULE_2__.string(),
       userRole: yup__WEBPACK_IMPORTED_MODULE_2__.string()
     }),
@@ -8078,6 +8095,14 @@ function UserEdit(_ref) {
   if (isLoading) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {});
   }
+
+  (function () {
+    formik.initialValues.userName = userRecord.name;
+    formik.initialValues.userMail = userRecord.email;
+    formik.initialValues.userRole = userRecord.role_id;
+    formik.initialValues.userPass = '';
+    formik.initialValues.userRPass = '';
+  })();
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
@@ -8138,7 +8163,7 @@ function UserEdit(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
           className: "form-select",
           "aria-label": "Default select example",
-          defaultValue: userRecord.loanee.company_id,
+          defaultValue: userCompany,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
             value: " ",
             children: "None"

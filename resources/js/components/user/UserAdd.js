@@ -11,6 +11,7 @@ export default function UserAdd() {
             userPass: '',
             userRPass: '',
             userCompany: '',
+            userCompanyID: '',
             userRole: '4',
         },
         validationSchema: Yup.object({
@@ -24,6 +25,7 @@ export default function UserAdd() {
             userRPass: Yup.string()
                 .oneOf([Yup.ref('userPass'), null], 'Passwords do not match'),
             userCompany: Yup.string(),
+            userCompanyID: Yup.string(),
             userRole: Yup.string()
         }),
         onSubmit: values => {
@@ -138,6 +140,20 @@ export default function UserAdd() {
                     </select>
                     {formik.touched.userCompany && formik.errors.userCompany ? (
                         <div>{formik.errors.userCompany}</div>
+                    ) : null}
+                </div>
+                <div className="form-group col-md-4">
+                    <label htmlFor="userCompanyID">Company ID: </label>
+                    <input 
+                        type="text"
+                        className="form-control"
+                        id="userCompanyID"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.userCompanyID}
+                    />
+                    {formik.touched.userCompanyID && formik.errors.userCompanyID ? (
+                        <div>{formik.errors.userCompanyID}</div>
                     ) : null}
                 </div>
                 <div className="form-group col-md-4">

@@ -9,11 +9,16 @@ export default function UserEdit({pathParam}) {
     const [isLoading, setLoading] = useState(true);
     const [companies, setCompanies] = useState({});
     const [roles, setRoles] = useState({});
+    const [userCompany, setUserCompany] = useState(0);
 
     useEffect(async () => {
         await axios.get('/get/user/' + pathParam).then(function (response) {
             setUserRecord(response.data);
-            console.log(response.data);
+            if (response.data.loanee === null){
+                setUserCompany(0);
+            } else {
+                setUserCompany(response.data.loanee.company_id);
+            }
         });
         await axios.get('/get/role/list').then(function (response) {
             setRoles(response);
@@ -22,28 +27,15 @@ export default function UserEdit({pathParam}) {
                 setCompanies(response);
                 setLoading(false);
             });
-        }, []);
+        });
     }, []);
 
     const formik = useFormik({
-        initialValues: {
-            userName: userRecord.name,
-            userMail: userRecord.email,
-            userPass: '',
-            userRPass: '',
-            userCompany: '',
-            userRole: '4',
-        },
+        initialValues: { },
         validationSchema: Yup.object({
             userName: Yup.string()
                 .required('Required'),
-            userMail: Yup.string()
-                .email('Invalid email')
-                .required('Required'),
-            userPass: Yup.string()
-                .required('Required'),
-            userRPass: Yup.string()
-                .oneOf([Yup.ref('userPass'), null], 'Passwords do not match'),
+
             userCompany: Yup.string(),
             userRole: Yup.string()
         }),
@@ -61,6 +53,14 @@ export default function UserEdit({pathParam}) {
     if (isLoading) {
         return <div></div>;
     }
+
+    ( () => {
+        formik.initialValues.userName = userRecord.name;
+        formik.initialValues.userMail = userRecord.email;
+        formik.initialValues.userRole = userRecord.role_id;
+        formik.initialValues.userPass = '';
+        formik.initialValues.userRPass = '';
+    })()
 
     return (
         <div>
@@ -110,7 +110,7 @@ export default function UserEdit({pathParam}) {
                     <select
                         className="form-select"
                         aria-label="Default select example"
-                        defaultValue={userRecord.loanee.company_id}
+                        defaultValue={userCompany}
 
                     >
                     <option value=" ">None</option>

@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Loanee;
 use App\Models\Company;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -77,8 +78,11 @@ class UserController extends Controller
             $data->save();
             $id = $data->id;
             DB::table('loanees')->insert([
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
                 'user_id' => $id,
                 'company_id' => $request->get('userCompany'),
+                'company_identification' => $request->get('userCompanyID'),
             ]);
         }
         catch(Exception $e) {
