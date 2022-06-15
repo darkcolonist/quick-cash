@@ -2,15 +2,15 @@ import axios from "axios";
 import { forEach } from "lodash";
 import { useState, useEffect } from "react";
 
-export default function CapitalTableRow({capital}) {
+export default function CapitalTableRow({capitalList}) {
 
     return (
         <>
-        { capital.map(function (x,y) {
+        { capitalList.map(function (x,y) {
             return <tr>
                 <td>{x.amount}</td>
                 <td>{x.comment}</td>
-                <td></td>
+                <td>{x.formatted_date}</td>
             </tr>
         })}
         </>

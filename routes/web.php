@@ -74,3 +74,4 @@ Route::get('/capital/list',  [CapitalHistoryController::class, 'showCapitalHisto
 Route::get('/get/capital/list',  [CapitalHistoryController::class, 'getCapitalHistoryList']);
 Route::get('/capital/add',  [CapitalHistoryController::class, 'showAddCapitalForm']);
 Route::post('/add/capital', [CapitalHistoryController::class, 'addCapital']);
+Route::get('/get/current/capital', [CapitalHistoryController::class, 'getCurrentCapital']);

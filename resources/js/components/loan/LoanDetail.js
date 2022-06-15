@@ -89,6 +89,7 @@ export default function LoanDetail({ident, pathParam}) {
                                     <td>No data</td>
                                     <td></td>
                                     <td></td>
+                                    <td></td>
                                 </tr>
                             )
                         }

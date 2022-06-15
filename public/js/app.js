@@ -5877,8 +5877,13 @@ function Capital() {
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
       _useState4 = _slicedToArray(_useState3, 2),
-      capital = _useState4[0],
-      setCapital = _useState4[1];
+      capitalList = _useState4[0],
+      setCapitalList = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0),
+      _useState6 = _slicedToArray(_useState5, 2),
+      capital = _useState6[0],
+      setCapital = _useState6[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -5887,8 +5892,12 @@ function Capital() {
           case 0:
             _context.next = 2;
             return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/capital/list').then(function (r) {
-              setCapital(r.data);
-              setLoading(false);
+              setCapitalList(r.data);
+              console.log(r.data);
+              axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/current/capital').then(function (r) {
+                setCapital(r.data);
+                setLoading(false);
+              });
             });
 
           case 2:
@@ -5911,6 +5920,11 @@ function Capital() {
         className: "col-md-8",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "col-md-4",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("b", {
+            children: ["Current Capital: ", capital]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "col-md-4",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
             className: "btn btn-info",
             href: "/capital/add",
@@ -5930,11 +5944,15 @@ function Capital() {
                   scope: "col",
                   width: "100px",
                   children: "Note"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
+                  scope: "col",
+                  width: "100px",
+                  children: "Date"
                 })]
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("tbody", {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_CapitalTableRow__WEBPACK_IMPORTED_MODULE_3__["default"], {
-                capital: capital
+                capitalList: capitalList
               })
             })]
           })
@@ -5970,15 +5988,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function CapitalTableRow(_ref) {
-  var capital = _ref.capital;
+  var capitalList = _ref.capitalList;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: capital.map(function (x, y) {
+    children: capitalList.map(function (x, y) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
           children: x.amount
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
           children: x.comment
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {})]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+          children: x.formatted_date
+        })]
       });
     })
   });
@@ -6834,7 +6854,7 @@ function LoanDetail(_ref) {
         }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
             children: "No data"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {})]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {})]
         })
       })]
     })]

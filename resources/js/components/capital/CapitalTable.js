@@ -5,11 +5,16 @@ import CapitalTableRow from './CapitalTableRow';
 
 export default function Capital() {
     const [isLoading, setLoading] = useState(true);
-    const [capital, setCapital] = useState({});
+    const [capitalList, setCapitalList] = useState({});
+    const [capital, setCapital] = useState(0);
     useEffect(async () => {
         await axios.get('/get/capital/list').then(r => {
-            setCapital(r.data);
-            setLoading(false);
+            setCapitalList(r.data);
+            console.log(r.data);
+            axios.get('/get/current/capital').then(r => {
+                setCapital(r.data);
+                setLoading(false);
+            });
         });
     }, []);
   
@@ -21,6 +26,9 @@ export default function Capital() {
         <div className="container">
         <div className="row justify-content-center">
             <div className="col-md-8">
+            <div className="col-md-4">
+                    <b>Current Capital: {capital}</b>
+                </div>
                 <div className="col-md-4">
                     <a className="btn btn-info" href="/capital/add">Add Capital</a>
                 </div>
@@ -28,13 +36,14 @@ export default function Capital() {
                     <table className="table table-hover">
                         <thead>
                             <tr>
-                            <th scope="col" width="100px">Amount</th>
-                            <th scope="col" width="100px">Note</th>
+                                <th scope="col" width="100px">Amount</th>
+                                <th scope="col" width="100px">Note</th>
+                                <th scope="col" width="100px">Date</th>
                             </tr>
                         </thead>
                         <tbody>
                             <CapitalTableRow
-                                capital={capital}
+                                capitalList={capitalList}
                             />
                         </tbody>
                     </table>

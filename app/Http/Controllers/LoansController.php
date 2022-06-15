@@ -8,6 +8,7 @@ use App\Models\LoanHistory;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\Loanee;
+use App\Models\CapitalHistory;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -167,6 +168,18 @@ class LoansController extends Controller
                 $data->save();
             }
         }
+
+        //capital
+        $lastcapital = CapitalHistory::orderBy('id', 'desc')->first();
+        $loanee = Loanee::whereId($loan->loanee_id)->first();
+        $loanee_user = User::whereId($loanee->user_id)->first();
+        $capital = new CapitalHistory;
+        $capital->user_id = $loanee_user->id;
+        $capital->date = Carbon::now();
+        $capital->amount = $loan->amount;
+        $capital->comment = "Loaned";
+        $capital->total_amt = $lastcapital->total_amt - $loan->amount;
+        $capital->save();
         
         return redirect('/loan/employees');
     }
@@ -232,6 +245,9 @@ class LoansController extends Controller
                 'bank_account_lender' => $bank_account_lender,
                 'bank_account_loanee' => $bank_account_loanee
             ]);
+
+        // capital
+
         return;
     }
 }
