@@ -39,6 +39,7 @@ export default function Capital() {
                                 <th scope="col" width="100px">Amount</th>
                                 <th scope="col" width="100px">Note</th>
                                 <th scope="col" width="100px">Date</th>
+                                <th scope="col" width="100px">Detail</th>
                             </tr>
                         </thead>
                         <tbody>

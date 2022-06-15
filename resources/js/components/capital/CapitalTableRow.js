@@ -11,6 +11,17 @@ export default function CapitalTableRow({capitalList}) {
                 <td>{x.amount}</td>
                 <td>{x.comment}</td>
                 <td>{x.formatted_date}</td>
+                <td>
+                    {
+                        x.loan_history_id !== null ? (
+                            <a className="btn btn-info" href={"/loan/detail/" + x.loan_history_id}>
+                                Details
+                            </a>
+                        ) : (
+                            <p></p>
+                        )
+                    }
+                </td>
             </tr>
         })}
         </>

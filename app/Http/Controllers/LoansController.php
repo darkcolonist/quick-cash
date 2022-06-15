@@ -178,6 +178,7 @@ class LoansController extends Controller
         $capital->date = Carbon::now();
         $capital->amount = $loan->amount;
         $capital->comment = "Loaned";
+        $capital->loan_history_id = $loan->id;
         $capital->total_amt = $lastcapital->total_amt - $loan->amount;
         $capital->save();
         
@@ -239,15 +240,36 @@ class LoansController extends Controller
         $id = $request->get('id');
         $bank_account_lender = $request->get('bank_account_lender');
         $bank_account_loanee = $request->get('bank_account_loanee');
-        $loan = LoanHistory::whereId($id)
+        $loanhistory = LoanHistory::whereId($id)
             ->update([
                 'is_paid' => 1,
                 'bank_account_lender' => $bank_account_lender,
                 'bank_account_loanee' => $bank_account_loanee
             ]);
+        
+        $lh = LoanHistory::whereId($id)->first();
+        $loan = Loan::whereId($lh->loan_id)->first();
+        $loanee = Loanee::whereId($loan->loanee_id)->first();
+        $user = User::whereId($loanee->user_id)->first();
+        $partial_payment = ($loan->amount + ($loan->amount * ($loan->rate/100))) / $loan->term_in_months;
+        
 
         // capital
-
+        $lastcapital = CapitalHistory::orderBy('id', 'desc')->first();
+        $total_amt = 0;
+        if (!$lastcapital) {
+            $total_amt = $total_amt + $partial_payment;
+        } else {
+            $total_amt = $lastcapital->total_amt + $partial_payment;
+        }
+        $capital = new CapitalHistory;
+        $capital->user_id = $user->id;
+        $capital->date = Carbon::now();
+        $capital->amount = $partial_payment;
+        $capital->comment = "Partial loan payment";
+        $capital->loan_history_id = $loan->id;
+        $capital->total_amt = $total_amt;
+        $capital->save();
         return;
     }
 }

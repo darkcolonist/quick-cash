@@ -43,16 +43,6 @@ class CapitalHistoryController extends Controller
         return view('home');
     }
 
-    public function loanSubtractFromCapital(Request $request)
-    {
-
-    }
-
-    public function loanRepayAddToCapital(Request $request)
-    {
-        
-    }
-
     public function addCapital(Request $request)
     {
         $user = User::whereId(Auth::id())->first();
