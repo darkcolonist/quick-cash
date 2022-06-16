@@ -24,7 +24,7 @@ export default function LoanTableRow({data}) {
                     <td>{x.company.name}</td>
                     <td>{x.amount}</td>
                     <td>
-                        
+                    <a className="btn btn-info" href={"/loancompany/detail/" + x.id}>Details</a>
                     </td>
                 </tr>)
             })

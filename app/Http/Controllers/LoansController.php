@@ -374,4 +374,9 @@ class LoansController extends Controller
         }
         return $loans;
     }
+
+    public function companyLoanDetail($id)
+    {
+        return view('home');
+    }
 }
