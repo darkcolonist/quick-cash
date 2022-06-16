@@ -78,7 +78,7 @@ export default function LoanAdd({pathParam}) {
 
     return (
         <div>
-            <h3>Add Loan</h3>
+            <h3>Edit Loan</h3>
             <form onSubmit={formik.handleSubmit}>
             <div className="form-group col-md-4">
                     <label htmlFor="loanLoanee">Employee: </label>

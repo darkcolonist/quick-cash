@@ -12,8 +12,18 @@ export default function LoanDetail({ident, pathParam}) {
     useEffect(async () => {
         await axios.get('/get/loan/detail/' + pathParam).then(function (response) {
             setLoan(response.data);
-            setApprover(response.data.approver.name);
-            setAcknowledger(response.data.acknowledger.name);
+            if (response.data.approver === null) {
+                setApprover(null);
+            } else {
+                setApprover(response.data.approver.name);
+            }
+
+            if (response.data.acknowledger === null) {
+                setAcknowledger(null);
+            } else {
+                setAcknowledger(response.data.acknowledger.name);
+            }
+            
             setLoanHistory(response.data.history);
             setHistoryLength(response.data.historylength);
             setDebtpermonth(response.data.debtpermonth)

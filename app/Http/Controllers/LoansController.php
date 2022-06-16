@@ -257,7 +257,8 @@ class LoansController extends Controller
         $loanee_user = User::whereId($loanee->user_id)->first();
 
         $loan->debt = $loan->amount + $loan->amount * ($loan->rate/100);
-        $loan->debtpermonth = $loan->debt / $loan->term_in_months;
+        $dpm = ($loan->debt / $loan->term_in_months);
+        $loan->debtpermonth = number_format($dpm, 2);
 
         $dateofapplication = Carbon::parse($loan->created_at);
         $dateofapplication = $dateofapplication->toFormattedDateString();

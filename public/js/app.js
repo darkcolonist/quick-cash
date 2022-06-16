@@ -6798,6 +6798,7 @@ function LoanAdd() {
               });
               axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/employees').then(function (response) {
                 setEmployeeList(response.data);
+                console.log(response.data);
                 setLoading(false);
               });
             });
@@ -6839,7 +6840,7 @@ function LoanAdd() {
   }
 
   (function () {
-    formik.initialValues.loanLoanee = employeeList[0].user.id;
+    //formik.initialValues.loanLoanee = employeeList[0].user.id;
     formik.initialValues.loanRate = rate;
     formik.initialValues.loanTerm = term;
   })();
@@ -7049,8 +7050,19 @@ function LoanDetail(_ref) {
             _context.next = 2;
             return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/loan/detail/' + pathParam).then(function (response) {
               setLoan(response.data);
-              setApprover(response.data.approver.name);
-              setAcknowledger(response.data.acknowledger.name);
+
+              if (response.data.approver === null) {
+                setApprover(null);
+              } else {
+                setApprover(response.data.approver.name);
+              }
+
+              if (response.data.acknowledger === null) {
+                setAcknowledger(null);
+              } else {
+                setAcknowledger(response.data.acknowledger.name);
+              }
+
               setLoanHistory(response.data.history);
               setHistoryLength(response.data.historylength);
               setDebtpermonth(response.data.debtpermonth);
@@ -7287,7 +7299,7 @@ function LoanAdd(_ref) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
-      children: "Add Loan"
+      children: "Edit Loan"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
       onSubmit: formik.handleSubmit,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {

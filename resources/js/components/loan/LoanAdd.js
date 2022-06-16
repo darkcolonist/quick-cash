@@ -18,6 +18,7 @@ export default function LoanAdd() {
             });
             axios.get('/get/employees').then(function (response) {
                 setEmployeeList(response.data);
+                console.log(response.data);
                 setLoading(false);
             });
         });
@@ -58,7 +59,7 @@ export default function LoanAdd() {
     }
 
     ( () => {
-        formik.initialValues.loanLoanee = employeeList[0].user.id;
+        //formik.initialValues.loanLoanee = employeeList[0].user.id;
         formik.initialValues.loanRate = rate;
         formik.initialValues.loanTerm = term;
     })()

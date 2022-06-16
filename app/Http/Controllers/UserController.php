@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Loanee;
 use App\Models\Company;
+use App\Models\LoanHistory;
+use App\Models\Loan;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 
@@ -186,12 +188,40 @@ class UserController extends Controller
             $employees = User::where('role_id', 4)->get();
             foreach ($employees as $e) {
                 $loanee = Loanee::where('user_id', $e->id)->first();
-                if ($loanee != null) {
+                if ($loanee == null) {
+                    continue;
+                }
+                /*$emp = (object)[];
+                $emp->user = $e;
+                $emp->loanee = $loanee;
+                array_push($employeelist, $emp);*/
+                $loans = Loan::where('loanee_id', $loanee->id)->get();
+                if (count($loans) == 0) {
                     $emp = (object)[];
                     $emp->user = $e;
                     $emp->loanee = $loanee;
                     array_push($employeelist, $emp);
+                } else {
+                    foreach($loans as $l) {
+                        if ($l->acknowledger_id == null) {
+                            continue;
+                        }
+                        if ($l->approver_id == null) {
+                            continue;
+                        }
+                        $history = LoanHistory::where('loan_id', $l->id)
+                            ->where('is_paid', 0)
+                            ->get();
+                        if (count($history) == 0) {
+                            $emp = (object)[];
+                            $emp->user = $e;
+                            $emp->loanee = $loanee;
+                            array_push($employeelist, $emp);
+                        }
+                    }
+                    
                 }
+                
             }
             return $employeelist;
         }
