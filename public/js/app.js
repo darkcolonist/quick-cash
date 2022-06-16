@@ -6840,7 +6840,7 @@ function LoanAdd() {
   }
 
   (function () {
-    //formik.initialValues.loanLoanee = employeeList[0].user.id;
+    formik.initialValues.loanLoanee = employeeList[0].user.id;
     formik.initialValues.loanRate = rate;
     formik.initialValues.loanTerm = term;
   })();
@@ -7243,7 +7243,7 @@ function LoanAdd(_ref) {
                 setLoanRecord(response.data);
                 setLoading(false);
               });
-              axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/employees').then(function (response) {
+              axios__WEBPACK_IMPORTED_MODULE_0___default().get('/gedit/employees').then(function (response) {
                 setEmployeeList(response.data);
               });
             });
@@ -7773,6 +7773,7 @@ function LoanTable() {
               setIdent(response.data);
               axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/loan/employees/' + response.data.id).then(function (r) {
                 setData(r.data);
+                console.log(r.data);
                 setLoading(false);
               });
             });
@@ -7926,43 +7927,51 @@ function LoanTableRow(_ref) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: data.map(function (x, y) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-          children: x.user.name
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-          children: x.company.name
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-          children: x.amount
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-          children: [x.approver_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-            children: "Approved"
-          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-            children: "Pending Approval"
-          }), x.acknowledger_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-            children: "Acknowledged"
-          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-            children: "Pending Acknowledgement"
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
-          children: [ident.role_id < 3 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
-            className: "btn btn-info",
-            href: "/acknowledge/loan/" + x.id,
-            children: "Acknowledge"
-          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
-            className: "btn btn-info",
-            href: "/approve/loan/" + x.id,
-            children: "Approve"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
-            className: "btn btn-info",
-            href: "/loan/detail/" + x.id,
-            children: "Details"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
-            className: "btn btn-info",
-            href: "/loan/edit/" + x.id,
-            children: "Edit"
-          })]
-        })]
-      });
+      {
+        if (x.paid === 0) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+              children: x.user.name
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+              children: x.company.name
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+              children: x.amount
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
+              children: [x.approver_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                children: "Approved"
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                children: "Pending Approval"
+              }), x.acknowledger_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                children: "Acknowledged"
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                children: "Pending Acknowledgement"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
+              children: [ident.role_id < 3 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+                className: "btn btn-info",
+                href: "/acknowledge/loan/" + x.id,
+                children: "Acknowledge"
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+                className: "btn btn-info",
+                href: "/approve/loan/" + x.id,
+                children: "Approve"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+                className: "btn btn-info",
+                href: "/loan/detail/" + x.id,
+                children: "Details"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+                className: "btn btn-info",
+                href: "/loan/edit/" + x.id,
+                children: "Edit"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+                className: "btn btn-info",
+                href: "/default/loan/" + x.id,
+                children: "Default"
+              })]
+            })]
+          });
+        }
+      }
     })
   });
 }

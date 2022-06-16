@@ -12,6 +12,7 @@ export default function LoanTable() {
             setIdent(response.data)
             axios.get('/get/loan/employees/' + response.data.id).then(r => {
                 setData(r.data);
+                console.log(r.data);
                 setLoading(false);
             });
         });

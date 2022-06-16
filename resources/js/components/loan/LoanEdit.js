@@ -21,7 +21,7 @@ export default function LoanAdd({pathParam}) {
                 setLoanRecord(response.data);
                 setLoading(false);
             });
-            axios.get('/get/employees').then(function (response) {
+            axios.get('/gedit/employees').then(function (response) {
                 setEmployeeList(response.data);
                 
             });

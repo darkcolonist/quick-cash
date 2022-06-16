@@ -18,39 +18,44 @@ export default function LoanTableRow({data}) {
     return (
         <>
         { data.map(function (x,y) {
+            {
+                if (x.paid === 0){
+                    return <tr>
+                        <td>{x.user.name}</td>
+                        <td>{x.company.name}</td>
+                        <td>{x.amount}</td>
+                        <td>
+                        {
+                            x.approver_id ? (
+                                <p>Approved</p>
+                            ) : (
+                                <p>Pending Approval</p>
+                            )
+                        }
+                        {
+                            x.acknowledger_id ? (
+                                <p>Acknowledged</p>
+                            ) : (
+                                <p>Pending Acknowledgement</p>
+                            )
+                        }
+                        </td>
+                        <td>
+                            {
+                                ident.role_id < 3 ? (
+                                        <a className="btn btn-info" href={"/acknowledge/loan/" + x.id}>Acknowledge</a>
+                                ) : (
+                                    <a className="btn btn-info" href={"/approve/loan/" + x.id}>Approve</a>
+                                )
+                            }
+                            <a className="btn btn-info" href={"/loan/detail/" + x.id}>Details</a>
+                            <a className="btn btn-info" href={"/loan/edit/" + x.id}>Edit</a>
+                            <a className="btn btn-info" href={"/default/loan/" + x.id}>Default</a>
+                        </td>
+                    </tr>
+                }
+            }
             
-            return <tr>
-                <td>{x.user.name}</td>
-                <td>{x.company.name}</td>
-                <td>{x.amount}</td>
-                <td>
-                {
-                    x.approver_id ? (
-                        <p>Approved</p>
-                    ) : (
-                        <p>Pending Approval</p>
-                    )
-                }
-                {
-                    x.acknowledger_id ? (
-                        <p>Acknowledged</p>
-                    ) : (
-                        <p>Pending Acknowledgement</p>
-                    )
-                }
-                </td>
-                <td>
-                    {
-                        ident.role_id < 3 ? (
-                                <a className="btn btn-info" href={"/acknowledge/loan/" + x.id}>Acknowledge</a>
-                        ) : (
-                            <a className="btn btn-info" href={"/approve/loan/" + x.id}>Approve</a>
-                        )
-                    }
-                    <a className="btn btn-info" href={"/loan/detail/" + x.id}>Details</a>
-                    <a className="btn btn-info" href={"/loan/edit/" + x.id}>Edit</a>
-                </td>
-            </tr>
         })}
         </>
     );

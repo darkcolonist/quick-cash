@@ -141,11 +141,20 @@ class LoansController extends Controller
                 ->get();
             }
             
-            foreach($loans as $loan) {
-                $user = User::whereId($loan->loanee->user_id)->first();
-                $company = Company::whereId($loan->loanee->company_id)->first();
-                $loan->user = $user;
-                $loan->company = $company;
+            for ($x=0; $x<count($loans); $x++) {
+                $history = LoanHistory::where('loan_id', $loans[$x]->id)
+                    ->where('is_paid', null)
+                    ->get();
+                if (count($history) == 0 && $loans[$x]->acknowledger_id != null) {
+                    $loans[$x]->paid = 1;
+                } else {
+                    $loans[$x]->paid = 0;
+                }
+                
+                $user = User::whereId($loans[$x]->loanee->user_id)->first();
+                $company = Company::whereId($loans[$x]->loanee->company_id)->first();
+                $loans[$x]->user = $user;
+                $loans[$x]->company = $company;
             }
             return response()->json($loans);
         }

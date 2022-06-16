@@ -231,6 +231,30 @@ class UserController extends Controller
         }
     }
 
+    public function getEmployeesforEdit()
+    {
+        try
+        {
+            $employeelist = [];
+            $employees = User::where('role_id', 4)->get();
+            foreach ($employees as $e) {
+                $loanee = Loanee::where('user_id', $e->id)->first();
+                if ($loanee == null) {
+                    continue;
+                }
+                $emp = (object)[];
+                $emp->user = $e;
+                $emp->loanee = $loanee;
+                array_push($employeelist, $emp);
+            }
+            return $employeelist;
+        }
+        catch (Exception $e)
+        {
+            Log::error($e);
+        }
+    }
+
     public function getLoaneeRecord($id)
     {
         try

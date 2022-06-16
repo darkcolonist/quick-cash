@@ -59,7 +59,7 @@ export default function LoanAdd() {
     }
 
     ( () => {
-        //formik.initialValues.loanLoanee = employeeList[0].user.id;
+        formik.initialValues.loanLoanee = employeeList[0].user.id;
         formik.initialValues.loanRate = rate;
         formik.initialValues.loanTerm = term;
     })()
