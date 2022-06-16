@@ -3,6 +3,17 @@ import { forEach } from "lodash";
 import { useState, useEffect } from "react";
 import UserTableRow from './UserTableRow';
 
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { Grid } from '@mui/material';
+import { Button } from '@mui/material';
+
+
 export default function UserTable() {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState({});
@@ -23,31 +34,37 @@ export default function UserTable() {
     }
 
     return (
-        <div className="container">
-        <div className="row justify-content-center">
-            <div className="col-md-8">
-                <div className="col-md-4">
-                    <a className="btn btn-info" href="/user/add">Add User</a>
-                </div>
-                <div className="card">
-                    <table className="table table-hover">
-                        <thead>
-                            <tr>
-                            <th scope="col" width="100px">Name</th>
-                            <th scope="col" width="100px">E-mail</th>
-                            <th scope="col" width="100px">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <UserTableRow
-                                data={data}
-                                setData={setData}
-                            />
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+        <>
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
+                    <Button
+                        href={"/user/add"}
+                        size='large'>
+                        Add User
+                    </Button>
+                </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
+                    <TableContainer component={Paper}>
+                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="left">Name</TableCell>
+                                    <TableCell align="center">E-mail</TableCell>
+                                    <TableCell align="center">Actions</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <UserTableRow
+                                    data={data}
+                                    setData={setData}
+                                />
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Grid>
+            </Grid>
+        </>
     );
 }

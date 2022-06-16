@@ -74,15 +74,12 @@ export default function ConfigEdit() {
     
     return (
         <Grid container spacing={2}>
-            
             <Grid item xs={12}>
                 <Typography variant="h5">
                     Edit Configuration
                 </Typography>
             </Grid>
-                {
-                    configform()
-                }
+                { configform() }
             <Grid item xs={12}>
             <Button
                 onClick={saveConfig}
