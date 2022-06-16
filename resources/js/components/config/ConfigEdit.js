@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { useState, useEffect } from "react";
+import { TextField } from '@mui/material';
+import { Button } from '@mui/material';
+import { Grid } from '@mui/material';
+import { Typography } from '@mui/material';
 
 export default function ConfigEdit() {
     const [config, setConfig] = useState([]);
@@ -46,32 +50,46 @@ export default function ConfigEdit() {
         return <div></div>;
     }
 
+    const inputProps = {
+        step: 1,
+        min: 1
+      };
+      
+    const configform = () => {
+        return config.map(function (config, index) {
+            return (
+                <Grid item xs={12}>
+                    <TextField
+                        id={config.id}
+                        type="number"
+                        inputProps={inputProps}
+                        label={config.setting}
+                        defaultValue={config.value}
+                        onChange={e=> updateVal(e)}
+                    />
+                </Grid>
+            );
+        });
+    }
+    
     return (
-        <div>
-            <h3>Edit Configuration</h3>
-            <form>
+        <Grid container spacing={2}>
+            
+            <Grid item xs={12}>
+                <Typography variant="h5">
+                    Edit Configuration
+                </Typography>
+            </Grid>
                 {
-                    config.map(function (config, index) {
-                        return (
-                            <div className="form-group col-md-4">
-                                <label>{config.setting}</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id={config.id}
-                                    defaultValue={config.value}
-                                    onChange={e=> updateVal(e)}
-                                />
-                            </div>
-                        )
-                    })
+                    configform()
                 }
-                <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={saveConfig}
-                >Submit</button>
-            </form>
-        </div>
+            <Grid item xs={12}>
+            <Button
+                onClick={saveConfig}
+                size='large'>
+                Submit
+            </Button>
+            </Grid>
+        </Grid>
     )
 }
