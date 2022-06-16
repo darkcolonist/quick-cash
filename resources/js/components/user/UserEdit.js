@@ -101,6 +101,8 @@ export default function UserEdit({pathParam}) {
                         className="form-control"
                         id="userMail"
                         defaultValue={userRecord.email}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     />
                 </div>
                 <div className="form-group col-md-4">
@@ -109,6 +111,8 @@ export default function UserEdit({pathParam}) {
                         type="password"
                         className="form-control"
                         id="userPass"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     />
                 </div>
                 <div className="form-group col-md-4">
@@ -117,6 +121,8 @@ export default function UserEdit({pathParam}) {
                         type="password"
                         className="form-control"
                         id="userRPass"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     />
                 </div>
                 {

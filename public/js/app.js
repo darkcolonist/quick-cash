@@ -8727,7 +8727,9 @@ function UserEdit(_ref) {
           type: "text",
           className: "form-control",
           id: "userMail",
-          defaultValue: userRecord.email
+          defaultValue: userRecord.email,
+          onChange: formik.handleChange,
+          onBlur: formik.handleBlur
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "form-group col-md-4",
@@ -8737,7 +8739,9 @@ function UserEdit(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
           type: "password",
           className: "form-control",
-          id: "userPass"
+          id: "userPass",
+          onChange: formik.handleChange,
+          onBlur: formik.handleBlur
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "form-group col-md-4",
@@ -8747,7 +8751,9 @@ function UserEdit(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
           type: "password",
           className: "form-control",
-          id: "userRPass"
+          id: "userRPass",
+          onChange: formik.handleChange,
+          onBlur: formik.handleBlur
         })]
       }), ident.role_id === 3 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "form-group col-md-4",
