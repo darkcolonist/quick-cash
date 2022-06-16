@@ -3,12 +3,13 @@ import { useState, useEffect } from "react";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-export default function LoanAdd() {
+export default function LoanAdd({pathParam}) {
     const [isLoading, setLoading] = useState(true);
     const [employeeList, setEmployeeList] = useState([]);
     const [rate, setRate] = useState(0);
     const [term, setTerm] = useState(0);
     const [ident, setIdent] = useState({});
+    const [loanRecord, setLoanRecord] = useState({});
     useEffect(async () => {
         await axios.get('/get/uses').then(function (response) {
             setIdent(response.data)
@@ -16,21 +17,26 @@ export default function LoanAdd() {
                 setRate(response.data[0].value);
                 setTerm(response.data[1].value);
             });
+            axios.get('/get/loan/detail/' + pathParam).then(function (response){
+                setLoanRecord(response.data);
+                setLoading(false);
+            });
             axios.get('/get/employees').then(function (response) {
                 setEmployeeList(response.data);
-                setLoading(false);
+                
             });
         });
     }, []);
 
     const formik = useFormik({
         initialValues: {
-            loanLoanee: '',
-            loanAmt: '',
-            loanRate: '',
-            loanTerm: '',
-            loanLoaneeBank: '',
-            loanLenderBank: '',
+            loanID: pathParam,
+            loanLoanee: loanRecord.loanee_id,
+            loanAmt: loanRecord.amount,
+            loanRate: loanRecord.rate,
+            loanTerm: loanRecord.term_in_months,
+            loanLoaneeBank: loanRecord.bank_account_loanee,
+            loanLenderBank: loanRecord.bank_account_lender,
         },
         validationSchema: Yup.object({
             loanAmt: Yup.number()
@@ -45,7 +51,9 @@ export default function LoanAdd() {
             .required('Required')
         }),
         onSubmit: values => {
-            axios.post('/create/loan', values).then((response) => {
+            console.log(values);
+            axios.post('/loan/update', values).then((response) => {
+                console.log(response.data);
                 setTimeout(() => {
                     window.location.href = "/loan/employees";
                 }, 1000)
@@ -58,9 +66,13 @@ export default function LoanAdd() {
     }
 
     ( () => {
-        formik.initialValues.loanLoanee = employeeList[0].user.id;
-        formik.initialValues.loanRate = rate;
-        formik.initialValues.loanTerm = term;
+        formik.initialValues.loanID = pathParam;
+        formik.initialValues.loanLoanee = loanRecord.user.id;
+        formik.initialValues.loanAmt = loanRecord.amount;
+        formik.initialValues.loanRate = loanRecord.rate;
+        formik.initialValues.loanTerm = loanRecord.term_in_months;
+        formik.initialValues.loanLoaneeBank = loanRecord.bank_account_loanee;
+        formik.initialValues.loanLenderBank = loanRecord.bank_account_lender;
     })()
     
 

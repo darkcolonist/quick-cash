@@ -26,6 +26,7 @@ class LoansController extends Controller
 
     public function addLoan(Request $request)
     {
+        //from request
         try
         {
             $data = new Loan;
@@ -159,6 +160,26 @@ class LoansController extends Controller
         return view('home');
     }
 
+    public function loanEditForm()
+    {
+        return view('home');
+    }
+
+    public function loanUpdate(Request $request)
+    {
+        $loanee = Loanee::where('user_id', $request->get('loanLoanee'))->first();
+        $loan = Loan::whereId($request->get('loanID'))
+            ->update([
+                'loanee_id' => $loanee->id,
+                'company_id' => $loanee->company_id,
+                'amount' => $request->get('loanAmt'),
+                'rate' => $request->get('loanRate'),
+                'term_in_months' => $request->get('loanTerm'),
+                'bank_account_loanee' => $request->get('loanLoaneeBank'),
+                'bank_account_lender' => $request->get('loanLenderBank'),
+            ]);
+    }
+
     public function approveLoan($id)
     {
         $user = User::whereId(Auth::id())->first();
@@ -232,6 +253,8 @@ class LoansController extends Controller
         $history = LoanHistory::where('loan_id', $id)->get();
         $approver = User::whereId($loan->approver_id)->first();
         $acknowledger = User::whereId($loan->acknowledger_id)->first();
+        $loanee = Loanee::whereId($loan->loanee_id)->first();
+        $loanee_user = User::whereId($loanee->user_id)->first();
 
         $loan->debt = $loan->amount + $loan->amount * ($loan->rate/100);
         $loan->debtpermonth = $loan->debt / $loan->term_in_months;
@@ -252,6 +275,7 @@ class LoansController extends Controller
         $loan->historylength = count($loan->history);
         $loan->approver = $approver;
         $loan->acknowledger = $acknowledger;
+        $loan->user = $loanee_user;
         return $loan;
     }
 
