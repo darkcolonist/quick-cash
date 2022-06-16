@@ -141,7 +141,6 @@ export default function UserAdd() {
                                 id="userCompany"
                                 className="form-select"
                                 aria-label="Default select example"
-                                //onChange={toggleCompanyIDInput}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.userCompany}
@@ -180,7 +179,6 @@ export default function UserAdd() {
                         id="userRole"
                         className="form-select"
                         aria-label="Default select example"
-                        //onChange={e => setUserRole(e.target.value)}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.userRole}

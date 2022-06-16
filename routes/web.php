@@ -71,6 +71,7 @@ Route::get('/pay/loan/{id}', [LoansController::class, 'showLoanPayForm']);
 Route::post('/pay/loan', [LoansController::class, 'payLoan']);
 Route::get('/get/historys/loan/{id}', [LoansController::class, 'getHistorysLoan']);
 Route::get('/loan/add', [LoansController::class, 'addLoanForm']);
+Route::post('/create/loan', [LoansController::class, 'createLoan']);
 
 //capital
 Route::get('/capital/list',  [CapitalHistoryController::class, 'showCapitalHistoryList']);

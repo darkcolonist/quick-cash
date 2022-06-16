@@ -182,8 +182,18 @@ class UserController extends Controller
     {
         try
         {
+            $employeelist = [];
             $employees = User::where('role_id', 4)->get();
-            return $employees;
+            foreach ($employees as $e) {
+                $loanee = Loanee::where('user_id', $e->id)->first();
+                if ($loanee != null) {
+                    $emp = (object)[];
+                    $emp->user = $e;
+                    $emp->loanee = $loanee;
+                    array_push($employeelist, $emp);
+                }
+            }
+            return $employeelist;
         }
         catch (Exception $e)
         {

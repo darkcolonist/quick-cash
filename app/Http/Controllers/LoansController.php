@@ -43,6 +43,27 @@ class LoansController extends Controller
         }
     }
 
+    public function createLoan(Request $request)
+    {
+        try
+        {
+            $loan = new Loan;
+            $loanee = Loanee::where('user_id', $request->get('loanLoanee'))->first();
+            $loan->loanee_id = $loanee->id;
+            $loan->company_id = $loanee->company_id;
+            $loan->amount = $request->get('loanAmt');
+            $loan->rate = $request->get('loanRate');
+            $loan->term_in_months = $request->get('loanTerm');
+            $loan->bank_account_loanee = $request->get('loanLoaneeBank');
+            $loan->bank_account_lender = $request->get('loanLenderBank');
+            $loan->is_companyPayingLoan = 0;
+            $loan->save();
+        }
+        catch(Exception $e) {
+            Log::error($e);
+        }
+    }
+
     public function getPendingLoanRecord($id)
     {
         try
@@ -184,7 +205,12 @@ class LoansController extends Controller
         $capital->amount = $loan->amount;
         $capital->comment = "Loaned";
         $capital->loan_history_id = $loan->id;
-        $capital->total_amt = $lastcapital->total_amt - $loan->amount;
+        if (!$lastcapital) {
+            $capital->total_amt = 0 - $loan->amount;
+        } else {
+            $capital->total_amt = $lastcapital->total_amt - $loan->amount;
+        }
+        
         $capital->save();
         
         return redirect('/loan/employees');
