@@ -300,6 +300,15 @@ class LoansController extends Controller
         return $hist->loan_id;
     }
 
+    public function loanDefault($id)
+    {
+        $loan = Loan::whereId($id)
+            ->update([
+                'is_companyPayingLoan' => 1,
+            ]);
+        return redirect('/home');
+    }
+
     public function payLoan(Request $request)
     {
         $id = $request->get('id');
@@ -336,5 +345,33 @@ class LoansController extends Controller
         $capital->total_amt = $total_amt;
         $capital->save();
         return;
+    }
+
+    public function companyLoans()
+    {
+        return view('home');
+    }
+
+    public function getCompanyLoans()
+    {
+        $result = [];
+        $loans = Loan::where('is_companyPayingLoan', 1)
+            ->get();
+        foreach($loans as $loan) {
+            $history = LoanHistory::where('loan_id', $loan->id)
+                ->where('is_paid', null)
+                ->get();
+            if (count($history) == 0) {
+                continue;
+            }
+            $loanee = Loanee::whereId($loan->loanee_id)->first();
+            $company = Company::whereId($loan->company_id)->first();
+            $user = User::whereId($loanee->user_id)->first();
+            $loan->loanee = $loanee;
+            $loan->company = $company;
+            $loan->user = $user;
+            array_push($result, $loan);
+        }
+        return $loans;
     }
 }

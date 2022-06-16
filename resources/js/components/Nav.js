@@ -18,7 +18,7 @@ function Nav() {
     const navlist = [
         { 'label': 'Users', 'path': '/user', 'access': [1,2,3] },
         { 'label': 'Companies', 'path': '/company', 'access': [1,2] },
-        { 'label': 'Company Loans', 'path':  '/home', 'access': [1,2] },
+        { 'label': 'Company Loans', 'path':  '/loan/companies', 'access': [1,2] },
         { 'label': 'Employee Loans', 'path': '/loan/employees', 'access': [1,2,3] },
         { 'label': 'Capital', 'path': '/capital/list', 'access': [1,2] },
         { 'label': 'Request Loan', 'path': '/loan/request', 'access': [4] },

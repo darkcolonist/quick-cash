@@ -18,6 +18,7 @@ import CapitalTable from './capital/CapitalTable';
 import CapitalAdd from './capital/CapitalAdd';
 import LoanAdd from './loan/LoanAdd';
 import LoanEdit from './loan/LoanEdit';
+import CompanyLoanTable from './company_loan/CompanyLoanTable';
 
 let path = window.location.pathname;
 let pathwithparams = path.split('/');
@@ -70,6 +71,8 @@ function App() {
                 return <LoanAdd ident={ident} pathParam={pathParam}/>;
             case '/loan/edit':
                 return <LoanEdit ident={ident} pathParam={pathParam}/>;
+            case '/loan/companies':
+                return <CompanyLoanTable ident={ident} pathParam={pathParam}/>;
             default:
                 return;
         }
