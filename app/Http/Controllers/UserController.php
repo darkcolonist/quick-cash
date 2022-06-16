@@ -210,7 +210,7 @@ class UserController extends Controller
                             continue;
                         }
                         $history = LoanHistory::where('loan_id', $l->id)
-                            ->where('is_paid', 0)
+                            ->where('is_paid', null)
                             ->get();
                         if (count($history) == 0) {
                             $emp = (object)[];
