@@ -81,18 +81,4 @@ class CompanyController extends Controller
         return view('home');
     }
 
-    public function store(Request $request)
-    {
-        
-    }
-
-    public function update(Request $request, Company $company)
-    {
-
-    }
-
-    public function destroy(Company $company)
-    {
-        
-    }
 }

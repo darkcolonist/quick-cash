@@ -10,9 +10,10 @@ export default function Capital() {
     useEffect(async () => {
         await axios.get('/get/capital/list').then(r => {
             setCapitalList(r.data);
-            console.log(r.data);
+            
             axios.get('/get/current/capital').then(r => {
                 setCapital(r.data);
+                console.log(r.data);
                 setLoading(false);
             });
         });

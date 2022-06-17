@@ -26830,9 +26830,9 @@ function Capital() {
             _context.next = 2;
             return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/capital/list').then(function (r) {
               setCapitalList(r.data);
-              console.log(r.data);
               axios__WEBPACK_IMPORTED_MODULE_0___default().get('/get/current/capital').then(function (r) {
                 setCapital(r.data);
+                console.log(r.data);
                 setLoading(false);
               });
             });

@@ -13,6 +13,8 @@ use App\Models\Loan;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 
+// use Barryvdh\Debugbar\Facades\Debugbar;
+
 class UserController extends Controller
 {
     public function __construct()
@@ -45,7 +47,7 @@ class UserController extends Controller
             } else {
                 $users = User::orderBy('id', 'ASC')->get();
             }
-            
+            \Barryvdh\Debugbar\Facades\Debugbar::info($users->toArray());
             return response()->json($users);
         }
         catch(Exception $e)

@@ -14,4 +14,9 @@ class CapitalHistory extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function getCurrentCapitalM()
+    {
+        return $this->orderBy('id', 'desc')->first();
+    }
 }

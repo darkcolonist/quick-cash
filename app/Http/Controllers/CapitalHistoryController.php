@@ -34,7 +34,8 @@ class CapitalHistoryController extends Controller
 
     public function getCurrentCapital()
     {
-        $capital = CapitalHistory::orderBy('id', 'desc')->first();
+        $ch = new CapitalHistory;
+        $capital = $ch->getCurrentCapitalM();
         return $capital->total_amt;
     }
 
