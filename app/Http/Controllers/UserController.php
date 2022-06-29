@@ -19,7 +19,17 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
+    }
+
+    public function logintemp()
+    {
+        echo "logintemp";
+    }
+
+    public function registertemp()
+    {
+        echo "registertemp";
     }
 
     public function newUserForm()
