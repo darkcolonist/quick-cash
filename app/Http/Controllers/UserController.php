@@ -240,7 +240,7 @@ class UserController extends Controller
             $employeelist = [];
             $employees = User::where('role_id', 4)->get();
             foreach ($employees as $e) {
-                $loanee = Loanee::where('user_id', $e->id)->first();
+                $loanee = Loanee::getLoaneeRecord($id);
                 if ($loanee == null) {
                     continue;
                 }
