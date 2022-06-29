@@ -261,7 +261,7 @@ class UserController extends Controller
     {
         try
         {
-            $loanee = Loanee::where('user_id', $id)->first();
+            $loanee = Loanee::getLoaneeRecord($id);
             return $loanee;
         }
         catch (Exception $e)
