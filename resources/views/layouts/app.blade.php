@@ -94,24 +94,9 @@
         <div class="row h-100">
             <div class="col-2" id="side-nav">
                 <!-- Navigation links in sidebar-->
-                <!--
-                <a href="#">Link 1</a>
-                <br/>
-                <br/>
-                <a href="#">Link 2</a>
-                <br/>
-                <br/>
-                <a href="#">Link 3</a>
-                <br/>
-                <br/>
-                <a href="#">Link 4</a>
-                <br/>
-                <br/>
-                -->
             </div>
             @endif
-            <!--Contains the main content
-                    of the webpage-->
+            <!--Contains the main content of the webpage-->
             <div class="col-10" style="text-align: justify;">
                 <main class="py-4">
                     @yield('content')

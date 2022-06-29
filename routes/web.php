@@ -20,7 +20,7 @@ use App\Http\Controllers\CapitalHistoryController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.app');
 });
 
 Auth::routes();
