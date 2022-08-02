@@ -20,7 +20,7 @@ use App\Http\Controllers\CapitalHistoryController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.app');
 });
 
 Auth::routes();
@@ -36,19 +36,23 @@ Route::get('/company/add', [CompanyController::class, 'addCompanyForm']);
 Route::get('/company', [CompanyController::class, 'index']);
 
 //user
-Route::get('/get/user/list/{id}', [UserController::class, 'getUserList']);
-Route::get('/user', [UserController::class, 'index']);
-Route::get('/user/add', [UserController::class, 'addUserForm']);
-Route::post('/user/add/data', [UserController::class, 'addUser']);
-Route::get('/user/edit/{id}', [UserController::class, 'editUserForm']);
-Route::post('/edit/user', [UserController::class, 'editUser']);
-Route::get('/get/uses', [UserController::class, 'getUsersSession']);
-Route::get('/get/user/{id}', [UserController::class, 'getUserRecord']);
-Route::get('/get/loanee/{id}', [UserController::class, 'getLoaneeRecord']);
-Route::get('/new/user/login', [UserController::class, 'newUserForm']);
-Route::post('/add/loanee', [UserController::class, 'addLoanee']);
-Route::get('/get/employees', [UserController::class, 'getEmployees']);
-Route::get('/gedit/employees', [UserController::class, 'getEmployeesforEdit']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/get/user/list/{id}', [UserController::class, 'getUserList']);
+    Route::get('/user', [UserController::class, 'index']);
+    Route::get('/user/add', [UserController::class, 'addUserForm']);
+    Route::post('/user/add/data', [UserController::class, 'addUser']);
+    Route::get('/user/edit/{id}', [UserController::class, 'editUserForm']);
+    Route::post('/edit/user', [UserController::class, 'editUser']);
+    Route::get('/get/uses', [UserController::class, 'getUsersSession']);
+    Route::get('/get/user/{id}', [UserController::class, 'getUserRecord']);
+    Route::get('/get/loanee/{id}', [UserController::class, 'getLoaneeRecord']);
+    Route::get('/new/user/login', [UserController::class, 'newUserForm']);
+    Route::post('/add/loanee', [UserController::class, 'addLoanee']);
+    Route::get('/get/employees', [UserController::class, 'getEmployees']);
+    Route::get('/gedit/employees', [UserController::class, 'getEmployeesforEdit']);
+});
+Route::get('/logintemp', [UserController::class, 'logintemp']);
+Route::get('/registertemp', [UserController::class, 'registertemp']);
 
 //role
 Route::get('/get/role/list', [RolesController::class, 'getRoleList']);

@@ -24,19 +24,12 @@ class CapitalHistoryController extends Controller
 
     public function getCapitalHistoryList()
     {
-        $capital = CapitalHistory::orderBy('id', 'ASC')->get();
-        for ($x=0; $x<count($capital); $x++){
-            $date = Carbon::parse($capital[$x]->date);
-            $capital[$x]->formatted_date = $date->toDayDateTimeString();
-        }
-        return response()->json($capital);
+        return response()->json(CapitalHistory::getCapitalHistoryList());
     }
 
     public function getCurrentCapital()
     {
-        $ch = new CapitalHistory;
-        $capital = $ch->getCurrentCapitalM();
-        return $capital->total_amt;
+        return CapitalHistory::getCurrentCapital();
     }
 
     public function showAddCapitalForm()

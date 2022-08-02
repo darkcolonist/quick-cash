@@ -12,4 +12,9 @@ class Loanee extends Model
     protected $fillable = [
         'company_id',
     ];
+
+    public static function getLoaneeRecord ($id)
+    {
+        return self::where('user_id', $id)->first();
+    }
 }

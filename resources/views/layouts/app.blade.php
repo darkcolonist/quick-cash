@@ -3,31 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style type="text/css">
-        html,
-        body {
-            height: 100%;
-        }
-        #side-nav {
-            height: 100%;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
     <!-- top navbar -->
@@ -52,17 +36,7 @@
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
                 @guest
-                    @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                    @endif
 
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -86,32 +60,14 @@
         </div>
     </nav>
     
-    <!-- This container contains the sidebar
-            and main content of the page -->
-    <!-- h-100 takes the full height of the body-->
     <div class="container-fluid h-100">
     @auth
         <div class="row h-100">
             <div class="col-2" id="side-nav">
                 <!-- Navigation links in sidebar-->
-                <!--
-                <a href="#">Link 1</a>
-                <br/>
-                <br/>
-                <a href="#">Link 2</a>
-                <br/>
-                <br/>
-                <a href="#">Link 3</a>
-                <br/>
-                <br/>
-                <a href="#">Link 4</a>
-                <br/>
-                <br/>
-                -->
             </div>
             @endif
-            <!--Contains the main content
-                    of the webpage-->
+            <!--Contains the main content of the webpage-->
             <div class="col-10" style="text-align: justify;">
                 <main class="py-4">
                     @yield('content')

@@ -19,7 +19,17 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
+    }
+
+    public function logintemp()
+    {
+        echo "logintemp";
+    }
+
+    public function registertemp()
+    {
+        echo "registertemp";
     }
 
     public function newUserForm()
@@ -240,7 +250,7 @@ class UserController extends Controller
             $employeelist = [];
             $employees = User::where('role_id', 4)->get();
             foreach ($employees as $e) {
-                $loanee = Loanee::where('user_id', $e->id)->first();
+                $loanee = Loanee::getLoaneeRecord($id);
                 if ($loanee == null) {
                     continue;
                 }
@@ -261,7 +271,7 @@ class UserController extends Controller
     {
         try
         {
-            $loanee = Loanee::where('user_id', $id)->first();
+            $loanee = Loanee::getLoaneeRecord($id);
             return $loanee;
         }
         catch (Exception $e)
